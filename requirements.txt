@@ -1,0 +1,13 @@
+beautifulsoup4==4.3.2
+certifi==14.5.14
+ipython==2.4.1
+Jinja2==2.7.3
+MarkupSafe==0.23
+numpy==1.9.1
+pandas==0.15.2
+Pygments==2.0.2
+python-dateutil==2.4.0
+pytz==2014.10
+pyzmq==14.5.0
+six==1.9.0
+tornado==4.1

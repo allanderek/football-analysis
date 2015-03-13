@@ -1,0 +1,5 @@
+*.html
+venv/
+data/
+.ipynb_checkpoints/
+*~
