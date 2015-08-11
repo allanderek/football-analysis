@@ -6,31 +6,55 @@
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
-  <loc>https://example.com/</loc>
+  <loc>http://allanderek.github.io/football-analysis/</loc>
   <lastmod>2015-08-07T09:56:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/2015/</loc>
+  <loc>http://allanderek.github.io/football-analysis/2015/</loc>
   <lastmod>2015-08-07T09:49:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/archive.html</loc>
-  <lastmod>2015-08-07T09:56:00Z</lastmod>
+  <loc>http://allanderek.github.io/football-analysis/archive.html</loc>
+  <lastmod>2015-08-11T11:15:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/categories/</loc>
+  <loc>http://allanderek.github.io/football-analysis/categories/</loc>
   <lastmod>2015-08-07T09:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/galleries/</loc>
+  <loc>http://allanderek.github.io/football-analysis/galleries/</loc>
   <lastmod>2015-08-07T09:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/listings/</loc>
+  <loc>http://allanderek.github.io/football-analysis/listings/</loc>
   <lastmod>2015-08-07T09:55:00Z</lastmod>
  </url>
  <url>
-  <loc>https://example.com/posts/introduction/</loc>
+  <loc>http://allanderek.github.io/football-analysis/posts/2014-2015-league-commentary/</loc>
+  <lastmod>2015-08-11T07:52:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/2014-2015-league-graphs/</loc>
+  <lastmod>2015-08-11T08:08:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/20142015-league-analysis/</loc>
+  <lastmod>2015-08-11T07:38:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/introduction/</loc>
   <lastmod>2015-08-07T09:49:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/leagueanalysis/</loc>
+  <lastmod>2015-08-10T08:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/preseasoncommentary/</loc>
+  <lastmod>2015-08-07T14:13:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/test/</loc>
+  <lastmod>2015-08-07T14:10:00Z</lastmod>
  </url>
 </urlset>
