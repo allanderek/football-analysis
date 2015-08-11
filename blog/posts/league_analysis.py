@@ -5,6 +5,10 @@ import matplotlib.pyplot as plot
 import numpy
 
 
+# Make the graphs twice as big.
+plot.rcParams['savefig.dpi'] = 2 * plot.rcParams['savefig.dpi']
+
+
 class League(object):
     def __init__(self, short_title, fixtures_directory, title=None):
         self.title = title if title is not None else fixtures_directory
