@@ -11,10 +11,12 @@ class League(object):
         data_dir_url = "http://www.football-data.co.uk/mmz4281/1415/"
         data_file_basename = short_title + ".csv"
         self.data_url = data_dir_url + data_file_basename
-        self.data_file = "data/1415/" + data_file_basename
+        self.data_dir = '../../data/1415'
+        self.data_file = self.data_dir + data_file_basename
         fixtures_base_url = "http://www.bbc.co.uk/sport/football/"
         self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
-        self.fixtures_file = "data/1415/{0}-fixtures.html".format(short_title)
+        self.fixtures_file = "{0}/{1}-fixtures.html".format(self.data_dir,
+                                                            short_title)
 
     def retrieve_data_and_fixtures(self):
         urllib.request.urlretrieve(self.data_url, self.data_file)
