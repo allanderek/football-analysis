@@ -333,6 +333,14 @@ def display_pairs(pairs):
     display(HTML(html))
 
 
+def display_most_recent(league, num_matches):
+    starting_index = len(league.matches) - num_matches
+    starting_index = max(0, starting_index)
+    matches = league.matches[starting_index:]
+    for match in matches:
+        display_match(match)
+
+
 def scatter_stats(league, title='', xlabel='', ylabel='',
                   get_x_stat=None, get_y_stat=None, annotate_teams=None):
     """By default all teams are annotated, to annotate none pass in '[]' as the
@@ -391,3 +399,36 @@ def graph_leagues(x_label, y_label, leagues=None,
                       get_x_stat=get_x_stat, get_y_stat=get_y_stat,
                       annotate_teams=annotate_teams
                       )
+
+
+def scatter_match_stats(matches, xlabel='', ylabel='', title='',
+                        get_x_stat=None, get_y_stat=None):
+    plot.title(title)
+    plot.xlabel(xlabel)
+    plot.ylabel(ylabel)
+    xs = []
+    ys = []
+    for match in matches:
+        x_stat = get_x_stat(match)
+        xs.append(x_stat)
+        y_stat = get_y_stat(match)
+        ys.append(y_stat)
+        plot.scatter(x_stat, y_stat)
+
+        annotation = match.HomeTeam + ' v ' + match.AwayTeam
+        plot.annotate(annotation, xy=(x_stat, y_stat),
+                      xytext=(40, -20),
+                      textcoords='offset points',
+                      ha='right', va='bottom',
+                      bbox=dict(boxstyle='round,pad=0.5',
+                      fc='yellow', alpha=0.5),
+                      arrowprops=dict(arrowstyle='->',
+                                      connectionstyle='arc3,rad=0'))
+
+    coefficients = numpy.polyfit(xs, ys, 1)
+    polynomial = numpy.poly1d(coefficients)
+    ys = polynomial(xs)
+    plot.plot(xs, ys)
+    plot.show()
+    plot.close()
+    display(HTML('line of best fit: ' + str(polynomial)))
