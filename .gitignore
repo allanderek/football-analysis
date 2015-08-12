@@ -3,3 +3,14 @@ venv/
 data/
 .ipynb_checkpoints/
 *~
+blog/.conf.py.swp
+blog/.doit.db.bak
+blog/.doit.db.dat
+blog/.doit.db.dir
+blog/README.txt
+blog/__pycache__/
+blog/cache/
+blog/files/
+blog/output/
+blog/posts/__pycache__/
+
