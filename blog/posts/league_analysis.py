@@ -1,45 +1,14 @@
 from IPython.display import display, HTML
 import urllib.request
+import os
 import csv
 import matplotlib.pyplot as plot
 import numpy
+import itertools
 
 
 # Make the graphs twice as big.
 plot.rcParams['savefig.dpi'] = 2 * plot.rcParams['savefig.dpi']
-
-
-class League(object):
-    def __init__(self, short_title, fixtures_directory, title=None):
-        self.title = title if title is not None else fixtures_directory
-        data_dir_url = "http://www.football-data.co.uk/mmz4281/1415/"
-        data_file_basename = short_title + ".csv"
-        self.data_url = data_dir_url + data_file_basename
-        self.data_dir = '../../data/1415'
-        self.data_file = self.data_dir + data_file_basename
-        fixtures_base_url = "http://www.bbc.co.uk/sport/football/"
-        self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
-        self.fixtures_file = "{0}/{1}-fixtures.html".format(self.data_dir,
-                                                            short_title)
-
-    def retrieve_data_and_fixtures(self):
-        urllib.request.urlretrieve(self.data_url, self.data_file)
-        urllib.request.urlretrieve(self.fixtures_url, self.fixtures_file)
-
-    def display_title(self):
-        display(HTML("<h2>" + self.title + "</h2>"))
-
-epl_league = League("E0", "premier-league")
-ech_league = League("E1", "championship")
-elo_league = League("E2", "league-one")
-elt_league = League("E3", "league-two")
-spl_league = League("SC0", "scottish-premiership")
-# League("SC1", "scottish-championship") No shots data
-all_leagues = [epl_league, ech_league, elo_league, elt_league, spl_league]
-
-
-for league in all_leagues:
-    league.retrieve_data_and_fixtures()
 
 
 class Match(object):
@@ -57,19 +26,6 @@ def create_match(field_names, row):
             value = int(value)
         setattr(match, name, value)
     return match
-
-
-def parse_league_data(league):
-    with open(league.data_file, newline='') as csvfile:
-        cvsreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-        league.field_names = next(cvsreader)
-        league.matches = [create_match(league.field_names, row)
-                          for row in cvsreader]
-    # We assume if you're never the home team, you're not in the league
-    league.teams = list({m.HomeTeam for m in league.matches})
-
-for league in all_leagues:
-    parse_league_data(league)
 
 
 def is_home_game(team, game):
@@ -205,16 +161,176 @@ interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'Goals For',
                      ]
 
 
-def get_stats(team, games, filter_fun):
-    return TeamStats(team, [g for g in games if filter_fun(team, g)])
+class League(object):
+    def __init__(self, short_title, fixtures_directory, year, title=None):
+        self.title = title if title is not None else fixtures_directory
+        data_dir_url = 'http://www.football-data.co.uk/mmz4281/' + year
+        data_file_basename = short_title + ".csv"
+        self.data_url = data_dir_url + '/' + data_file_basename
+        self.data_dir = '../../data/' + year
+        self.data_file = self.data_dir + '/' + data_file_basename
+        fixtures_base_url = "http://www.bbc.co.uk/sport/football/"
+        self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
+        self.fixtures_file = "{0}/{1}-fixtures.html".format(self.data_dir,
+                                                            short_title)
 
-for league in all_leagues:
-    league.team_stats = {t: get_stats(t, league.matches, involved_in_game)
-                         for t in league.teams}
-    league.home_team_stats = {t: get_stats(t, league.matches, is_home_game)
-                              for t in league.teams}
-    league.away_team_stats = {t: get_stats(t, league.matches, is_away_game)
-                              for t in league.teams}
+    def retrieve_data(self):
+        if not os.path.isdir(self.data_dir):
+            os.makedirs(self.data_dir)
+        urllib.request.urlretrieve(self.data_url, self.data_file)
+
+    # You should pretty much never wish to retrieve the fixtures without also
+    # retrieving the data for that league. By not providing a
+    # 'retrieve_fixtures' method, we make it less likely that you update the
+    # fixtures and make some analysis of those fixtures whilst forgetting to
+    # update the data upon which that analysis is dependent.
+    def retrieve_fixtures_and_data(self):
+        self.retrieve_data()
+        urllib.request.urlretrieve(self.fixtures_url, self.fixtures_file)
+
+    def display_title(self):
+        display(HTML("<h2>" + self.title + "</h2>"))
+
+    def parse_league_data(self):
+        with open(self.data_file, newline='') as csvfile:
+            cvsreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+            self.field_names = next(cvsreader)
+            self.matches = []
+            for row in cvsreader:
+                try:
+                    match = create_match(self.field_names, row)
+                    self.matches.append(match)
+                except ValueError:
+                    # Slightly dodgy in that we assume the problem is that the
+                    # the problem is that 'football-data' have input the stub of
+                    # a game without actually filling in the data yet, as it
+                    # does.
+                    pass
+        # We assume you're in the league if you play at least one game, that is
+        # you're the home or the away side at least once.
+        home_teams = {m.HomeTeam for m in self.matches}
+        away_teams = {m.AwayTeam for m in self.matches}
+        self.teams = list(home_teams.union(away_teams))
+
+    def get_game(self, home, away, date):
+        games = [m for m in self.matches
+                 if (is_home_game(home, m) and
+                     is_away_game(away, m) and
+                     m.Date == date)]
+        if len(games) == 1:
+            return games[0]
+        else:
+            return None
+
+    def get_stats(self, filter_fun):
+        def get_team_stats(team):
+            games = [game for game in self.matches if filter_fun(team, game)]
+            return TeamStats(team, games)
+        return {team: get_team_stats(t) for t in self.teams}
+
+    def calculate_statistics(self):
+        self.team_stats = self.get_stats(involved_in_game)
+        self.home_team_stats = self.get_stats(is_home_game)
+        self.away_team_stats = self.get_stats(is_away_game)
+
+
+class Year(object):
+    def __init__(self, year):
+        self.epl_league = League("E0", "premier-league", year)
+        self.elo_league = League("E2", "league-one", year)
+        self.ech_league = League("E1", "championship", year)
+        self.elt_league = League("E3", "league-two", year)
+        self.spl_league = League("SC0", "scottish-premiership", year)
+        # No shots data for the scottish championship.
+        self.all_leagues = [self.epl_league, self.ech_league, self.elo_league,
+                            self.elt_league, self.spl_league]
+
+    def retrieve_data(self):
+        for league in self.all_leagues:
+            league.retrieve_data()
+
+    def retrieve_fixtures_and_data(self):
+        for league in self.all_leagues:
+            league.retrieve_fixtures_and_data()
+
+    def parse_data(self):
+        for league in self.all_leagues:
+            league.parse_league_data()
+
+    def calculate_statistics(self):
+        for league in self.all_leagues:
+            league.calculate_statistics()
+
+    def get_all_matches(self):
+        match_lists = (league.matches for league in self.all_leagues)
+        return itertools.chain.from_iterable(match_lists)
+
+year_201011 = Year('1011')
+year_201112 = Year('1112')
+year_201213 = Year('1213')
+year_201314 = Year('1314')
+year_201415 = Year('1415')
+year_201516 = Year('1516')
+all_years = [year_201011, year_201112, year_201213,
+             year_201314, year_201415, year_201516]
+
+# For convenience we retrieve the data for the current year's leagues and
+# we set parse all the data for all years, assuming that they are up-to-date,
+# which will be true in most cases.
+current_year = year_201516
+current_year.retrieve_fixtures_and_data()
+for year in all_years:
+    year.parse_data()
+epl = current_year.epl_league
+championship = current_year.ech_league
+league_one = current_year.elo_league
+league_two = current_year.elt_league
+spl = current_year.spl_league
+
+
+def get_all_matches(years=None):
+    if years is None:
+        years = all_years
+    match_lists = (year.get_all_matches() for year in years)
+    return itertools.chain.from_iterable(match_lists)
+
+
+def count_matches(filter_fun, matches):
+    return len([m for m in matches if filter_fun(m)])
+
+
+def display_match(match):
+    template = """
+    <table>
+      <tr><th></th><th>Home</th><th>Away</th></tr>
+      <tr><td>Team</td><td>{0}</td><td>{1}</td></tr>
+      <tr><td>Goals</td><td>{2}</td><td>{3}</td></tr>
+      <tr><td>Shots</td><td>{4}</td><td>{5}</td></tr>
+      <tr><td>SOT</td><td>{6}</td><td>{7}</td></tr>
+      {8}
+    </table>
+    """
+    if hasattr(match, 'HHW') and hasattr(match, 'AHW'):
+        woodwork_tmpl = "<tr><td>Woodwork</td><td>{0}</td><td>{1}</td></tr>"
+        woodwork = woodwork_tmpl.format(match.HHW, match.AHW)
+    else:
+        woodwork = ""
+    hhw = match.HHW if hasattr(match, 'HHW') else 'n/a'
+    ahw = match.AHW if hasattr(match, 'AHW') else 'n/a'
+    html = template.format(match.HomeTeam, match.AwayTeam,
+                           match.FTHG, match.FTAG,
+                           match.HS, match.AS,
+                           match.HST, match.AST,
+                           woodwork)
+    display(HTML(html))
+
+
+def display_pairs(pairs):
+    row_template = "<tr><td>{0}</td><td>{1}</td></tr>"
+    rows = [row_template.format(k, e) for k, e in pairs]
+    html_rows = "\n".join(rows)
+    html = "\n".join(["<table>", html_rows, "</table>"])
+    display(HTML(html))
 
 
 def scatter_stats(league, title='', xlabel='', ylabel='',
