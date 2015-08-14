@@ -299,7 +299,7 @@ def count_matches(filter_fun, matches):
     return len([m for m in matches if filter_fun(m)])
 
 
-def display_match(match):
+def match_to_html(match):
     template = """
     <table>
       <tr><th></th><th>Home</th><th>Away</th></tr>
@@ -322,7 +322,7 @@ def display_match(match):
                            match.HS, match.AS,
                            match.HST, match.AST,
                            woodwork)
-    display(HTML(html))
+    return html
 
 
 def display_pairs(pairs):
@@ -337,8 +337,12 @@ def display_most_recent(league, num_matches):
     starting_index = len(league.matches) - num_matches
     starting_index = max(0, starting_index)
     matches = league.matches[starting_index:]
-    for match in matches:
-        display_match(match)
+    def inline_div_match(match):
+        inline_block = '<div style="display:inline-block;">{0}</div>'
+        return inline_block.format(match_to_html(match))
+    match_blocks = [inline_div_match(match) for match in matches]
+    html = "\n".join(match_blocks)
+    display(HTML(html))
 
 
 def scatter_stats(league, title='', xlabel='', ylabel='',
