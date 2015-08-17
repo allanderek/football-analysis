@@ -337,6 +337,7 @@ def display_most_recent(league, num_matches):
     starting_index = len(league.matches) - num_matches
     starting_index = max(0, starting_index)
     matches = league.matches[starting_index:]
+
     def inline_div_match(match):
         inline_block = '<div style="display:inline-block;">{0}</div>'
         return inline_block.format(match_to_html(match))
