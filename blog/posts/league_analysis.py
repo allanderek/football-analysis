@@ -201,10 +201,9 @@ class League(object):
                     match = create_match(self.field_names, row)
                     self.matches.append(match)
                 except ValueError:
-                    # Slightly dodgy in that we assume the problem is that the
-                    # the problem is that 'football-data' have input the stub of
-                    # a game without actually filling in the data yet, as it
-                    # does.
+                    # Slightly dodgy in that we assume the problem is that
+                    # 'football-data' have input the stub of a game without
+                    # actually filling in the data yet, as it does.
                     pass
         # We assume you're in the league if you play at least one game, that is
         # you're the home or the away side at least once.
@@ -333,17 +332,37 @@ def display_pairs(pairs):
     display(HTML(html))
 
 
-def display_most_recent(league, num_matches):
-    starting_index = len(league.matches) - num_matches
-    starting_index = max(0, starting_index)
-    matches = league.matches[starting_index:]
+def date_on_or_before(first_date, second_date):
+    """ Returns true if the first date is on or before the second date. """
+    first_day, first_month, first_year = first_date.split('/')
+    second_day, second_month, second_year = second_date.split('/')
+    if first_year < second_year:
+        return True
+    elif first_year == second_year:
+        if first_month < second_month:
+            return True
+        elif first_month == second_month:
+            return first_day <= second_day
+    return False
 
+
+def display_given_matches(matches):
+    """ Display a given set of matches """
     def inline_div_match(match):
         inline_block = '<div style="display:inline-block;">{0}</div>'
         return inline_block.format(match_to_html(match))
     match_blocks = [inline_div_match(match) for match in matches]
     html = "\n".join(match_blocks)
     display(HTML(html))
+
+
+def display_matches(league, starting_date, ending_date):
+    """ Display all matches within a league between the given dates """
+    def filter_fun(m):
+        return (date_on_or_before(starting_date, m.Date) and
+                date_on_or_before(m.Date, ending_date))
+    matches = [m for m in league.matches if filter_fun(m)]
+    display_given_matches(matches)
 
 
 def scatter_stats(league, title='', xlabel='', ylabel='',
