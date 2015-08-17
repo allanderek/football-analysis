@@ -225,7 +225,7 @@ class League(object):
         def get_team_stats(team):
             games = [game for game in self.matches if filter_fun(team, game)]
             return TeamStats(team, games)
-        return {team: get_team_stats(t) for t in self.teams}
+        return {team: get_team_stats(team) for team in self.teams}
 
     def calculate_statistics(self):
         self.team_stats = self.get_stats(involved_in_game)
@@ -365,11 +365,13 @@ def display_matches(league, starting_date, ending_date):
     display_given_matches(matches)
 
 
-def scatter_stats(league, title='', xlabel='', ylabel='',
+def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
                   get_x_stat=None, get_y_stat=None, annotate_teams=None):
     """By default all teams are annotated, to annotate none pass in '[]' as the
        list of teams to annotate.
     """
+    if teams is None:
+        teams = league.teams
     if annotate_teams is None:
         annotate_teams = league.teams
 
@@ -378,7 +380,7 @@ def scatter_stats(league, title='', xlabel='', ylabel='',
     plot.ylabel(ylabel)
     xs = []
     ys = []
-    for team in league.teams:
+    for team in teams:
         x_stat = get_x_stat(league, team)
         xs.append(x_stat)
         y_stat = get_y_stat(league, team)
