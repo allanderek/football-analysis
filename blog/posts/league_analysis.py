@@ -1,6 +1,7 @@
 from IPython.display import display, HTML
 import urllib.request
 import os
+import datetime
 import csv
 import matplotlib.pyplot as plot
 import numpy
@@ -179,14 +180,12 @@ class League(object):
             os.makedirs(self.data_dir)
         urllib.request.urlretrieve(self.data_url, self.data_file)
 
-    # You should pretty much never wish to retrieve the fixtures without also
-    # retrieving the data for that league. By not providing a
-    # 'retrieve_fixtures' method, we make it less likely that you update the
-    # fixtures and make some analysis of those fixtures whilst forgetting to
-    # update the data upon which that analysis is dependent.
+    def retrieve_fixtures(self):
+        urllib.request.urlretrieve(self.fixtures_url, self.fixtures_file)
+
     def retrieve_fixtures_and_data(self):
         self.retrieve_data()
-        urllib.request.urlretrieve(self.fixtures_url, self.fixtures_file)
+        self.retrieve_fixtures()
 
     def display_title(self):
         display(HTML("<h2>" + self.title + "</h2>"))
@@ -264,6 +263,8 @@ class Year(object):
         match_lists = (league.matches for league in self.all_leagues)
         return itertools.chain.from_iterable(match_lists)
 
+
+
 year_201011 = Year('1011')
 year_201112 = Year('1112')
 year_201213 = Year('1213')
@@ -273,13 +274,13 @@ year_201516 = Year('1516')
 all_years = [year_201011, year_201112, year_201213,
              year_201314, year_201415, year_201516]
 
-# For convenience we retrieve the data for the current year's leagues and
-# we set parse all the data for all years, assuming that they are up-to-date,
-# which will be true in most cases.
+
+def parse_all_data():
+    for year in all_years:
+        year.parse_data()
+
+
 current_year = year_201516
-current_year.retrieve_fixtures_and_data()
-for year in all_years:
-    year.parse_data()
 epl = current_year.epl_league
 championship = current_year.ech_league
 league_one = current_year.elo_league
@@ -475,7 +476,8 @@ team_aliases = {'Dundee Utd': 'Dundee United',
                 'Newport': 'Newport County',
                 'Dag & Red': 'Dag and Red',
                 'Oxford Utd': 'Oxford',
-                'Wimbledon': 'AFC Wimbledon'
+                'Wimbledon': 'AFC Wimbledon',
+                'Bristol Rovers': 'Bristol Rvs',
                 }
 
 
@@ -534,13 +536,40 @@ def get_fixtures(fixtures_page, end_date):
     return fixtures
 
 
+def last_modified_date(filepath):
+    modification_timestamp = os.path.getmtime(filepath)
+    modification_date = datetime.date.fromtimestamp(modification_timestamp)
+    return modification_date
+
+
 def analyse_fixtures(league, end_date):
+    today = datetime.date.today()
+    if last_modified_date(league.fixtures_file) != today:
+        league.retrieve_fixtures()
+    if last_modified_date(league.data_file) != today:
+        league.retrieve_data()
     fixtures = get_fixtures(league.fixtures_file, end_date)
     fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
+    if not hasattr(league, 'matches'):
+        league.parse_league_data()
+    if not hasattr(league, 'team_stats'):
+        league.calculate_statistics()
     for home_team, away_team in fixtures:
+        def print_statline(attribute):
+            home = getattr(home_stats, attribute)
+            away = getattr(away_stats, attribute)
+            print('    {0}: {1} vs {2}'.format(attribute, home, away))
+        home_stats = league.team_stats[home_team]
+        away_stats = league.team_stats[away_team]
         print('{0} vs {1}'.format(home_team, away_team))
+        print_statline('points')
+        print_statline('tsr')
+        print_statline('pdo')
+        print_statline('tsotr')
+        print_statline('team_rating')
+
 
 if __name__ == '__main__':
     for league in current_year.all_leagues:
         print(league.title)
-        analyse_fixtures(league, '18/08/15')
+        analyse_fixtures(league, '19/08/15')
