@@ -458,3 +458,89 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
     plot.show()
     plot.close()
     display(HTML('line of best fit: ' + str(polynomial)))
+
+
+from bs4 import BeautifulSoup
+team_aliases = {'Dundee Utd': 'Dundee United',
+                'Inverness CT': 'Inverness C',
+                'Partick Thistle': 'Partick',
+                'Man Utd': 'Man United',
+                'Sheff Wed': 'Sheffield Weds',
+                'Nottm Forest': "Nott'm Forest",
+                'Sheff Utd': 'Sheffield United',
+                'MK Dons': 'Milton Keynes Dons',
+                'Fleetwood': 'Fleetwood Town',
+                'Peterborough': 'Peterboro',
+                'Crawley': 'Crawley Town',
+                'Newport': 'Newport County',
+                'Dag & Red': 'Dag and Red',
+                'Oxford Utd': 'Oxford',
+                'Wimbledon': 'AFC Wimbledon'
+                }
+
+
+def alias_team(team):
+    return team_aliases.get(team, team)
+
+
+def get_match_teams(match_details):
+    home_team_span = match_details.find('span', class_='team-home teams')
+    home_team = home_team_span.a.contents[0]
+    away_team_span = match_details.find('span', class_='team-away teams')
+    away_team = away_team_span.a.contents[0]
+    return (alias_team(home_team), alias_team(away_team))
+
+
+month_strings = {'January': '01',
+                 'February': '02',
+                 'March': '03',
+                 'April': '04',
+                 'May': '05',
+                 'June': '06',
+                 'July': '07',
+                 'August': '08',
+                 'September': '09',
+                 'October': '10',
+                 'November': '11',
+                 'December': '12'}
+
+
+def fixtures_date_on_or_before(datestring, date):
+    # An example datestring 'Saturday 9th April 2016'
+    fields = [f for f in datestring.split(' ') if f not in ['', '\n']]
+    day_string = fields[1]
+    day = day_string[:len(day_string) - 2]
+    if day in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
+        day = '0' + day
+    month = month_strings[fields[2]]
+    year = fields[3][2:]
+    newdatestring = '{0}/{1}/{2}'.format(day, month, year)
+    return date_on_or_before(newdatestring, date)
+
+
+def get_fixtures(fixtures_page, end_date):
+    with open(fixtures_page, encoding='utf-8') as fixtures_file:
+        soup = BeautifulSoup(fixtures_file)
+    dates = soup.find_all('h2', class_='table-header')
+    fixtures = []
+    for date in dates:
+        if fixtures_date_on_or_before(date.string, end_date):
+            table = date.next_sibling.next_sibling
+            match_details_list = table.find_all('td', class_='match-details')
+            matches = [get_match_teams(md) for md in match_details_list]
+            fixtures.extend(matches)
+        else:
+            break
+    return fixtures
+
+
+def analyse_fixtures(league, end_date):
+    fixtures = get_fixtures(league.fixtures_file, end_date)
+    fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
+    for home_team, away_team in fixtures:
+        print('{0} vs {1}'.format(home_team, away_team))
+
+if __name__ == '__main__':
+    for league in current_year.all_leagues:
+        print(league.title)
+        analyse_fixtures(league, '18/08/15')
