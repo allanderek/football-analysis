@@ -542,6 +542,18 @@ def last_modified_date(filepath):
     return modification_date
 
 
+def last_x_matches(league, team, x):
+    matches = [m for m in league.matches if involved_in_game(team, m)]
+    start_index = max(0, len(matches) - x)
+    matches = matches[start_index:]
+    for match in matches:
+        output_template = '    {0}/{1}/{2}/{3} vs {4}/{5}/{6}/{7}'
+        output = output_template.format(match.HomeTeam, match.FTHG,
+                                        match.HS, match.HST,
+                                        match.AwayTeam, match.FTAG,
+                                        match.AS, match.AST)
+        print(output)
+
 def analyse_fixtures(league, end_date):
     today = datetime.date.today()
     if last_modified_date(league.fixtures_file) != today:
@@ -562,6 +574,8 @@ def analyse_fixtures(league, end_date):
         home_stats = league.team_stats[home_team]
         away_stats = league.team_stats[away_team]
         print('{0} vs {1}'.format(home_team, away_team))
+        last_x_matches(league, home_team, 3)
+        last_x_matches(league, away_team, 3)
         print_statline('points')
         print_statline('tsr')
         print_statline('pdo')
