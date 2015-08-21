@@ -333,18 +333,20 @@ def display_pairs(pairs):
     display(HTML(html))
 
 
-def date_on_or_before(first_date, second_date):
-    """ Returns true if the first date is on or before the second date. """
-    first_day, first_month, first_year = first_date.split('/')
-    second_day, second_month, second_year = second_date.split('/')
-    if first_year < second_year:
-        return True
-    elif first_year == second_year:
-        if first_month < second_month:
-            return True
-        elif first_month == second_month:
-            return first_day <= second_day
-    return False
+def date_from_string(date_string):
+    date_fields = date_string.split('/')
+    day, month, year = [int(f) for f in date_fields]
+    # We allow you to specify the year as a two-digit number, we assume
+    # that such a number which is greater than 50 refers to the 20th
+    # century and one that is less than 50 refers to the 21st century,
+    # it seems unlikely I will still be using this script in 2050. So,
+    # 01/02/16 is the first of February 2016
+    # 01/02/95 is the first of Feburary 1995
+    if year < 50:
+        year += 2000
+    elif year < 100:
+        year += 1900
+    return datetime.date(year, month, day)
 
 
 def display_given_matches(matches):
@@ -357,11 +359,17 @@ def display_given_matches(matches):
     display(HTML(html))
 
 
+def date_in_range(start_date, datestring, end_date):
+    date = date_from_string(datestring)
+    return start_date <= date and date <= end_date
+
+
 def display_matches(league, starting_date, ending_date):
     """ Display all matches within a league between the given dates """
+    start_date = date_from_string(starting_date)
+    end_date = date_from_string(ending_date)
     def filter_fun(m):
-        return (date_on_or_before(starting_date, m.Date) and
-                date_on_or_before(m.Date, ending_date))
+        return date_in_range(start_date, m.Date, end_date)
     matches = [m for m in league.matches if filter_fun(m)]
     display_given_matches(matches)
 
@@ -584,14 +592,7 @@ if __name__ == '__main__':
     import sys
     try:
         date_string = sys.argv[1]
-        date_fields = date_string.split('/')
-        day, month, year = [int(f) for f in date_fields]
-        # We allow you to specify the year as a two-digit number,
-        # assuming such a number means the 21st century, so
-        # 01/02/16 is the first of February 2016
-        if year < 100:
-            year += 2000
-        date = datetime.date(year, month, day)
+        date = date_from_string(date_string)
     except IndexError:
         date = datetime.date.today() + datetime.timedelta(days=2)
     for league in current_year.all_leagues:
