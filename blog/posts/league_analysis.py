@@ -493,31 +493,28 @@ def get_match_teams(match_details):
     return (alias_team(home_team), alias_team(away_team))
 
 
-month_strings = {'January': '01',
-                 'February': '02',
-                 'March': '03',
-                 'April': '04',
-                 'May': '05',
-                 'June': '06',
-                 'July': '07',
-                 'August': '08',
-                 'September': '09',
-                 'October': '10',
-                 'November': '11',
-                 'December': '12'}
+month_strings = {'January': 1,
+                 'February': 2,
+                 'March': 3,
+                 'April': 4,
+                 'May': 5,
+                 'June': 6,
+                 'July': 7,
+                 'August': 8,
+                 'September': 9,
+                 'October': 10,
+                 'November': 11,
+                 'December': 12}
 
 
 def fixtures_date_on_or_before(datestring, date):
     # An example datestring 'Saturday 9th April 2016'
     fields = [f for f in datestring.split(' ') if f not in ['', '\n']]
     day_string = fields[1]
-    day = day_string[:len(day_string) - 2]
-    if day in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
-        day = '0' + day
+    day = int(day_string[:len(day_string) - 2])
     month = month_strings[fields[2]]
-    year = fields[3][2:]
-    newdatestring = '{0}/{1}/{2}'.format(day, month, year)
-    return date_on_or_before(newdatestring, date)
+    year = int(fields[3])
+    return datetime.date(year, month, day) <= date
 
 
 def get_fixtures(fixtures_page, end_date):
@@ -586,15 +583,17 @@ def analyse_fixtures(league, end_date):
 if __name__ == '__main__':
     import sys
     try:
-        date = sys.argv[1]
+        date_string = sys.argv[1]
+        date_fields = date_string.split('/')
+        day, month, year = [int(f) for f in date_fields]
+        # We allow you to specify the year as a two-digit number,
+        # assuming such a number means the 21st century, so
+        # 01/02/16 is the first of February 2016
+        if year < 100:
+            year += 2000
+        date = datetime.date(year, month, day)
     except IndexError:
-        today = datetime.date.today()
-        two_days = datetime.timedelta(days=2)
-        two_days_hence = today + two_days
-        date = '{0}/{1}/{2}'.format(two_days_hence.day,
-                                    '0' + str(two_days_hence.month),
-                                    '15')
+        date = datetime.date.today() + datetime.timedelta(days=2)
     for league in current_year.all_leagues:
         print(league.title)
         analyse_fixtures(league, date)
-    print(date)
