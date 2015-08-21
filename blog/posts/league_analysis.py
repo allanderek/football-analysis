@@ -584,6 +584,17 @@ def analyse_fixtures(league, end_date):
 
 
 if __name__ == '__main__':
+    import sys
+    try:
+        date = sys.argv[1]
+    except IndexError:
+        today = datetime.date.today()
+        two_days = datetime.timedelta(days=2)
+        two_days_hence = today + two_days
+        date = '{0}/{1}/{2}'.format(two_days_hence.day,
+                                    '0' + str(two_days_hence.month),
+                                    '15')
     for league in current_year.all_leagues:
         print(league.title)
-        analyse_fixtures(league, '19/08/15')
+        analyse_fixtures(league, date)
+    print(date)
