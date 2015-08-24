@@ -10,7 +10,7 @@
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://allanderek.github.io/football-analysis/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-august-14-17/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-22-24-august/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -59,7 +59,353 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-august-14-17/" class="u-url">EPL August 14-17</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-22-24-august/" class="u-url">EPL 22-24 August</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="posts/epl-22-24-august/" rel="bookmark"><time class="published dt-published" datetime="2015-08-24T10:41:58+01:00" title="2015-08-24 10:41">2015-08-24 10:41</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-22-24-august/#disqus_thread" data-disqus-identifier="cache/posts/epl-22-24-august.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-22-24-august-2015-2016">EPL 22-24 August 2015/2016</h2>
+<p>Weekly round-up of games in the English Premier League.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">epl</span><span class="o">.</span><span class="n">retrieve_data</span><span class="p">()</span>
+<span class="n">epl</span><span class="o">.</span><span class="n">parse_league_data</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">display_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'22/08/15'</span><span class="p">,</span> <span class="s">'24/08/15'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Crystal Palace</td>
+<td>Aston Villa</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>16</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Leicester</td>
+<td>Tottenham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>19</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man United</td>
+<td>Newcastle</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>20</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Norwich</td>
+<td>Stoke</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>21</td>
+<td>6</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Sunderland</td>
+<td>Swansea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>10</td>
+<td>20</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>9</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Ham</td>
+<td>Bournemouth</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>10</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Everton</td>
+<td>Man City</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>10</td>
+<td>16</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>9</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Watford</td>
+<td>Southampton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>14</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>0</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Brom</td>
+<td>Chelsea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is being done on Monday before the Arsenal vs Liverpool game so I'll update this post after data for that match is available.
+</p>
+<p class="more"><a href="posts/epl-22-24-august/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-august-14-17/" class="u-url">EPL August 14-17</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
             <p class="dateline"><a href="posts/epl-august-14-17/" rel="bookmark"><time class="published dt-published" datetime="2015-08-17T11:07:38+01:00" title="2015-08-17 11:07">2015-08-17 11:07</time></a></p>
