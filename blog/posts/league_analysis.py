@@ -16,8 +16,10 @@ class Match(object):
     pass
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
-              'HBP', 'ABP']
+              'HBP', 'ABP', 'Bb1X2']
 
+float_fields = ['BbMxH', 'BbAvH', 'BbMxD',
+                'BbAvD', 'BbMxA', 'BbAvA']
 
 def create_match(field_names, row):
     match = Match()
@@ -25,6 +27,8 @@ def create_match(field_names, row):
         value = row[index]
         if name in int_fields:
             value = int(value)
+        if name in float_fields:
+            value = float(value)
         setattr(match, name, value)
     return match
 
@@ -234,9 +238,10 @@ class League(object):
 
 class Year(object):
     def __init__(self, year):
+        self.year_name = year
         self.epl_league = League("E0", "premier-league", year)
-        self.elo_league = League("E2", "league-one", year)
         self.ech_league = League("E1", "championship", year)
+        self.elo_league = League("E2", "league-one", year)
         self.elt_league = League("E3", "league-two", year)
         self.spl_league = League("SC0", "scottish-premiership", year)
         # No shots data for the scottish championship.
@@ -259,8 +264,12 @@ class Year(object):
         for league in self.all_leagues:
             league.calculate_statistics()
 
-    def get_all_matches(self):
-        match_lists = (league.matches for league in self.all_leagues)
+    def get_all_matches(self, leagues=None):
+        if leagues is None:
+            leagues = self.all_leagues
+        else:
+            leagues = [getattr(self, league) for league in leagues]
+        match_lists = (league.matches for league in leagues)
         return itertools.chain.from_iterable(match_lists)
 
 
@@ -288,10 +297,11 @@ league_two = current_year.elt_league
 spl = current_year.spl_league
 
 
-def get_all_matches(years=None):
+def get_all_matches(years=None, leagues=None):
     if years is None:
         years = all_years
-    match_lists = (year.get_all_matches() for year in years)
+    match_lists = (year.get_all_matches(leagues=leagues)
+                   for year in years)
     return itertools.chain.from_iterable(match_lists)
 
 
