@@ -10,7 +10,7 @@
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://allanderek.github.io/football-analysis/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-22-24-august/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/results-histograms/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -59,7 +59,119 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-22-24-august/" class="u-url">EPL 22-24 August</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/results-histograms/" class="u-url">Results Histograms</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="posts/results-histograms/" rel="bookmark"><time class="published dt-published" datetime="2015-08-26T14:02:12+01:00" title="2015-08-26 14:02">2015-08-26 14:02</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/results-histograms/#disqus_thread" data-disqus-identifier="cache/posts/results-histograms.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="result-histograms">Result Histograms</h2>
+<p>Suppose you wish to bet on the correct score for games in a particular league. Of course the odds for each result will depend heavily on the two teams involved but it would at least help to know what the <em>base</em> rates are. That is, how often each kind of result occurs in a particular league. There is no point in betting on a four-nil away victory if that result never happens. Here, we give a few histograms over the kinds of results that happen in our standard five leagues.</p>
+<p>We start off with a bunch of imports to get us started.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">parse_all_data</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plot</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="n">league_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'epl'</span><span class="p">,</span> <span class="s">'ech'</span><span class="p">,</span> <span class="s">'elo'</span><span class="p">,</span> <span class="s">'elt'</span><span class="p">,</span> <span class="s">'spl'</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we require some code to actually draw the histogram of results from a particular set of matches. Our code here is generic enough to draw the histograms for both results (home, away, draw) and correct scores (0-0, 0-1, etc.).</p>
+<p class="more"><a href="posts/results-histograms/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/shots-per-goal/" class="u-url">Shots Per Goal</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="posts/shots-per-goal/" rel="bookmark"><time class="published dt-published" datetime="2015-08-26T14:01:53+01:00" title="2015-08-26 14:01">2015-08-26 14:01</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/shots-per-goal/#disqus_thread" data-disqus-identifier="cache/posts/shots-per-goal.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="shots-per-goal">Shots Per Goal</h2>
+<p>A very quick post which explores the average number of shots and shots on target it takes in order to score a goal. If we assume that shots and shots on target are a better indicator of skill than the number of goals, then we can get an idea of what the score <em>should</em> have been for any given game. Of course this simple analysis ignores score effects which are almost certainly prevalent.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following tables then show for each year the number of shots divided by the number of goals for each of the 5 leagues we are examining and the average across all 5 leagues. We then get an overall picture for all years, firstly for each league individually and then in the final row of the final table we have the overall picture which includes all the matches we have data for.</p>
+<p>In addition, we do the same analyses, but only for all home shots/goals and all away shots/goals, since it may be that there is a difference in the number of shots taken for each goal by home and away teams.</p>
+<p class="more"><a href="posts/shots-per-goal/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-22-24-august/" class="u-url">EPL 22-24 August</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
             <p class="dateline"><a href="posts/epl-22-24-august/" rel="bookmark"><time class="published dt-published" datetime="2015-08-24T10:41:58+01:00" title="2015-08-24 10:41">2015-08-24 10:41</time></a></p>

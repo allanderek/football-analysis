@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shots Per Goal | Football Data Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="http://allanderek.github.io/football-analysis/posts/shots-per-goal/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="allanderek">
+<link rel="prev" href="../epl-22-24-august/" title="EPL 22-24 August" type="text/html">
+<link rel="next" href="../results-histograms/" title="Results Histograms" type="text/html">
+<meta property="og:site_name" content="Football Data Site">
+<meta property="og:title" content="Shots Per Goal">
+<meta property="og:url" content="http://allanderek.github.io/football-analysis/posts/shots-per-goal/">
+<meta property="og:description" content="Shots Per Goal
+A very quick post which explores the average number of shots and shots on target it takes in order to score a goal. If we assume that shots and shots on target are a better indicator of">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-08-26T14:01:53+01:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://allanderek.github.io/football-analysis/">
+
+                <span id="blog-title">Football Data Site</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../categories/">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="index.ipynb" id="sourcelink">Source</a>
+    </li>
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Shots Per Goal</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2015-08-26T14:01:53+01:00" itemprop="datePublished" title="2015-08-26 14:01">2015-08-26 14:01</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/shots-per-goal.html">Comments</a>
+
+
+            
+        </p>
+<p class="sourceline"><a href="index.ipynb" id="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="shots-per-goal">Shots Per Goal</h2>
+<p>A very quick post which explores the average number of shots and shots on target it takes in order to score a goal. If we assume that shots and shots on target are a better indicator of skill than the number of goals, then we can get an idea of what the score <em>should</em> have been for any given game. Of course this simple analysis ignores score effects which are almost certainly prevalent.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following tables then show for each year the number of shots divided by the number of goals for each of the 5 leagues we are examining and the average across all 5 leagues. We then get an overall picture for all years, firstly for each league individually and then in the final row of the final table we have the overall picture which includes all the matches we have data for.</p>
+<p>In addition, we do the same analyses, but only for all home shots/goals and all away shots/goals, since it may be that there is a difference in the number of shots taken for each goal by home and away teams.</p>
+<!-- TEASER_END -->
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">parse_all_data</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">all_years</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s">'&lt;h3&gt;{0}&lt;/h3&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">year</span><span class="o">.</span><span class="n">year_name</span><span class="p">)))</span>
+    <span class="n">league_analysis</span><span class="o">.</span><span class="n">display_shots_per_goal_info</span><span class="p">(</span><span class="n">years</span><span class="o">=</span><span class="p">[</span><span class="n">year</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s">'&lt;h3&gt;All Years&lt;/h3&gt;'</span><span class="p">))</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_shots_per_goal_info</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1011</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>8.888993414863593</td> <td>4.866415804327375</td> <td>8.500810372771475</td> <td>4.716369529983792</td> <td>9.426008968609866</td> <td>5.073991031390134</td>
+</tr>
+<tr>
+<td>ech</td> <td>8.309271523178808</td> <td>4.354304635761589</td> <td>8.333333333333334</td> <td>4.322695035460993</td> <td>8.278614457831326</td> <td>4.394578313253012</td>
+</tr>
+<tr>
+<td>elo</td> <td>7.581842279655401</td> <td>3.841616964877402</td> <td>7.535329341317365</td> <td>3.7904191616766467</td> <td>7.63946587537092</td> <td>3.9050445103857565</td>
+</tr>
+<tr>
+<td>elt</td> <td>7.347941567065073</td> <td>3.4156706507304118</td> <td>7.307317073170732</td> <td>3.4414634146341463</td> <td>7.396501457725948</td> <td>3.3848396501457727</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.082191780821918</td> <td>3.565068493150685</td> <td>7.0476190476190474</td> <td>3.5238095238095237</td> <td>7.122676579925651</td> <td>3.613382899628253</td>
+</tr>
+<tr>
+<td>Overall</td> <td>7.880589760207388</td> <td>4.013447828904731</td> <td>7.806291872997378</td> <td>3.9801922516749197</td> <td>7.973713033953998</td> <td>4.055129609346477</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1112</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>9.25703564727955</td> <td>5.230769230769231</td> <td>9.144039735099337</td> <td>5.155629139072848</td> <td>9.404761904761905</td> <td>5.329004329004329</td>
+</tr>
+<tr>
+<td>ech</td> <td>8.621564482029598</td> <td>4.456659619450317</td> <td>8.654241645244216</td> <td>4.482005141388175</td> <td>8.581903276131046</td> <td>4.425897035881436</td>
+</tr>
+<tr>
+<td>elo</td> <td>7.751511081262592</td> <td>3.9079919408999326</td> <td>7.807361963190184</td> <td>3.939877300613497</td> <td>7.683976261127596</td> <td>3.8694362017804154</td>
+</tr>
+<tr>
+<td>elt</td> <td>8.017146776406035</td> <td>3.993141289437586</td> <td>7.898765432098766</td> <td>3.9592592592592593</td> <td>8.165123456790123</td> <td>4.035493827160494</td>
+</tr>
+<tr>
+<td>spl</td> <td>6.846921797004992</td> <td>3.5041597337770383</td> <td>7.111111111111111</td> <td>3.6126984126984127</td> <td>6.555944055944056</td> <td>3.3846153846153846</td>
+</tr>
+<tr>
+<td>Overall</td> <td>8.196253936681584</td> <td>4.2511188463451015</td> <td>8.2049969897652</td> <td>4.26158940397351</td> <td>8.18554039099963</td> <td>4.238288454444854</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1213</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>8.985888993414864</td> <td>5.089369708372531</td> <td>9.065878378378379</td> <td>5.108108108108108</td> <td>8.885350318471337</td> <td>5.065817409766455</td>
+</tr>
+<tr>
+<td>ech</td> <td>7.918340026773762</td> <td>4.136546184738956</td> <td>7.941105769230769</td> <td>4.150240384615385</td> <td>7.889728096676738</td> <td>4.119335347432024</td>
+</tr>
+<tr>
+<td>elo</td> <td>8.539136795903438</td> <td>4.286027798098025</td> <td>8.547169811320755</td> <td>4.30188679245283</td> <td>8.5296</td> <td>4.2672</td>
+</tr>
+<tr>
+<td>elt</td> <td>7.874204946996467</td> <td>3.963957597173145</td> <td>7.951219512195122</td> <td>3.9653401797175865</td> <td>7.779874213836478</td> <td>3.9622641509433962</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.016051364365971</td> <td>3.524879614767255</td> <td>7.2373887240356085</td> <td>3.599406528189911</td> <td>6.755244755244755</td> <td>3.437062937062937</td>
+</tr>
+<tr>
+<td>Overall</td> <td>8.146259644414625</td> <td>4.2358269037235825</td> <td>8.211151736745887</td> <td>4.256855575868373</td> <td>8.066791044776119</td> <td>4.210074626865672</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1314</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>9.709125475285171</td> <td>3.223384030418251</td> <td>9.503344481605351</td> <td>3.20066889632107</td> <td>9.980176211453745</td> <td>3.253303964757709</td>
+</tr>
+<tr>
+<td>ech</td> <td>10.129009762900976</td> <td>3.301952580195258</td> <td>10.257250945775535</td> <td>3.3455233291298865</td> <td>9.970358814352574</td> <td>3.2480499219968797</td>
+</tr>
+<tr>
+<td>elo</td> <td>8.29938900203666</td> <td>3.3380855397148674</td> <td>8.337871287128714</td> <td>3.339108910891089</td> <td>8.25263157894737</td> <td>3.336842105263158</td>
+</tr>
+<tr>
+<td>elt</td> <td>8.426026336173509</td> <td>3.3446940356312935</td> <td>8.379008746355685</td> <td>3.3411078717201166</td> <td>8.479338842975206</td> <td>3.3487603305785125</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.520766773162939</td> <td>3.0894568690095845</td> <td>7.417391304347826</td> <td>3.1043478260869564</td> <td>7.647686832740214</td> <td>3.0711743772241995</td>
+</tr>
+<tr>
+<td>Overall</td> <td>8.943158611300204</td> <td>3.283696392103472</td> <td>8.935294117647059</td> <td>3.290402476780186</td> <td>8.95275888133031</td> <td>3.2755102040816326</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1415</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>10.098461538461539</td> <td>3.275897435897436</td> <td>9.923214285714286</td> <td>3.205357142857143</td> <td>10.334939759036144</td> <td>3.3710843373493975</td>
+</tr>
+<tr>
+<td>ech</td> <td>10.175033921302578</td> <td>3.289009497964722</td> <td>10.160736196319018</td> <td>3.2625766871165642</td> <td>10.192716236722307</td> <td>3.3216995447647952</td>
+</tr>
+<tr>
+<td>elo</td> <td>8.15915300546448</td> <td>3.3545081967213113</td> <td>8.38974358974359</td> <td>3.428205128205128</td> <td>7.896198830409356</td> <td>3.27046783625731</td>
+</tr>
+<tr>
+<td>elt</td> <td>8.502657555049355</td> <td>3.3705391040242976</td> <td>8.248979591836735</td> <td>3.254421768707483</td> <td>8.823024054982818</td> <td>3.5171821305841924</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.7904599659284495</td> <td>3.340715502555366</td> <td>7.615151515151515</td> <td>3.2848484848484847</td> <td>8.01556420233463</td> <td>3.412451361867704</td>
+</tr>
+<tr>
+<td>Overall</td> <td>9.035585353274884</td> <td>3.3269726663228467</td> <td>8.993167701863355</td> <td>3.293167701863354</td> <td>9.088178667693493</td> <td>3.3688871775125144</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>1516</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>9.636363636363637</td> <td>3.272727272727273</td> <td>11.666666666666666</td> <td>3.515151515151515</td> <td>8.113636363636363</td> <td>3.090909090909091</td>
+</tr>
+<tr>
+<td>ech</td> <td>11.233644859813085</td> <td>3.5514018691588785</td> <td>11.616666666666667</td> <td>3.6166666666666667</td> <td>10.74468085106383</td> <td>3.4680851063829787</td>
+</tr>
+<tr>
+<td>elo</td> <td>8.346774193548388</td> <td>3.370967741935484</td> <td>7.472222222222222</td> <td>3.0277777777777777</td> <td>9.557692307692308</td> <td>3.8461538461538463</td>
+</tr>
+<tr>
+<td>elt</td> <td>7.881889763779528</td> <td>3.1496062992125986</td> <td>7.594202898550725</td> <td>3.101449275362319</td> <td>8.224137931034482</td> <td>3.206896551724138</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.160493827160494</td> <td>3.419753086419753</td> <td>6.853658536585366</td> <td>3.292682926829268</td> <td>7.475</td> <td>3.55</td>
+</tr>
+<tr>
+<td>Overall</td> <td>8.837209302325581</td> <td>3.3468992248062017</td> <td>8.818181818181818</td> <td>3.272727272727273</td> <td>8.858921161825727</td> <td>3.4315352697095434</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<h4>All Years</h4>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>league</th> <th>shots per goal</th> <th>sot per goal</th> <th>home spg</th> <th>home sotpg</th> <th>away spg</th> <th>away sotpg</th>
+</tr>
+<tr>
+<td>epl</td> <td>9.378965256797583</td> <td>4.34214501510574</td> <td>9.241011984021306</td> <td>4.285286284953395</td> <td>9.559773123909249</td> <td>4.416666666666667</td>
+</tr>
+<tr>
+<td>ech</td> <td>9.052971228824953</td> <td>3.904544232320516</td> <td>9.093598448108633</td> <td>3.9102812803103784</td> <td>9.002414001207</td> <td>3.8974049487024742</td>
+</tr>
+<tr>
+<td>elo</td> <td>8.061001885267977</td> <td>3.732965257204417</td> <td>8.098716683119447</td> <td>3.740868706811451</td> <td>8.01570835803201</td> <td>3.723473621813871</td>
+</tr>
+<tr>
+<td>elt</td> <td>8.008715209446162</td> <td>3.6170930559460217</td> <td>7.929982046678636</td> <td>3.59476788920236</td> <td>8.104199066874028</td> <td>3.644167962674961</td>
+</tr>
+<tr>
+<td>spl</td> <td>7.247904577691812</td> <td>3.4029658284977433</td> <td>7.279857397504457</td> <td>3.4171122994652405</td> <td>7.210007047216349</td> <td>3.386187455954898</td>
+</tr>
+<tr>
+<td>Overall</td> <td>8.438405319989466</td> <td>3.8203515933631813</td> <td>8.42673905261902</td> <td>3.813626058942847</td> <td>8.452769208168062</td> <td>3.828632290289408</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="conclusion">Conclusion</h2>
+<p>My take from this is that the number of shots/shots on target per goal is not affected by whether the team is playing at home or away. It does seem to be affected by which league the match is taking place in. In particular the higher the league the more shots/sots required per goal. There also seems to be year-on-year differences, but these are smaller.</p>
+<p>A final note is that it seems to converge pretty quickly after a few matches in a given season. So I think we can safely use the shots/sots per goal from the current season on a per-league basis. We do not need to look at historical data, nor do we need to separate home from away teams.</p>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../epl-22-24-august/" rel="prev" title="EPL 22-24 August">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../results-histograms/" rel="next" title="Results Histograms">Next post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="allanderek",
+            disqus_url="http://allanderek.github.io/football-analysis/posts/shots-per-goal/",
+        disqus_title="Shots Per Goal",
+        disqus_identifier="cache/posts/shots-per-goal.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script><script src="../../assets/js/mathjax.js"></script></article><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2015         <a href="mailto:allan.clark@gmail.com">allanderek</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>
