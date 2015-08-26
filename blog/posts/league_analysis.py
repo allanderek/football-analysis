@@ -168,13 +168,16 @@ interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'Goals For',
                      ]
 
 
+# We sometimes call this from within the 'blog/posts' directory and
+# sometimes from the parent directory.
+data_dir_base = 'data/' if os.path.isdir('data/') else '../../data/'
 class League(object):
     def __init__(self, short_title, fixtures_directory, year, title=None):
         self.title = title if title is not None else fixtures_directory
         data_dir_url = 'http://www.football-data.co.uk/mmz4281/' + year
         data_file_basename = short_title + ".csv"
         self.data_url = data_dir_url + '/' + data_file_basename
-        self.data_dir = '../../data/' + year
+        self.data_dir = data_dir_base + year
         self.data_file = self.data_dir + '/' + data_file_basename
         fixtures_base_url = "http://www.bbc.co.uk/sport/football/"
         self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
