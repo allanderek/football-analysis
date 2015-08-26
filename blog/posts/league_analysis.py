@@ -460,7 +460,6 @@ def display_shots_per_goal_info(years=None):
         else:
             league_name = league_short_name + '_league'
             leagues = [getattr(y, league_name) for y in years]
-
         for league in leagues:
             league.calculate_league_shot_stats()
 
@@ -536,9 +535,11 @@ def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
     display(HTML('line of best fit: ' + str(polynomial)))
 
 
-def graph_leagues(x_label, y_label, leagues=None,
-                  get_x_stat=None, get_y_stat=None, annotate_teams=None):
-    """This only works if the x/y stats are attributes of a TeamStat object."""
+def graph_leagues(x_label, y_label, leagues=None, get_x_stat=None,
+                  get_y_stat=None, annotate_teams=None):
+    """This only works if the x/y stats are attributes of a TeamStat
+       object. Note that this will error out if you do not specify a
+       list of leagues."""
     def get_stat_from_label(label):
         stat_name = label.replace(' ', '_').lower()
         return lambda league, team: getattr(league.team_stats[team], stat_name)
@@ -546,8 +547,6 @@ def graph_leagues(x_label, y_label, leagues=None,
         get_x_stat = get_stat_from_label(x_label)
     if get_y_stat is None:
         get_y_stat = get_stat_from_label(y_label)
-    if leagues is None:
-        leagues = all_leagues
     for league in leagues:
         title = '{0}: {1}/{2}'.format(league.title, x_label, y_label)
         scatter_stats(league, title=title,
