@@ -146,6 +146,8 @@ class TeamStats(object):
         self.goals_against = sum_stat(goals_against_in_game)
         self.sot_for = sum_stat(sot_for_in_game)
         self.sot_against = sum_stat(sot_against_in_game)
+        total_sot = self.sot_for + self.sot_against
+        self.sotr = clean_ratio(self.sot_for, total_sot, default=0.5)
         self.sot_for_ratio = clean_ratio(self.sot_for, self.shots_for,
                                          default=0.0)
         self.sot_against_ratio = clean_ratio(self.sot_against,
@@ -230,10 +232,38 @@ class League(object):
             return TeamStats(team, games)
         return {team: get_team_stats(team) for team in self.teams}
 
+
     def calculate_statistics(self):
         self.team_stats = self.get_stats(involved_in_game)
         self.home_team_stats = self.get_stats(is_home_game)
         self.away_team_stats = self.get_stats(is_away_game)
+        self.calculate_league_shot_stats()
+
+    def calculate_league_shot_stats(self):
+        # Now shot and shots on target per goal.
+        def sum_attribute(attr):
+            return float(sum(getattr(m, attr) for m in self.matches))
+
+        self.home_goals = sum_attribute('FTHG')
+        self.away_goals = sum_attribute('FTAG')
+        self.all_goals = self.home_goals + self.away_goals
+        
+        self.home_shots = sum_attribute('HS')
+        self.away_shots = sum_attribute('AS')
+        self.all_shots = self.home_shots + self.away_shots
+        
+        self.home_sot = sum_attribute('HST')
+        self.away_sot = sum_attribute('AST')
+        self.all_sot = self.home_sot + self.away_sot
+        
+        self.shots_per_goal = self.all_shots / self.all_goals
+        self.sot_per_goal = self.all_sot / self.all_goals
+        
+        self.home_spg = self.home_shots / self.home_goals
+        self.home_sotpg = self.home_sot / self.home_goals
+        
+        self.away_spg = self.away_shots / self.away_goals
+        self.away_sotpg = self.away_sot / self.away_goals
 
 
 class Year(object):
@@ -245,8 +275,9 @@ class Year(object):
         self.elt_league = League("E3", "league-two", year)
         self.spl_league = League("SC0", "scottish-premiership", year)
         # No shots data for the scottish championship.
-        self.all_leagues = [self.epl_league, self.ech_league, self.elo_league,
-                            self.elt_league, self.spl_league]
+        self.all_leagues = [self.epl_league, self.ech_league,
+                            self.elo_league, self.elt_league,
+                            self.spl_league]
 
     def retrieve_data(self):
         for league in self.all_leagues:
@@ -297,6 +328,12 @@ league_two = current_year.elt_league
 spl = current_year.spl_league
 
 
+def get_match(league, home, away, date):
+    def filter_fun(match):
+        return (match.HomeTeam == home and
+                match.AwayTeam == away and match.Date == date)
+    return next(m for m in league.matches if filter_fun(m))
+
 def get_all_matches(years=None, leagues=None):
     if years is None:
         years = all_years
@@ -334,14 +371,34 @@ def match_to_html(match):
                            woodwork)
     return html
 
+def create_inline_block(html):
+    return '<div style="display:inline-block;">{0}</div>'.format(html)
 
-def display_pairs(pairs):
+
+def display_pairs(pairs, inline_block=True):
     row_template = "<tr><td>{0}</td><td>{1}</td></tr>"
     rows = [row_template.format(k, e) for k, e in pairs]
     html_rows = "\n".join(rows)
     html = "\n".join(["<table>", html_rows, "</table>"])
+    if inline_block:
+        html = create_inline_block(html)
     display(HTML(html))
 
+
+def display_table(header_data, row_data):
+    def make_header_cell(s):
+        return '<th>{0}</th>'.format(s)
+    def make_cell(s):
+        return '<td>{0}</td>'.format(s)
+    def make_row(s):
+        return '<tr>{0}</tr>'.format(s)
+    headers = " ".join([make_header_cell(h) for h in header_data])
+    header_row = make_row(headers)
+    rows = [make_row(" ".join([make_cell(c) for c in row]))
+            for row in row_data]
+    rows = "\n".join(rows)
+    html = '<table>' + header_row + rows + '</table>'
+    display(HTML(html))
 
 def date_from_string(date_string):
     date_fields = date_string.split('/')
@@ -362,8 +419,7 @@ def date_from_string(date_string):
 def display_given_matches(matches):
     """ Display a given set of matches """
     def inline_div_match(match):
-        inline_block = '<div style="display:inline-block;">{0}</div>'
-        return inline_block.format(match_to_html(match))
+        return create_inline_block(match_to_html(match))
     match_blocks = [inline_div_match(match) for match in matches]
     html = "\n".join(match_blocks)
     display(HTML(html))
@@ -374,14 +430,66 @@ def date_in_range(start_date, datestring, end_date):
     return start_date <= date and date <= end_date
 
 
-def display_matches(league, starting_date, ending_date):
-    """ Display all matches within a league between the given dates """
+def get_matches(league, starting_date, ending_date,
+                home_team=None, away_team=None):
     start_date = date_from_string(starting_date)
     end_date = date_from_string(ending_date)
     def filter_fun(m):
+        if home_team is not None and m.HomeTeam != home_team:
+            return False
+        if away_team is not None and m.AwayTeam != away_team:
+            return False
         return date_in_range(start_date, m.Date, end_date)
     matches = [m for m in league.matches if filter_fun(m)]
+    return matches    
+
+def display_matches(league, starting_date, ending_date):
+    """ Display all matches within a league between the given dates """
+    matches = get_matches(league, starting_date, ending_date)
     display_given_matches(matches)
+
+def display_shots_per_goal_info(years=None):
+    if years is None:
+        years = all_years
+    def get_data_row(league_short_name):
+        if league_short_name == 'Overall':
+            leagues = [l for y in years for l in y.all_leagues]
+        else:
+            league_name = league_short_name + '_league'
+            leagues = [getattr(y, league_name) for y in years]
+
+        for league in leagues:
+            league.calculate_league_shot_stats()
+
+        def sum_attribute(attribute):
+            return sum(getattr(l, attribute) for l in leagues)
+
+        home_goals = sum_attribute('home_goals')
+        away_goals = sum_attribute('away_goals')
+        all_goals = sum_attribute('all_goals')
+
+        home_shots = sum_attribute('home_shots')
+        home_spg = home_shots / home_goals
+        away_shots = sum_attribute('away_shots')
+        away_spg = away_shots / away_goals
+        all_shots = sum_attribute('all_shots')
+        shots_per_goal = all_shots / all_goals
+
+        home_sot = sum_attribute('home_sot')
+        home_sotpg = home_sot / home_goals
+        away_sot = sum_attribute('away_sot')
+        away_sotpg = away_sot / away_goals
+        all_sot = sum_attribute('all_sot')
+        sot_per_goal = all_sot / all_goals
+
+        return [league_short_name, shots_per_goal, sot_per_goal,
+                home_spg, home_sotpg, away_spg, away_sotpg]
+
+    leagues = ['epl', 'ech', 'elo', 'elt', 'spl', 'Overall']
+    data_rows = [get_data_row(league) for league in leagues]
+    header_row = ['league', 'shots per goal', 'sot per goal',
+                  'home spg', 'home sotpg', 'away spg', 'away sotpg']
+    display_table(header_row, data_rows)
 
 
 def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
@@ -480,6 +588,11 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
 
 
 from bs4 import BeautifulSoup
+# The teams on the left here, that is the keys of the dictionary are
+# team names from sources other than the data files. So in particular
+# from the fixture list, but also betfair etc. The idea is that we can
+# lookup a team name from any source in the data files by first using
+# this dictionary via 'alias_team'.
 team_aliases = {'Dundee Utd': 'Dundee United',
                 'Inverness CT': 'Inverness C',
                 'Partick Thistle': 'Partick',
@@ -496,6 +609,12 @@ team_aliases = {'Dundee Utd': 'Dundee United',
                 'Oxford Utd': 'Oxford',
                 'Wimbledon': 'AFC Wimbledon',
                 'Bristol Rovers': 'Bristol Rvs',
+                'Cambridge Utd': 'Cambridge',
+                'York City': 'York',
+                'Notts Co': 'Notts County',
+                'Accrington S': 'Accrington',
+                'C Palace': 'Crystal Palace',
+                'Ross Co': 'Ross County',
                 }
 
 
@@ -593,6 +712,7 @@ def analyse_fixtures(league, end_date):
         last_x_matches(league, away_team, 3)
         print_statline('points')
         print_statline('tsr')
+        print_statline('sotr')
         print_statline('pdo')
         print_statline('tsotr')
         print_statline('team_rating')
