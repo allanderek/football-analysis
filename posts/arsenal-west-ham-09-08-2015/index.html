@@ -108,8 +108,9 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight"><pre><span class="kn">import</span> <span class="nn">league_analysis</span>
-<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
-<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_match</span><span class="p">(</span><span class="n">epl</span><span class="o">.</span><span class="n">get_game</span><span class="p">(</span><span class="s">'Arsenal'</span><span class="p">,</span> <span class="s">'West Ham'</span><span class="p">,</span> <span class="s">'09/08/15'</span><span class="p">))</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">parse_all_data</span><span class="p">()</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">year_201516</span><span class="o">.</span><span class="n">epl_league</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">([</span><span class="n">epl</span><span class="o">.</span><span class="n">get_game</span><span class="p">(</span><span class="s">'Arsenal'</span><span class="p">,</span> <span class="s">'West Ham'</span><span class="p">,</span> <span class="s">'09/08/15'</span><span class="p">)])</span>
 </pre></div>
 
 </div>
@@ -124,7 +125,7 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 <div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-
+<div style="display:inline-block;">
     <table>
 <tr>
 <th></th>
@@ -152,6 +153,7 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 <td>4</td>
 </tr>
 </table>
+</div>
 </div>
 
 </div>
@@ -205,28 +207,28 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 <div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<table>
+<div style="display:inline-block;"><table>
 <tr>
 <td>more shots</td>
-<td>4917</td>
+<td>4979</td>
 </tr>
 <tr>
 <td>fewer shots</td>
-<td>2956</td>
+<td>2982</td>
 </tr>
 <tr>
 <td>all wins</td>
-<td>8340</td>
+<td>8432</td>
 </tr>
 <tr>
 <td>draws</td>
-<td>3037</td>
+<td>3089</td>
 </tr>
 <tr>
 <td>total number of matches</td>
-<td>11377</td>
+<td>11521</td>
 </tr>
-</table>
+</table></div>
 </div>
 
 </div>
@@ -240,7 +242,7 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So of course the team that takes the larger number of shots is more likely to win, but it is only a ratio of approximately 5:3 (some games the teams have equal shot numbers). So it is not <em>that</em> uncommon for a team that is out-shot to win. However, of course many of these games may be cases in which the difference was small, so we check on how often a team is out-shot by the margin that Arsenal out-shot West Ham by, and how often such a team loses the match:</p>
+<p>So, unsurprisingly, the team that takes the larger number of shots is more likely to win, but it is only a ratio of approximately 5:3 (some games the teams have equal shot numbers). So it is not <em>that</em> uncommon for a team that is out-shot to win. However, many of these games may be cases in which the difference was small, so we check on how often a team is out-shot by the margin that Arsenal out-shot West Ham by, and how often such a team loses the match:</p>
 </div>
 </div>
 </div>
@@ -309,10 +311,10 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 <div class="prompt"></div>
 
 <div class="output_html rendered_html output_subarea ">
-<table>
+<div style="display:inline-block;"><table>
 <tr>
 <td>A team wins shots by 14 or more</td>
-<td>667</td>
+<td>675</td>
 </tr>
 <tr>
 <td>Won shots by 14 but lost</td>
@@ -320,13 +322,13 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 </tr>
 <tr>
 <td>Won shots by 14 and won</td>
-<td>412</td>
+<td>416</td>
 </tr>
 <tr>
 <td>Won shots by 14 but draw</td>
-<td>137</td>
+<td>141</td>
 </tr>
-</table>
+</table></div>
 </div>
 
 </div>
@@ -340,7 +342,7 @@ Possibly the largest upset of the week came at the Emirates where Arsenal starte
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>So in only 667 of the 11377 games did one team out-shoot the other by 14 shots or more. In 118 of those cases did the team that took the most shots actually lose the game. By contrast there are 412 games in which such a dominant shots team wins the game. I'm a little surprised there are not a larger number of dominant displays where a team really bosses the shots <em>and</em> wins the game. Similarly to the teams that win the shots battle at all, when a team wins the shots battle by as much as Arsenal did at the weekend, they are favourites to win the game, the ratio of wins to losses is only approximately 4:1. Good, but not guaranteed.</p>
+<p>So in only 675 of the 11521 games did one team out-shoot the other by 14 shots or more. In 118 of those cases did the team that took the most shots actually lose the game. By contrast there are 416 games in which such a dominant shots team wins the game. I'm a little surprised there are not a larger number of dominant displays where a team really bosses the shots <em>and</em> wins the game. Similarly to the teams that win the shots battle at all, when a team wins the shots battle by as much as Arsenal did at the weekend, they are favourites to win the game, the ratio of wins to losses is only approximately 4:1. Good, but not guaranteed.</p>
 <p>To be clear, I'm not terribly surprised by the 118 number. When a significantly superior team finds themselves behind in a game they tend to ramp up their urgency and hence shots. So it is not surprising to find the odd game in which such a team just does not find away to score. The 118 number represents less than 1% of the games.</p>
 <p>I am surprised that less 4% of games result in a team bossing the shots by 14 or more and reaping the benefits of this. I guess this demonstrates that once a team obtains a lead (or possibly a comfortable lead) they don't have much adventure about them. Or perhaps they pass up shooting opportunities in the hope of cultivating better chances, whilst hopefully whittling down the clock.</p>
 <p>This might tell us something about score-effects. That is, that score effects are rather important.</p>
