@@ -137,6 +137,7 @@ class TeamStats(object):
         def sum_stat(stat_fun):
             return sum(stat_fun(teamname, game) for game in games)
 
+        self.num_games = len(games)
         self.points = sum_stat(points_in_game)
         self.shots_for = sum_stat(shots_for_in_game)
         self.shots_against = sum_stat(shots_against_in_game)
@@ -388,6 +389,11 @@ def display_pairs(pairs, inline_block=True):
     display(HTML(html))
 
 
+def display_dictionary(dictionary):
+    pairs = sorted(dictionary.items(), key=lambda p: p[1], reverse=True)
+    display_pairs(pairs)
+
+
 def display_table(header_data, row_data):
     def make_header_cell(s):
         return '<th>{0}</th>'.format(s)
@@ -589,6 +595,31 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
     display(HTML('line of best fit: ' + str(polynomial)))
 
 
+def get_adjusted_stat(league, team, stat_home_name, stat_away_name, reverse_stat_dict):
+    matches = [m for m in league.matches if involved_in_game(team, m)]
+    def get_adjusted_stat(match):
+        if match.HomeTeam == team:
+            opponent = match.AwayTeam
+            team_stat = getattr(match, stat_home_name)
+        else:
+            opponent = match.HomeTeam
+            team_stat = getattr(match, stat_away_name)
+        opponent_avg_stat = reverse_stat_dict[opponent]
+        return team_stat - opponent_avg_stat
+    sum_diff = sum(get_adjusted_stat(m) for m in matches)
+    diff_per_game = sum_diff / float(len(matches))
+    return diff_per_game
+
+def get_adjusted_stat_dictionary(league, stat_home_name, stat_away_name, reverse_stat_name):
+    def get_reverse_stat(team):
+        stats = league.team_stats[team]
+        return getattr(stats, reverse_stat_name) / float(stats.num_games)
+    reverse_stat_dict = {t: get_reverse_stat(t) for t in league.teams}
+    adjusted_stats = {t: get_adjusted_stat(league, t, stat_home_name, stat_away_name, reverse_stat_dict)
+                      for t in league.teams}
+    return adjusted_stats
+
+
 from bs4 import BeautifulSoup
 # The teams on the left here, that is the keys of the dictionary are
 # team names from sources other than the data files. So in particular
@@ -702,19 +733,42 @@ def analyse_fixtures(league, end_date):
         league.parse_league_data()
     if not hasattr(league, 'team_stats'):
         league.calculate_statistics()
-    for home_team, away_team in fixtures:
+
+    adjusted_shots_for_per_game = get_adjusted_stat_dictionary(league,'HS', 'AS', 'shots_against')
+    adjusted_shots_against_per_game = get_adjusted_stat_dictionary(league,'AS', 'HS', 'shots_for')
+
+    def get_adjusted_tsr(team):
+        shots_for = adjusted_shots_for_per_game[team]
+        shots_against = adjusted_shots_against_per_game[team]
+        return shots_for - shots_against
+
+    adjusted_sot_for_per_game = get_adjusted_stat_dictionary(league, 'HST', 'AST', 'sot_against')
+    adjusted_sot_against_per_game = get_adjusted_stat_dictionary(league, 'AST', 'HST', 'sot_for')
+
+    def get_adjusted_sotr(team):
+        shots_for = adjusted_sot_for_per_game[team]
+        shots_against = adjusted_sot_against_per_game[team]
+        return shots_for - shots_against
+
+    for home_team, away_team in fixtures:        
         def print_statline(attribute):
             home = getattr(home_stats, attribute)
             away = getattr(away_stats, attribute)
             print('    {0}: {1} vs {2}'.format(attribute, home, away))
         home_stats = league.team_stats[home_team]
+        home_stats.adjsr = get_adjusted_tsr(home_team)
+        home_stats.adjsotr = get_adjusted_sotr(home_team)
         away_stats = league.team_stats[away_team]
+        away_stats.adjsr = get_adjusted_tsr(away_team)
+        away_stats.adjsotr = get_adjusted_sotr(away_team)
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
         last_x_matches(league, away_team, 3)
         print_statline('points')
         print_statline('tsr')
+        print_statline('adjsr')
         print_statline('sotr')
+        print_statline('adjsotr')
         print_statline('pdo')
         print_statline('tsotr')
         print_statline('team_rating')
