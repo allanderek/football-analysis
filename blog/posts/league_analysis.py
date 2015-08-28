@@ -781,6 +781,6 @@ if __name__ == '__main__':
         date = date_from_string(date_string)
     except IndexError:
         date = datetime.date.today() + datetime.timedelta(days=2)
-    for league in current_year.all_leagues:
+    for league in reversed(current_year.all_leagues):
         print(league.title)
         analyse_fixtures(league, date)
