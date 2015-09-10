@@ -169,6 +169,37 @@ interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'Goals For',
                      ]
 
 
+def last_modified_date(filepath):
+    modification_timestamp = os.path.getmtime(filepath)
+    modification_date = datetime.date.fromtimestamp(modification_timestamp)
+    return modification_date
+
+
+def needs_refreshing(filepath):
+    """ Basically we assume that if the file in question is for a season
+    before the current one, then the data has not been updated and we do
+    not need to refresh it. If it is from the current season, then we
+    check whether we have downloaded the file previously today and if
+    not we re-download it. Note, that this assumes the file does exist.
+    """
+    today = datetime.date.today()
+    year = today.year - 2000 # Obviously does not work prior to 2000
+    if today.month <= 6:
+        current_season = str(year - 1) + str(year)
+    else:
+        current_season = str(year) + str(year + 1)
+    return (current_season in filepath and
+            last_modified_date(filepath) != today)
+
+def download_if_stale(filepath, fileurl):
+    """ Given a file to download we check if there exists a file in
+    the filesystem that was downloaded today, if so we do not download
+    it again, otherwise we download it afresh.
+    """
+
+    if not os.path.exists(filepath) or needs_refreshing(filepath):
+        urllib.request.urlretrieve(fileurl, filepath)
+
 # We sometimes call this from within the 'blog/posts' directory and
 # sometimes from the parent directory.
 data_dir_base = 'data/' if os.path.isdir('data/') else '../../data/'
@@ -184,23 +215,23 @@ class League(object):
         self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
         self.fixtures_file = "{0}/{1}-fixtures.html".format(self.data_dir,
                                                             short_title)
+        self._retrieve_data()
+        self._retrieve_fixtures()
+        self._parse_league_data()
+        self._calculate_statistics()
 
-    def retrieve_data(self):
+    def _retrieve_data(self):
         if not os.path.isdir(self.data_dir):
             os.makedirs(self.data_dir)
-        urllib.request.urlretrieve(self.data_url, self.data_file)
+        download_if_stale(self.data_file, self.data_url)
 
-    def retrieve_fixtures(self):
-        urllib.request.urlretrieve(self.fixtures_url, self.fixtures_file)
-
-    def retrieve_fixtures_and_data(self):
-        self.retrieve_data()
-        self.retrieve_fixtures()
+    def _retrieve_fixtures(self):
+        download_if_stale(self.fixtures_file, self.fixtures_url)
 
     def display_title(self):
         display(HTML("<h2>" + self.title + "</h2>"))
 
-    def parse_league_data(self):
+    def _parse_league_data(self):
         with open(self.data_file, newline='') as csvfile:
             cvsreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             self.field_names = next(cvsreader)
@@ -237,13 +268,13 @@ class League(object):
         return {team: get_team_stats(team) for team in self.teams}
 
 
-    def calculate_statistics(self):
+    def _calculate_statistics(self):
         self.team_stats = self.get_stats(involved_in_game)
         self.home_team_stats = self.get_stats(is_home_game)
         self.away_team_stats = self.get_stats(is_away_game)
-        self.calculate_league_shot_stats()
+        self._calculate_league_shot_stats()
 
-    def calculate_league_shot_stats(self):
+    def _calculate_league_shot_stats(self):
         # Now shot and shots on target per goal.
         def sum_attribute(attr):
             return float(sum(getattr(m, attr) for m in self.matches))
@@ -703,12 +734,6 @@ def get_fixtures(fixtures_page, end_date):
     return fixtures
 
 
-def last_modified_date(filepath):
-    modification_timestamp = os.path.getmtime(filepath)
-    modification_date = datetime.date.fromtimestamp(modification_timestamp)
-    return modification_date
-
-
 def last_x_matches(league, team, x):
     matches = [m for m in league.matches if involved_in_game(team, m)]
     start_index = max(0, len(matches) - x)
@@ -722,17 +747,8 @@ def last_x_matches(league, team, x):
         print(output)
 
 def analyse_fixtures(league, end_date):
-    today = datetime.date.today()
-    if last_modified_date(league.fixtures_file) != today:
-        league.retrieve_fixtures()
-    if last_modified_date(league.data_file) != today:
-        league.retrieve_data()
     fixtures = get_fixtures(league.fixtures_file, end_date)
     fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
-    if not hasattr(league, 'matches'):
-        league.parse_league_data()
-    if not hasattr(league, 'team_stats'):
-        league.calculate_statistics()
 
     adjusted_shots_for_per_game = get_adjusted_stat_dictionary(league,'HS', 'AS', 'shots_against')
     adjusted_shots_against_per_game = get_adjusted_stat_dictionary(league,'AS', 'HS', 'shots_for')
