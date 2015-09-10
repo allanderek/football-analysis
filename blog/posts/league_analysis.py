@@ -314,22 +314,6 @@ class Year(object):
                             self.elo_league, self.elt_league,
                             self.spl_league]
 
-    def retrieve_data(self):
-        for league in self.all_leagues:
-            league.retrieve_data()
-
-    def retrieve_fixtures_and_data(self):
-        for league in self.all_leagues:
-            league.retrieve_fixtures_and_data()
-
-    def parse_data(self):
-        for league in self.all_leagues:
-            league.parse_league_data()
-
-    def calculate_statistics(self):
-        for league in self.all_leagues:
-            league.calculate_statistics()
-
     def get_all_matches(self, leagues=None):
         if leagues is None:
             leagues = self.all_leagues
@@ -348,11 +332,6 @@ year_201415 = Year('1415')
 year_201516 = Year('1516')
 all_years = [year_201011, year_201112, year_201213,
              year_201314, year_201415, year_201516]
-
-
-def parse_all_data():
-    for year in all_years:
-        year.parse_data()
 
 
 current_year = year_201516
@@ -497,8 +476,6 @@ def display_shots_per_goal_info(years=None):
         else:
             league_name = league_short_name + '_league'
             leagues = [getattr(y, league_name) for y in years]
-        for league in leagues:
-            league.calculate_league_shot_stats()
 
         def sum_attribute(attribute):
             return sum(getattr(l, attribute) for l in leagues)
