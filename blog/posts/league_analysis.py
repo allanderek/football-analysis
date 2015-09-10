@@ -743,6 +743,11 @@ def last_x_matches(league, team, x):
         print(output)
 
 
+count_dict = dict()
+count_dict['H'] = 0
+count_dict['A'] = 0
+count_dict['D'] = 0
+
 def analyse_fixtures(league, end_date):
     fixtures = get_fixtures(league.fixtures_file, end_date)
     fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
@@ -774,6 +779,20 @@ def analyse_fixtures(league, end_date):
         away_stats = league.team_stats[away_team]
         away_stats.adjsr = get_adjusted_tsr(away_team)
         away_stats.adjsotr = get_adjusted_sotr(away_team)
+
+        suggested_bet = 'D'
+        sr_threshold = 2.0
+        sotr_threshold = 1.0
+        adjsr_diff = sr_threshold + home_stats.adjsr - away_stats.adjsr
+        adjsotr_diff = sotr_threshold + home_stats.adjsotr  - away_stats.adjsotr
+        
+        if adjsr_diff > sr_threshold and adjsotr_diff > sotr_threshold:
+            suggested_bet = 'H'
+        elif (adjsr_diff < 0.0 - sr_threshold and
+              adjsotr_diff < 0.0 - sotr_threshold):
+            suggested_bet = 'A'
+
+        count_dict[suggested_bet] += 1
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
         last_x_matches(league, away_team, 3)
@@ -785,6 +804,7 @@ def analyse_fixtures(league, end_date):
         print_statline('pdo')
         print_statline('tsotr')
         print_statline('team_rating')
+        print("    Suggested bet: {0}".format(suggested_bet))
 
 
 if __name__ == '__main__':
@@ -797,3 +817,4 @@ if __name__ == '__main__':
     for league in reversed(current_year.all_leagues):
         print(league.title)
         analyse_fixtures(league, date)
+    print(count_dict)
