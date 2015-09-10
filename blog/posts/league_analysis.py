@@ -1,3 +1,8 @@
+"""Takes care of all of the grunt work of obtaining and parsing the
+data and fixtures for all of the leagues. We also implement a script to
+analyse upcoming fixtures using the past data of the current season.
+"""
+
 from IPython.display import display, HTML
 import urllib.request
 import os
@@ -13,6 +18,9 @@ plot.rcParams['savefig.dpi'] = 2 * plot.rcParams['savefig.dpi']
 
 
 class Match(object):
+    """Holds a parsed match object, each line of a data file is parsed
+    into one Match object.
+    """
     pass
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
@@ -20,6 +28,7 @@ int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
 
 float_fields = ['BbMxH', 'BbAvH', 'BbMxD',
                 'BbAvD', 'BbMxA', 'BbAvA']
+
 
 def create_match(field_names, row):
     match = Match()
@@ -96,14 +105,14 @@ def sot_against_in_game(team, game):
 
 
 def get_team_rating(pdo, tsotr, tsr):
-    """ Essentially tsr * tsott * pdo, but not weight equally, James Grayson
-        gives it as: Rating = (0.5+(TSR-0.5)*0.732^0.5) *
-                              (1.0+(%TSOTt-1.0)*0.166^2) *
-                              (1000+(PDO-1000)*0.176^0.5)
-        But we have normalised the three values to average at 0. Note that by
-        doing this we really shouldn't multipy. Instead we will add, but we will
-        add only 0.82 of tsr, 0.45 of tsott and 0.4 of pdo because these appear
-        to be the repeatable portions.
+    """Essentially tsr * tsott * pdo, but not weight equally, James Grayson
+    gives it as: Rating = (0.5+(TSR-0.5)*0.732^0.5) *
+                          (1.0+(%TSOTt-1.0)*0.166^2) *
+                          (1000+(PDO-1000)*0.176^0.5)
+    But we have normalised the three values to average at 0. Note that by
+    doing this we really shouldn't multipy. Instead we will add, but we will
+    add only 0.82 of tsr, 0.45 of tsott and 0.4 of pdo because these appear
+    to be the repeatable portions.
     """
     normalised_tsr = (tsr - 0.5) * 2.0
     rating = (0.82 * normalised_tsr) + (0.45 * tsotr) + (0.4 * pdo)
@@ -111,24 +120,24 @@ def get_team_rating(pdo, tsotr, tsr):
 
 
 def clean_ratio(sub, total, default=0.0):
-    """ Returns the ratio of sub to total, assuming that sub is included within
-        total. So for example sub may be the shots on target and total may be
-        all shots. We return default in the case that total is zero. The default
-        likely does not come up much for the stats we're looking at here, you
-        would have to have a small sample of games and even then the stats tend
-        not to be zero for the total for even a sample of one game. Eg. the
-        total number of shots taken is rarely zero for even one game. This is
-        just a warning that if you have your default wrongly set, then you
-        likely won't notice this and may mess up, say, at the start of the
-        season.
+    """Returns the ratio of sub to total, assuming that sub is included within
+    total. So for example sub may be the shots on target and total may be
+    all shots. We return default in the case that total is zero. The default
+    likely does not come up much for the stats we're looking at here, you
+    would have to have a small sample of games and even then the stats tend
+    not to be zero for the total for even a sample of one game. Eg. the
+    total number of shots taken is rarely zero for even one game. This is
+    just a warning that if you have your default wrongly set, then you
+    likely won't notice this and may mess up, say, at the start of the
+    season.
     """
     return sub / total if total else default
 
 
 class TeamStats(object):
-    """ Note that this is intended to only be used with a set number of games,
-        if you change the set of games, then you pretty much have to recalculate
-        all of the stats.
+    """Note that this is intended to only be used with a set number of games,
+    if you change the set of games, then you pretty much have to recalculate
+    all of the stats.
     """
     def __init__(self, teamname, games):
         self.teamname = teamname
@@ -176,14 +185,14 @@ def last_modified_date(filepath):
 
 
 def needs_refreshing(filepath):
-    """ Basically we assume that if the file in question is for a season
+    """Basically we assume that if the file in question is for a season
     before the current one, then the data has not been updated and we do
     not need to refresh it. If it is from the current season, then we
     check whether we have downloaded the file previously today and if
     not we re-download it. Note, that this assumes the file does exist.
     """
     today = datetime.date.today()
-    year = today.year - 2000 # Obviously does not work prior to 2000
+    year = today.year - 2000  # Obviously does not work prior to 2000
     if today.month <= 6:
         current_season = str(year - 1) + str(year)
     else:
@@ -191,18 +200,20 @@ def needs_refreshing(filepath):
     return (current_season in filepath and
             last_modified_date(filepath) != today)
 
+
 def download_if_stale(filepath, fileurl):
-    """ Given a file to download we check if there exists a file in
+    """Given a file to download we check if there exists a file in
     the filesystem that was downloaded today, if so we do not download
     it again, otherwise we download it afresh.
     """
-
     if not os.path.exists(filepath) or needs_refreshing(filepath):
         urllib.request.urlretrieve(fileurl, filepath)
 
 # We sometimes call this from within the 'blog/posts' directory and
 # sometimes from the parent directory.
 data_dir_base = 'data/' if os.path.isdir('data/') else '../../data/'
+
+
 class League(object):
     def __init__(self, short_title, fixtures_directory, year, title=None):
         self.title = title if title is not None else fixtures_directory
@@ -267,7 +278,6 @@ class League(object):
             return TeamStats(team, games)
         return {team: get_team_stats(team) for team in self.teams}
 
-
     def _calculate_statistics(self):
         self.team_stats = self.get_stats(involved_in_game)
         self.home_team_stats = self.get_stats(is_home_game)
@@ -282,21 +292,21 @@ class League(object):
         self.home_goals = sum_attribute('FTHG')
         self.away_goals = sum_attribute('FTAG')
         self.all_goals = self.home_goals + self.away_goals
-        
+
         self.home_shots = sum_attribute('HS')
         self.away_shots = sum_attribute('AS')
         self.all_shots = self.home_shots + self.away_shots
-        
+
         self.home_sot = sum_attribute('HST')
         self.away_sot = sum_attribute('AST')
         self.all_sot = self.home_sot + self.away_sot
-        
+
         self.shots_per_goal = self.all_shots / self.all_goals
         self.sot_per_goal = self.all_sot / self.all_goals
-        
+
         self.home_spg = self.home_shots / self.home_goals
         self.home_sotpg = self.home_sot / self.home_goals
-        
+
         self.away_spg = self.away_shots / self.away_goals
         self.away_sotpg = self.away_sot / self.away_goals
 
@@ -323,7 +333,6 @@ class Year(object):
         return itertools.chain.from_iterable(match_lists)
 
 
-
 year_201011 = Year('1011')
 year_201112 = Year('1112')
 year_201213 = Year('1213')
@@ -347,6 +356,7 @@ def get_match(league, home, away, date):
         return (match.HomeTeam == home and
                 match.AwayTeam == away and match.Date == date)
     return next(m for m in league.matches if filter_fun(m))
+
 
 def get_all_matches(years=None, leagues=None):
     if years is None:
@@ -376,14 +386,13 @@ def match_to_html(match):
         woodwork = woodwork_tmpl.format(match.HHW, match.AHW)
     else:
         woodwork = ""
-    hhw = match.HHW if hasattr(match, 'HHW') else 'n/a'
-    ahw = match.AHW if hasattr(match, 'AHW') else 'n/a'
     html = template.format(match.HomeTeam, match.AwayTeam,
                            match.FTHG, match.FTAG,
                            match.HS, match.AS,
                            match.HST, match.AST,
                            woodwork)
     return html
+
 
 def create_inline_block(html):
     return '<div style="display:inline-block;">{0}</div>'.format(html)
@@ -405,10 +414,13 @@ def display_dictionary(dictionary):
 
 
 def display_table(header_data, row_data):
+    """Display an ipython table given the headers and the row data."""
     def make_header_cell(s):
         return '<th>{0}</th>'.format(s)
+
     def make_cell(s):
         return '<td>{0}</td>'.format(s)
+
     def make_row(s):
         return '<tr>{0}</tr>'.format(s)
     headers = " ".join([make_header_cell(h) for h in header_data])
@@ -418,6 +430,7 @@ def display_table(header_data, row_data):
     rows = "\n".join(rows)
     html = '<table>' + header_row + rows + '</table>'
     display(HTML(html))
+
 
 def date_from_string(date_string):
     date_fields = date_string.split('/')
@@ -436,7 +449,7 @@ def date_from_string(date_string):
 
 
 def display_given_matches(matches):
-    """ Display a given set of matches """
+    """Display a given set of matches."""
     def inline_div_match(match):
         return create_inline_block(match_to_html(match))
     match_blocks = [inline_div_match(match) for match in matches]
@@ -453,6 +466,7 @@ def get_matches(league, starting_date, ending_date,
                 home_team=None, away_team=None):
     start_date = date_from_string(starting_date)
     end_date = date_from_string(ending_date)
+
     def filter_fun(m):
         if home_team is not None and m.HomeTeam != home_team:
             return False
@@ -460,16 +474,19 @@ def get_matches(league, starting_date, ending_date,
             return False
         return date_in_range(start_date, m.Date, end_date)
     matches = [m for m in league.matches if filter_fun(m)]
-    return matches    
+    return matches
+
 
 def display_matches(league, starting_date, ending_date):
-    """ Display all matches within a league between the given dates """
+    """Display all matches within a league between the given dates."""
     matches = get_matches(league, starting_date, ending_date)
     display_given_matches(matches)
+
 
 def display_shots_per_goal_info(years=None):
     if years is None:
         years = all_years
+
     def get_data_row(league_short_name):
         if league_short_name == 'Overall':
             leagues = [l for y in years for l in y.all_leagues]
@@ -511,7 +528,7 @@ def display_shots_per_goal_info(years=None):
 def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
                   get_x_stat=None, get_y_stat=None, annotate_teams=None):
     """By default all teams are annotated, to annotate none pass in '[]' as the
-       list of teams to annotate.
+    list of teams to annotate.
     """
     if teams is None:
         teams = league.teams
@@ -551,9 +568,9 @@ def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
 
 def graph_leagues(x_label, y_label, leagues=None, get_x_stat=None,
                   get_y_stat=None, annotate_teams=None):
-    """This only works if the x/y stats are attributes of a TeamStat
-       object. Note that this will error out if you do not specify a
-       list of leagues."""
+    """Produce a scatter plot for each team in each of the provided
+    leagues. Will error if `leagues` is not specified.
+    """
     def get_stat_from_label(label):
         stat_name = label.replace(' ', '_').lower()
         return lambda league, team: getattr(league.team_stats[team], stat_name)
@@ -605,6 +622,7 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
 
 def get_adjusted_stat(league, team, stat_home_name, stat_away_name, reverse_stat_dict):
     matches = [m for m in league.matches if involved_in_game(team, m)]
+
     def get_adjusted_stat(match):
         if match.HomeTeam == team:
             opponent = match.AwayTeam
@@ -617,6 +635,7 @@ def get_adjusted_stat(league, team, stat_home_name, stat_away_name, reverse_stat
     sum_diff = sum(get_adjusted_stat(m) for m in matches)
     diff_per_game = sum_diff / float(len(matches))
     return diff_per_game
+
 
 def get_adjusted_stat_dictionary(league, stat_home_name, stat_away_name, reverse_stat_name):
     def get_reverse_stat(team):
@@ -723,12 +742,13 @@ def last_x_matches(league, team, x):
                                         match.AS, match.AST)
         print(output)
 
+
 def analyse_fixtures(league, end_date):
     fixtures = get_fixtures(league.fixtures_file, end_date)
     fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
 
-    adjusted_shots_for_per_game = get_adjusted_stat_dictionary(league,'HS', 'AS', 'shots_against')
-    adjusted_shots_against_per_game = get_adjusted_stat_dictionary(league,'AS', 'HS', 'shots_for')
+    adjusted_shots_for_per_game = get_adjusted_stat_dictionary(league, 'HS', 'AS', 'shots_against')
+    adjusted_shots_against_per_game = get_adjusted_stat_dictionary(league, 'AS', 'HS', 'shots_for')
 
     def get_adjusted_tsr(team):
         shots_for = adjusted_shots_for_per_game[team]
@@ -743,7 +763,7 @@ def analyse_fixtures(league, end_date):
         shots_against = adjusted_sot_against_per_game[team]
         return shots_for - shots_against
 
-    for home_team, away_team in fixtures:        
+    for home_team, away_team in fixtures:
         def print_statline(attribute):
             home = getattr(home_stats, attribute)
             away = getattr(away_stats, attribute)
