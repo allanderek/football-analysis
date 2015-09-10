@@ -14,9 +14,12 @@ def run():
     for notebook in all_good:
         print("    {0}".format(notebook))
     print("--------------------------------------")
-    print("Following notebooks returned errors:")
-    for notebook in all_bad:
-        print("    {0}".format(notebook))
+    if all_bad:
+        print("Following notebooks returned errors:")
+        for notebook in all_bad:
+            print("    {0}".format(notebook))
+    else:
+        print("No notebooks returned any errors, you're good to go")
 
 if __name__ == '__main__':
     run()
