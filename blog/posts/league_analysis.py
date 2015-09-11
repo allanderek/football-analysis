@@ -588,7 +588,8 @@ def graph_leagues(x_label, y_label, leagues=None, get_x_stat=None,
 
 
 def scatter_match_stats(matches, xlabel='', ylabel='', title='',
-                        get_x_stat=None, get_y_stat=None):
+                        get_x_stat=None, get_y_stat=None,
+                        annotate=True):
     plot.title(title)
     plot.xlabel(xlabel)
     plot.ylabel(ylabel)
@@ -601,15 +602,16 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
         ys.append(y_stat)
         plot.scatter(x_stat, y_stat)
 
-        annotation = match.HomeTeam + ' v ' + match.AwayTeam
-        plot.annotate(annotation, xy=(x_stat, y_stat),
-                      xytext=(40, -20),
-                      textcoords='offset points',
-                      ha='right', va='bottom',
-                      bbox=dict(boxstyle='round,pad=0.5',
-                      fc='yellow', alpha=0.5),
-                      arrowprops=dict(arrowstyle='->',
-                                      connectionstyle='arc3,rad=0'))
+        if annotate:
+            annotation = match.HomeTeam + ' v ' + match.AwayTeam
+            plot.annotate(annotation, xy=(x_stat, y_stat),
+                          xytext=(40, -20),
+                          textcoords='offset points',
+                          ha='right', va='bottom',
+                          bbox=dict(boxstyle='round,pad=0.5',
+                          fc='yellow', alpha=0.5),
+                          arrowprops=dict(arrowstyle='->',
+                                          connectionstyle='arc3,rad=0'))
 
     coefficients = numpy.polyfit(xs, ys, 1)
     polynomial = numpy.poly1d(coefficients)
@@ -620,8 +622,8 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
     display(HTML('line of best fit: ' + str(polynomial)))
 
 
-def get_adjusted_stat(league, team, stat_home_name, stat_away_name, reverse_stat_dict):
-    matches = [m for m in league.matches if involved_in_game(team, m)]
+def get_adjusted_stat(matches, team, stat_home_name, stat_away_name, reverse_stat_dict):
+    matches = [m for m in matches if involved_in_game(team, m)]
 
     def get_adjusted_stat(match):
         if match.HomeTeam == team:
@@ -637,12 +639,16 @@ def get_adjusted_stat(league, team, stat_home_name, stat_away_name, reverse_stat
     return diff_per_game
 
 
-def get_adjusted_stat_dictionary(league, stat_home_name, stat_away_name, reverse_stat_name):
+def get_adjusted_stat_dictionary(league, stat_home_name,
+                                 stat_away_name, reverse_stat_name):
     def get_reverse_stat(team):
         stats = league.team_stats[team]
         return getattr(stats, reverse_stat_name) / float(stats.num_games)
     reverse_stat_dict = {t: get_reverse_stat(t) for t in league.teams}
-    adjusted_stats = {t: get_adjusted_stat(league, t, stat_home_name, stat_away_name, reverse_stat_dict)
+    adjusted_stats = {t: get_adjusted_stat(league.matches, t,
+                                           stat_home_name,
+                                           stat_away_name,
+                                           reverse_stat_dict)
                       for t in league.teams}
     return adjusted_stats
 
@@ -781,16 +787,16 @@ def analyse_fixtures(league, end_date):
         away_stats.adjsotr = get_adjusted_sotr(away_team)
 
         suggested_bet = 'D'
-        sr_threshold = 2.0
-        sotr_threshold = 1.0
-        adjsr_diff = sr_threshold + home_stats.adjsr - away_stats.adjsr
-        adjsotr_diff = sotr_threshold + home_stats.adjsotr  - away_stats.adjsotr
+        adjsr_diff = home_stats.adjsr - away_stats.adjsr
+        adjsotr_diff = home_stats.adjsotr  - away_stats.adjsotr
         
-        if adjsr_diff > sr_threshold and adjsotr_diff > sotr_threshold:
+        if adjsr_diff > 1.5 and adjsotr_diff > 0.68:
             suggested_bet = 'H'
-        elif (adjsr_diff < 0.0 - sr_threshold and
-              adjsotr_diff < 0.0 - sotr_threshold):
+        elif adjsr_diff < -2.5 and adjsotr_diff < -1.1:
             suggested_bet = 'A'
+
+        home_bet_threshold = 2.4 - adjsotr_diff
+        away_bet_threshold = 4.4 + adjsotr_diff
 
         count_dict[suggested_bet] += 1
         print('{0} vs {1}'.format(home_team, away_team))
@@ -805,6 +811,8 @@ def analyse_fixtures(league, end_date):
         print_statline('tsotr')
         print_statline('team_rating')
         print("    Suggested bet: {0}".format(suggested_bet))
+        print("    home bet threshold: {0}".format(home_bet_threshold))
+        print("    away bet threshold: {0}".format(away_bet_threshold))
 
 
 if __name__ == '__main__':
@@ -813,7 +821,7 @@ if __name__ == '__main__':
         date_string = sys.argv[1]
         date = date_from_string(date_string)
     except IndexError:
-        date = datetime.date.today() + datetime.timedelta(days=2)
+        date = datetime.date.today() + datetime.timedelta(days=3)
     for league in reversed(current_year.all_leagues):
         print(league.title)
         analyse_fixtures(league, date)
