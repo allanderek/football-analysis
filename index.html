@@ -10,7 +10,8 @@
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://allanderek.github.io/football-analysis/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-29-31-august-2015/" type="text/html">
+<link rel="next" href="index-1.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-11-13-september-2015/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -59,7 +60,368 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-29-31-august-2015/" class="u-url">EPL 29-31 August 2015</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-11-13-september-2015/" class="u-url">EPL 11-13 September 2015</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="posts/epl-11-13-september-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-09-14T13:57:19+01:00" title="2015-09-14 13:57">2015-09-14 13:57</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-11-13-september-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-11-13-september-2015.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-11-13th-september-2015">EPL 11-13th September 2015</h2>
+<p>Another weekend in the EPL, let's look at the basic statistics for all the games:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'12/09/15'</span><span class="p">,</span> <span class="s">'14/09/15'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Arsenal</td>
+<td>Stoke</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>29</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>12</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Crystal Palace</td>
+<td>Man City</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>10</td>
+<td>21</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Everton</td>
+<td>Chelsea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>9</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man United</td>
+<td>Liverpool</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Norwich</td>
+<td>Bournemouth</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Watford</td>
+<td>Swansea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>17</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Brom</td>
+<td>Southampton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>8</td>
+<td>14</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Leicester</td>
+<td>Aston Villa</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>21</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Sunderland</td>
+<td>Tottenham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Ham</td>
+<td>Newcastle</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>17</td>
+<td>14</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="everton-3-1-chelsea">Everton 3-1 Chelsea</h2>
+<p>Chelsea are not having a great start to the season. As others have <a href="http://statsbomb.com/2015/09/what-the-hell-chelsea-premier-league-stat-round-up/">pointed out</a> this is not a case of having underlying performance and getting a bunch of unlucky results. The performance for Chelsea simply is not there. In this case they have a respectable number of shots at goal, in fact out-shooting their hosts 14-15, but it is the shots on target that reveals that the score line was anything but a fluke. Everton had 9 shots on target to Chelsea's 2. If we take the <a href="http://allanderek.github.io/football-analysis/posts/shots-per-goal/">average number of shots on target per goal in the premier league</a> and multiply by 9 vs 2 we get an average score line of 2.54 vs 0.57, so 3-1 is perfectly fair scoreline given those shots on targets. I still expect Chelsea to somewhat improve, but they will have to improve their performances rather than just allow luck to regress to the mean.</p>
+<p class="more"><a href="posts/epl-11-13-september-2015/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-29-31-august-2015/" class="u-url">EPL 29-31 August 2015</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
             <p class="dateline"><a href="posts/epl-29-31-august-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-09-10T10:04:58+01:00" title="2015-09-10 10:04">2015-09-10 10:04</time></a></p>
@@ -2022,30 +2384,14 @@ line of best fit:
 </div>
 </div>
     </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/introduction/" class="u-url">Introduction</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
-            <p class="dateline"><a href="posts/introduction/" rel="bookmark"><time class="published dt-published" datetime="2015-08-07T09:45:52+01:00" title="2015-08-07 09:45">2015-08-07 09:45</time></a></p>
-                <p class="commentline">
-        
-    <a href="posts/introduction/#disqus_thread" data-disqus-identifier="cache/posts/introduction.html">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="p-summary entry-summary">
-    <p>The intention of this blog is to mostly use the freely available data on
-football matches to make some graphs which are hopefully interesting. Initially
-I will concentrate on the English Premiership,Championship, Leagues One and Two
-and the Scottish Premiership.</p>
-    </div>
     </article>
 </div>
 
-
-
-        
-       <script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/x-mathjax-config">
+        <nav class="postindexpager"><ul class="pager">
+<li class="next">
+                <a href="index-1.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/x-mathjax-config">
         MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script><script src="assets/js/mathjax.js"></script>
 </div>
         <!--End of body content-->
