@@ -11,6 +11,7 @@ import csv
 import matplotlib.pyplot as plot
 import numpy
 import itertools
+import collections
 
 
 # Make the graphs twice as big.
@@ -463,7 +464,7 @@ def date_in_range(start_date, datestring, end_date):
 
 
 def get_matches(league, starting_date, ending_date,
-                home_team=None, away_team=None):
+                home_team=None, away_team=None, team_involved=None):
     start_date = date_from_string(starting_date)
     end_date = date_from_string(ending_date)
 
@@ -471,6 +472,9 @@ def get_matches(league, starting_date, ending_date,
         if home_team is not None and m.HomeTeam != home_team:
             return False
         if away_team is not None and m.AwayTeam != away_team:
+            return False
+        if (team_involved is not None and
+            not involved_in_game(team_involved, m)):
             return False
         return date_in_range(start_date, m.Date, end_date)
     matches = [m for m in league.matches if filter_fun(m)]
@@ -524,6 +528,84 @@ def display_shots_per_goal_info(years=None):
                   'home spg', 'home sotpg', 'away spg', 'away sotpg']
     display_table(header_row, data_rows)
 
+
+def collect_after_game_dicts(league, start_date, end_date):
+    """Returns a dictionary of dictionaries. The outer dictionary has
+    intergers as keys. The integer represents the number of games. The
+    value associated with a number of games is a dictionary which maps
+    the teams of the league to team stats. So if you want to find out a
+    team's statistics after x number of games you call this function and
+    then:
+        dictionaries = collect_after_game_dicts(...)
+        team_stats = dictionaries[x][team]
+    'team_stats' will now old a TeamStats object represents the
+    statistics for 'team' after 'x' games.
+    This method allows you to do things such as plot how a team's stat
+    has changed over the course of a season.
+    """
+    after_game_no_dicts = collections.defaultdict(dict)
+    def add_team_stats(team, after_game_no, stat):
+        stat_dict = after_game_no_dicts[after_game_no]
+        stat_dict[team] = stat
+
+    for team in league.teams:
+        matches = get_matches(league, start_date, end_date, team_involved=team)
+        for x in range(1, len(matches) + 1):
+            stats = TeamStats(team, matches[:x])
+            add_team_stats(team, x, stats)
+
+    for x, dictionary in after_game_no_dicts.items():
+        if len(dictionary) != len(league.teams):
+            del after_game_no_dicts[x]
+    return after_game_no_dicts
+
+team_line_colors = {'Sunderland': ('DarkGreen', '--'),
+                    'Crystal Palace': ('Crimson', '-'),
+                    'Southampton': ('Red', '--'),
+                    'West Ham': ('MediumTurquoise', '--'),
+                    'Liverpool': ('Red', '-'),
+                    'West Brom': ('Black', '-'),
+                    'Man City': ('LightSkyBlue', '-'),
+                    'Chelsea': ('Blue', '-'),
+                    'Everton': ('Blue', '--'),
+                    'Leicester': ('Blue', ':'),
+                    'Swansea': ('Black', '--'),
+                    'Watford': ('Gold', '-'),
+                    'Man United': ('Red', ':'),
+                    'Aston Villa': ('MediumTurquoise', '-'),
+                    'Newcastle': ('Black', ':'),
+                    'Norwich': ('Gold', '--'),
+                    'Tottenham': ('DarkBlue', '--'),
+                    'Arsenal': ('Red', '-.'),
+                    'Stoke': ('DarkRed', '-'),
+                    'Bournemouth': ('DarkRed', ':')}
+def plot_changing_stats(league, after_game_no_dicts, stat_name):
+    plot.title('{0} after game #'.format(stat_name))
+    plot.xlabel('Game Number')
+    plot.ylabel(stat_name)
+    for team in league.teams:
+        xs = range(1, len(after_game_no_dicts) + 1)
+        ys = [getattr(after_game_no_dicts[x][team], stat_name) for x in xs]
+        color, line_style = team_line_colors.get(team, (None, None))
+        plot.plot(xs, ys, label=team, color=color, linestyle=line_style)
+    plot.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+    plot.xticks(xs)
+
+def display_stats_table(after_game_no_dicts, stat_names):
+    """To get the argument you can simply call the above
+    'collect_after_game_dicts', this means that we will give the table
+    after a set number of games, which will mean all teams will have
+    played the same number. This allows us to give a meaningful table
+    for something like 'goals', or 'shots' which are cumulative.
+    """
+    latest_dict = after_game_no_dicts[len(after_game_no_dicts)]
+    pairs = latest_dict.items()
+    first_stat_name = stat_names[0]
+    key_fun = lambda p: getattr(p[1], first_stat_name)
+    sorted_pairs = sorted(pairs, key=key_fun, reverse=True)
+    rows = [[pos, team] + [getattr(stats, name) for name in stat_names]
+            for pos, (team, stats) in enumerate(sorted_pairs, start=1)]
+    display_table(['Position', 'Team'] + stat_names, rows)
 
 def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
                   get_x_stat=None, get_y_stat=None, annotate_teams=None):
