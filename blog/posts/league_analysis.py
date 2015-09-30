@@ -172,6 +172,9 @@ class TeamStats(object):
         self.pdo = self.goals_sot_for_ratio - self.goals_sot_against_ratio
         self.team_rating = get_team_rating(self.pdo, self.tsotr, self.tsr)
 
+    def average_stat(self, stat_name):
+        return getattr(self, stat_name) / float(self.num_games)
+
 interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'Goals For',
                      'Goals Against', 'SOT For', 'SOT Against', 'SOT For Ratio',
                      'SOT Against Ratio', 'TSOTR', 'Goals SOT For Ratio',
@@ -311,6 +314,38 @@ class League(object):
         self.away_spg = self.away_shots / self.away_goals
         self.away_sotpg = self.away_sot / self.away_goals
 
+    def compare_game_against_opponents(self, home, away, date):
+        """ Does not compare against the league average game, but
+        compares against the two team's average game. So if the match
+        is between Leicester and Arsenal it compares how well Leicester
+        have done against Arsenal compared to the average team against
+        Arsenal, and vice-versa.
+        """
+        match = get_match(self, home, away, date)
+        home_stats = self.team_stats[match.HomeTeam]
+        away_stats = self.team_stats[match.AwayTeam]
+        display_table(['Measure',
+                       'Average Per Game for',
+                       'This game for',
+                       'Average Per Game against opponents'],
+                      [['{0} Shots'.format(home),
+                        home_stats.average_stat('shots_for'),
+                        shots_for_in_game(home, match),
+                        away_stats.average_stat('shots_against')],
+                       ['{0} Shots'.format(away),
+                        away_stats.average_stat('shots_for'),
+                        shots_for_in_game(away, match),
+                        home_stats.average_stat('shots_against')],
+                        
+                       ['{0} SOT'.format(home),
+                        home_stats.average_stat('sot_for'),
+                        sot_for_in_game(home, match),
+                        away_stats.average_stat('sot_against')],
+                       ['{0} SOT'.format(away),
+                        away_stats.average_stat('sot_for'),
+                        sot_for_in_game(away, match),
+                        home_stats.average_stat('sot_against')]])
+        
 
 class Year(object):
     def __init__(self, year):
