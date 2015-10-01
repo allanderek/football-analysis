@@ -594,6 +594,27 @@ def collect_after_game_dicts(league, start_date, end_date):
             del after_game_no_dicts[x]
     return after_game_no_dicts
 
+def get_stats_rankings(stats_dictionary, stat_name):
+    pairs = stats_dictionary.items()
+    key_fun = lambda p: getattr(p[1], stat_name)
+    sorted_pairs = sorted(pairs, key=key_fun, reverse=True)
+    return sorted_pairs
+
+def display_stats_table(after_game_no_dicts, stat_names):
+    """To get the argument you can simply call the above
+    'collect_after_game_dicts', this means that we will give the table
+    after a set number of games, which will mean all teams will have
+    played the same number. This allows us to give a meaningful table
+    for something like 'goals', or 'shots' which are cumulative.
+    """
+    latest_dict = after_game_no_dicts[len(after_game_no_dicts)]
+    first_stat_name = stat_names[0]
+    sorted_pairs = get_stats_rankings(latest_dict, first_stat_name)
+    rows = [[pos, team] + [getattr(stats, name) for name in stat_names]
+            for pos, (team, stats) in enumerate(sorted_pairs, start=1)]
+    display_table(['Position', 'Team'] + stat_names, rows)
+
+
 team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Crystal Palace': ('Crimson', '-'),
                     'Southampton': ('Red', '--'),
@@ -614,33 +635,38 @@ team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Arsenal': ('Red', '-.'),
                     'Stoke': ('DarkRed', '-'),
                     'Bournemouth': ('DarkRed', ':')}
-def plot_changing_stats(league, after_game_no_dicts, stat_name):
-    plot.title('{0} after game #'.format(stat_name))
+
+def plot_changing_stats(league, after_game_no_dicts,
+                        stat_name, teams=None, rankings=False):
+    if teams is None:
+        teams = league.teams
     plot.xlabel('Game Number')
-    plot.ylabel(stat_name)
-    for team in league.teams:
-        xs = range(1, len(after_game_no_dicts) + 1)
-        ys = [getattr(after_game_no_dicts[x][team], stat_name) for x in xs]
+
+    if rankings:
+        plot.title('Rank in {0} after game #'.format(stat_name))
+        plot.ylabel('Rank in {0}'.format(stat_name))
+        def get_team_rank(ranking_table, team):
+            return (next(zip(*ranking_table)).index(team)) + 1
+        ranking_tables = [get_stats_rankings(d, stat_name)
+                          for d in after_game_no_dicts.values()]
+        get_ys = lambda team: [get_team_rank(table, team)
+                               for table in ranking_tables]
+        plot.gca().set_ylim(len(league.teams) + 1, 1)
+    else:
+        plot.title('{0} after game #'.format(stat_name))
+        plot.ylabel(stat_name)
+        get_ys = lambda team: [getattr(after_game_no_dicts[x][team],
+                                       stat_name)
+                               for x in xs]
+
+    xs = range(1, len(after_game_no_dicts) + 1)
+    for team in teams:
+        ys = get_ys(team)
         color, line_style = team_line_colors.get(team, (None, None))
         plot.plot(xs, ys, label=team, color=color, linestyle=line_style)
     plot.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
     plot.xticks(xs)
 
-def display_stats_table(after_game_no_dicts, stat_names):
-    """To get the argument you can simply call the above
-    'collect_after_game_dicts', this means that we will give the table
-    after a set number of games, which will mean all teams will have
-    played the same number. This allows us to give a meaningful table
-    for something like 'goals', or 'shots' which are cumulative.
-    """
-    latest_dict = after_game_no_dicts[len(after_game_no_dicts)]
-    pairs = latest_dict.items()
-    first_stat_name = stat_names[0]
-    key_fun = lambda p: getattr(p[1], first_stat_name)
-    sorted_pairs = sorted(pairs, key=key_fun, reverse=True)
-    rows = [[pos, team] + [getattr(stats, name) for name in stat_names]
-            for pos, (team, stats) in enumerate(sorted_pairs, start=1)]
-    display_table(['Position', 'Team'] + stat_names, rows)
 
 def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
                   get_x_stat=None, get_y_stat=None, annotate_teams=None):
