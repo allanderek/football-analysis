@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Football Data Site</title><link>http://allanderek.github.io/football-analysis/</link><description>I basically just graph some of the data freely available for football leagues, I might even make the occasional comment.</description><atom:link type="application/rss+xml" href="http://allanderek.github.io/football-analysis/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Oct 2015 14:19:18 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>EPL 3-4 October 2015</title><link>http://allanderek.github.io/football-analysis/posts/epl-3-4-october-2015/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Football Data Site</title><link>http://allanderek.github.io/football-analysis/</link><description>I basically just graph some of the data freely available for football leagues, I might even make the occasional comment.</description><atom:link type="application/rss+xml" href="http://allanderek.github.io/football-analysis/rss.xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Oct 2015 14:23:18 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>EPL 3-4 October 2015</title><link>http://allanderek.github.io/football-analysis/posts/epl-3-4-october-2015/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
@@ -430,7 +430,7 @@ There have been 80 matches in total
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;h2 id="everton-1-1-liverpool"&gt;Everton 1-1 Liverpool&lt;/h2&gt;
-&lt;p&gt;Honours even seems fairly reasonable. Whoever takes over at Liverpool though will be taking on a side with some pretty reasonable looking numbers. As the table above shows only 3 teams have allowed fewer shots on target. Liverpool's shot ratios are beginning to stabalise in about 4th. Everton fans should probably be a little more worried&lt;/p&gt;
+&lt;p&gt;Honours even seems fairly reasonable. Whoever takes over at Liverpool though will be taking on a side with some pretty reasonable looking numbers. As the table above shows only 3 teams have allowed fewer shots on target. Liverpool's shot ratios are beginning to stabalise in about 4th. Everton fans should probably be a little more worried even if they are currently ahead on points.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
