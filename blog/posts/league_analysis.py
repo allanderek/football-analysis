@@ -22,7 +22,12 @@ class Match(object):
     """Holds a parsed match object, each line of a data file is parsed
     into one Match object.
     """
-    pass
+    def opponent(self, team):
+        if team == self.HomeTeam:
+            return self.AwayTeam
+        else:
+            assert team == self.AwayTeam
+            return self.HomeTeam
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
               'HBP', 'ABP', 'Bb1X2']
@@ -345,7 +350,33 @@ class League(object):
                         away_stats.average_stat('sot_for'),
                         sot_for_in_game(away, match),
                         home_stats.average_stat('sot_against')]])
-        
+
+    def compare_average_team_games(self, home, away, date):
+        match = get_match(self, home, away, date)
+        home_stats = self.team_stats[match.HomeTeam]
+        home_home_stats = self.home_team_stats[match.HomeTeam]
+        away_stats = self.team_stats[match.AwayTeam]
+        away_away_stats = self.away_team_stats[match.AwayTeam]
+        headers = ['Game Type', 'Shots For', 'Shots Against',
+                                'SOT For', 'SOT Against']
+        def make_row(title, stats):
+            return [title,
+                    stats.average_stat('shots_for'),
+                    stats.average_stat('shots_against'),
+                    stats.average_stat('sot_for'),
+                    stats.average_stat('sot_against')]
+        rows = [['This {0} game'.format(home),
+                 shots_for_in_game(home, match),
+                 shots_against_in_game(home, match),
+                 sot_for_in_game(home, match),
+                 sot_against_in_game(home, match)],
+                make_row('Avg {0} game'.format(home), home_stats),
+                make_row('Avg {0} game'.format(away), away_stats),
+                make_row('Avg {0} home game'.format(home),
+                         home_home_stats),
+                make_row('Avg {0} away game'.format(away),
+                         away_away_stats)]
+        display_table(headers, rows)
 
 class Year(object):
     def __init__(self, year):
@@ -610,10 +641,34 @@ def display_stats_table(after_game_no_dicts, stat_names):
     latest_dict = after_game_no_dicts[len(after_game_no_dicts)]
     first_stat_name = stat_names[0]
     sorted_pairs = get_stats_rankings(latest_dict, first_stat_name)
-    rows = [[pos, team] + [getattr(stats, name) for name in stat_names]
-            for pos, (team, stats) in enumerate(sorted_pairs, start=1)]
+    def get_rows(sorted_pairs):
+        latest_stat = None
+        latest_position = None
+        for position, (team, stats) in enumerate(sorted_pairs, start=1):
+            this_stat = getattr(stats, first_stat_name)
+            if latest_stat ==  this_stat:
+                position = latest_position
+            else:
+                latest_position = position
+            stat_cells = [getattr(stats, name) for name in stat_names]
+            row = [position, team] + stat_cells
+            yield_row
+    rows = get_rows(sorted_pairs)
     display_table(['Position', 'Team'] + stat_names, rows)
 
+def display_statistic_rankings(league, stat_name):
+    def get_rows(stat_rankings, stat_name):
+        latest_stat = None
+        for position, (team, stats) in enumerate(stat_rankings, start=1):
+            stat = getattr(stats, stat_name)
+            position_string = '-' if stat == latest_stat else str(position)
+            latest_stat = stat
+            row = [position_string, team, stat]
+            yield row
+
+    stat_rankings = get_stats_rankings(league.team_stats, stat_name)
+    rows = get_rows(stat_rankings, stat_name)
+    display_table(['Position', 'Team', stat_name], rows)
 
 team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Crystal Palace': ('Crimson', '-'),
@@ -645,8 +700,19 @@ def plot_changing_stats(league, after_game_no_dicts,
     if rankings:
         plot.title('Rank in {0} after game #'.format(stat_name))
         plot.ylabel('Rank in {0}'.format(stat_name))
-        def get_team_rank(ranking_table, team):
-            return (next(zip(*ranking_table)).index(team)) + 1
+        def get_team_rank(ranking_table, team_name):
+            latest_position = 1
+            latest_stat = None
+            for position, (team, stats) in enumerate(ranking_table, start=1):
+                stat = getattr(stats, stat_name)
+                if latest_stat != stat:
+                    latest_position = position
+                latest_stat = stat
+                if team == team_name:
+                    return latest_position
+            else:
+                raise KeyError
+
         ranking_tables = [get_stats_rankings(d, stat_name)
                           for d in after_game_no_dicts.values()]
         get_ys = lambda team: [get_team_rank(table, team)
@@ -666,6 +732,7 @@ def plot_changing_stats(league, after_game_no_dicts,
         plot.plot(xs, ys, label=team, color=color, linestyle=line_style)
     plot.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
     plot.xticks(xs)
+    plot.show()
 
 
 def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
