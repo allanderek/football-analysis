@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPL 17-19 October 2015 | Football Data Site</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/ipython.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="http://allanderek.github.io/football-analysis/posts/epl-17-19-october-2015/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="allanderek">
+<link rel="prev" href="../epl-3-4-october-2015/" title="EPL 3-4 October 2015" type="text/html">
+<meta property="og:site_name" content="Football Data Site">
+<meta property="og:title" content="EPL 17-19 October 2015">
+<meta property="og:url" content="http://allanderek.github.io/football-analysis/posts/epl-17-19-october-2015/">
+<meta property="og:description" content="EPL 3-4th October 2015
+A brief look at the shot statistics which underlay the weekend's games. Teams of course had an extended break due to the international weekend.
+
+
+
+
+
+In [1]:
+
+    
+%matplotlib in">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-10-21T08:02:09+01:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://allanderek.github.io/football-analysis/">
+
+                <span id="blog-title">Football Data Site</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../categories/">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="index.ipynb" id="sourcelink">Source</a>
+    </li>
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">EPL 17-19 October 2015</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2015-10-21T08:02:09+01:00" itemprop="datePublished" title="2015-10-21 08:02">2015-10-21 08:02</time></a></p>
+                <p class="commentline">
+        
+    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/epl-17-19-october-2015.html">Comments</a>
+
+
+            
+        </p>
+<p class="sourceline"><a href="index.ipynb" id="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-3-4th-october-2015">EPL 3-4th October 2015</h2>
+<p>A brief look at the shot statistics which underlay the weekend's games. Teams of course had an extended break due to the international weekend.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">weekend_matches</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'17/10/2015'</span><span class="p">,</span> <span class="s">'19/10/2015'</span><span class="p">)</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Chelsea</td>
+<td>Aston Villa</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Crystal Palace</td>
+<td>West Ham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>6</td>
+<td>24</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Everton</td>
+<td>Man United</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>10</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man City</td>
+<td>Bournemouth</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>5</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>11</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Southampton</td>
+<td>Leicester</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>26</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Tottenham</td>
+<td>Liverpool</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>12</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Watford</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>8</td>
+<td>17</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Brom</td>
+<td>Sunderland</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Newcastle</td>
+<td>Norwich</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>6</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>11</td>
+<td>18</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Swansea</td>
+<td>Stoke</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="chelsea-2-0-aston-villa">Chelsea 2-0 Aston Villa</h2>
+<p>Chelsea sure needed this. It's not a particularly dominant home victory, particularly against Aston Villa who have not been posting stellar numbers so far.</p>
+<h2 id="crystal-palace-1-3-west-ham">Crystal Palace 1-3 West Ham</h2>
+<p>Something of a surprise and this no doubt now has a lot of the statistics people scratching their heads. I for one have been very bearish on West Ham, concluding that they have been very lucky and in particular away from home. But this was away from home and very well deserved victory. They had the second most total shots of the weekend after Leicester:</p>
+<!-- TEASER_END -->
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">rank_teams_single_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">,</span> <span class="s">'shots'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>shots</th>
+</tr>
+<tr>
+<td>1</td> <td>Leicester</td> <td>26</td>
+</tr>
+<tr>
+<td>2</td> <td>West Ham</td> <td>24</td>
+</tr>
+<tr>
+<td>3</td> <td>Norwich</td> <td>18</td>
+</tr>
+<tr>
+<td>4</td> <td>Arsenal</td> <td>17</td>
+</tr>
+<tr>
+<td>5</td> <td>Man City</td> <td>15</td>
+</tr>
+<tr>
+<td>6</td> <td>Southampton</td> <td>14</td>
+</tr>
+<tr>
+<td>-</td> <td>Swansea</td> <td>14</td>
+</tr>
+<tr>
+<td>8</td> <td>Tottenham</td> <td>13</td>
+</tr>
+<tr>
+<td>9</td> <td>Everton</td> <td>12</td>
+</tr>
+<tr>
+<td>-</td> <td>Liverpool</td> <td>12</td>
+</tr>
+<tr>
+<td>11</td> <td>Newcastle</td> <td>11</td>
+</tr>
+<tr>
+<td>12</td> <td>Man United</td> <td>10</td>
+</tr>
+<tr>
+<td>13</td> <td>Chelsea</td> <td>9</td>
+</tr>
+<tr>
+<td>-</td> <td>Sunderland</td> <td>9</td>
+</tr>
+<tr>
+<td>-</td> <td>Stoke</td> <td>9</td>
+</tr>
+<tr>
+<td>16</td> <td>Aston Villa</td> <td>8</td>
+</tr>
+<tr>
+<td>-</td> <td>Watford</td> <td>8</td>
+</tr>
+<tr>
+<td>-</td> <td>West Brom</td> <td>8</td>
+</tr>
+<tr>
+<td>19</td> <td>Crystal Palace</td> <td>6</td>
+</tr>
+<tr>
+<td>20</td> <td>Bournemouth</td> <td>5</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>They also had the best total shots ratio for the weekend:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">rank_teams_single_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">,</span> <span class="s">'tsr'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>tsr</th>
+</tr>
+<tr>
+<td>1</td> <td>West Ham</td> <td>0.8</td>
+</tr>
+<tr>
+<td>2</td> <td>Man City</td> <td>0.75</td>
+</tr>
+<tr>
+<td>3</td> <td>Arsenal</td> <td>0.68</td>
+</tr>
+<tr>
+<td>4</td> <td>Leicester</td> <td>0.65</td>
+</tr>
+<tr>
+<td>5</td> <td>Norwich</td> <td>0.6206896551724138</td>
+</tr>
+<tr>
+<td>6</td> <td>Swansea</td> <td>0.6086956521739131</td>
+</tr>
+<tr>
+<td>7</td> <td>Everton</td> <td>0.5454545454545454</td>
+</tr>
+<tr>
+<td>8</td> <td>Chelsea</td> <td>0.5294117647058824</td>
+</tr>
+<tr>
+<td>-</td> <td>Sunderland</td> <td>0.5294117647058824</td>
+</tr>
+<tr>
+<td>10</td> <td>Tottenham</td> <td>0.52</td>
+</tr>
+<tr>
+<td>11</td> <td>Liverpool</td> <td>0.48</td>
+</tr>
+<tr>
+<td>12</td> <td>Aston Villa</td> <td>0.47058823529411764</td>
+</tr>
+<tr>
+<td>-</td> <td>West Brom</td> <td>0.47058823529411764</td>
+</tr>
+<tr>
+<td>14</td> <td>Man United</td> <td>0.45454545454545453</td>
+</tr>
+<tr>
+<td>15</td> <td>Stoke</td> <td>0.391304347826087</td>
+</tr>
+<tr>
+<td>16</td> <td>Newcastle</td> <td>0.3793103448275862</td>
+</tr>
+<tr>
+<td>17</td> <td>Southampton</td> <td>0.35</td>
+</tr>
+<tr>
+<td>18</td> <td>Watford</td> <td>0.32</td>
+</tr>
+<tr>
+<td>19</td> <td>Bournemouth</td> <td>0.25</td>
+</tr>
+<tr>
+<td>20</td> <td>Crystal Palace</td> <td>0.2</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see just how dominant a tsr of 0.8 is, we look at matches so far within the league in which a team has recorded a total shots ratio of 0.8 or more. There have only been 4 such matches. Twice Newcastle have been on the recieving end. Incredibly West Ham have been both on the receiving end and, are now, the team dishing out the shots.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">matches_so_far</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'01/08/2015'</span><span class="p">,</span> <span class="s">'19/10/2015'</span><span class="p">)</span>
+<span class="n">high_tsr_matches</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">matches_so_far</span> <span class="k">if</span> <span class="n">m</span><span class="o">.</span><span class="n">home_tsr</span> <span class="o">&gt;=</span> <span class="mf">0.8</span> <span class="ow">or</span> <span class="n">m</span><span class="o">.</span><span class="n">away_tsr</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">(</span><span class="n">high_tsr_matches</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s">'There have been {0} matches in total'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches_so_far</span><span class="p">))))</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Swansea</td>
+<td>Newcastle</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>19</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Newcastle</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>1</td>
+<td>22</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>0</td>
+<td>9</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man City</td>
+<td>West Ham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>27</td>
+<td>6</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Crystal Palace</td>
+<td>West Ham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>6</td>
+<td>24</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+There have been 90 matches in total
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This week it wasn't just the shots but the shots on target. For this West Ham were third best in the league this weekend, behind the title contenders Manchester City and (yes) Arsenal.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">rank_teams_single_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">,</span> <span class="s">'sotr'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>sotr</th>
+</tr>
+<tr>
+<td>1</td> <td>Man City</td> <td>0.9166666666666666</td>
+</tr>
+<tr>
+<td>2</td> <td>Arsenal</td> <td>0.8571428571428571</td>
+</tr>
+<tr>
+<td>3</td> <td>West Ham</td> <td>0.8</td>
+</tr>
+<tr>
+<td>4</td> <td>Chelsea</td> <td>0.75</td>
+</tr>
+<tr>
+<td>5</td> <td>Man United</td> <td>0.7</td>
+</tr>
+<tr>
+<td>6</td> <td>Sunderland</td> <td>0.6666666666666666</td>
+</tr>
+<tr>
+<td>7</td> <td>Tottenham</td> <td>0.5714285714285714</td>
+</tr>
+<tr>
+<td>8</td> <td>Leicester</td> <td>0.5384615384615384</td>
+</tr>
+<tr>
+<td>9</td> <td>Newcastle</td> <td>0.5</td>
+</tr>
+<tr>
+<td>-</td> <td>Norwich</td> <td>0.5</td>
+</tr>
+<tr>
+<td>-</td> <td>Swansea</td> <td>0.5</td>
+</tr>
+<tr>
+<td>-</td> <td>Stoke</td> <td>0.5</td>
+</tr>
+<tr>
+<td>13</td> <td>Southampton</td> <td>0.46153846153846156</td>
+</tr>
+<tr>
+<td>14</td> <td>Liverpool</td> <td>0.42857142857142855</td>
+</tr>
+<tr>
+<td>15</td> <td>West Brom</td> <td>0.3333333333333333</td>
+</tr>
+<tr>
+<td>16</td> <td>Everton</td> <td>0.3</td>
+</tr>
+<tr>
+<td>17</td> <td>Aston Villa</td> <td>0.25</td>
+</tr>
+<tr>
+<td>18</td> <td>Crystal Palace</td> <td>0.2</td>
+</tr>
+<tr>
+<td>19</td> <td>Watford</td> <td>0.14285714285714285</td>
+</tr>
+<tr>
+<td>20</td> <td>Bournemouth</td> <td>0.08333333333333333</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The lingering worry for West Ham fans will be that all of these shots have come they were only 15th equal for their target ratio, that is the ratio of their total shots that were on target.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">rank_teams_single_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">,</span> <span class="s">'target_ratio'</span><span class="p">,</span>
+                                          <span class="n">stat_header_name</span><span class="o">=</span><span class="s">'Target Ratio'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>Target Ratio</th>
+</tr>
+<tr>
+<td>1</td> <td>Man City</td> <td>0.4230769230769231</td>
+</tr>
+<tr>
+<td>2</td> <td>Man United</td> <td>0.4117647058823529</td>
+</tr>
+<tr>
+<td>3</td> <td>Newcastle</td> <td>0.35294117647058826</td>
+</tr>
+<tr>
+<td>4</td> <td>Southampton</td> <td>0.3</td>
+</tr>
+<tr>
+<td>5</td> <td>Arsenal</td> <td>0.2608695652173913</td>
+</tr>
+<tr>
+<td>6</td> <td>Chelsea</td> <td>0.25</td>
+</tr>
+<tr>
+<td>-</td> <td>Norwich</td> <td>0.25</td>
+</tr>
+<tr>
+<td>8</td> <td>Tottenham</td> <td>0.23529411764705882</td>
+</tr>
+<tr>
+<td>9</td> <td>Leicester</td> <td>0.21212121212121213</td>
+</tr>
+<tr>
+<td>10</td> <td>Everton</td> <td>0.2</td>
+</tr>
+<tr>
+<td>-</td> <td>Liverpool</td> <td>0.2</td>
+</tr>
+<tr>
+<td>12</td> <td>Sunderland</td> <td>0.18181818181818182</td>
+</tr>
+<tr>
+<td>-</td> <td>Stoke</td> <td>0.18181818181818182</td>
+</tr>
+<tr>
+<td>14</td> <td>Bournemouth</td> <td>0.16666666666666666</td>
+</tr>
+<tr>
+<td>15</td> <td>Crystal Palace</td> <td>0.14285714285714285</td>
+</tr>
+<tr>
+<td>-</td> <td>West Ham</td> <td>0.14285714285714285</td>
+</tr>
+<tr>
+<td>17</td> <td>Swansea</td> <td>0.125</td>
+</tr>
+<tr>
+<td>18</td> <td>Aston Villa</td> <td>0.1111111111111111</td>
+</tr>
+<tr>
+<td>-</td> <td>Watford</td> <td>0.1111111111111111</td>
+</tr>
+<tr>
+<td>-</td> <td>West Brom</td> <td>0.1111111111111111</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And they still have a pretty large PDO, significantly higher than the second placed team, Manchester United, who are themselves something of an outlier:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">display_statistic_rankings</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'pdo'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>pdo</th>
+</tr>
+<tr>
+<td>1</td> <td>West Ham</td> <td>0.2337507453786523</td>
+</tr>
+<tr>
+<td>2</td> <td>Man United</td> <td>0.13257575757575757</td>
+</tr>
+<tr>
+<td>3</td> <td>Everton</td> <td>0.09285714285714286</td>
+</tr>
+<tr>
+<td>4</td> <td>Arsenal</td> <td>0.07500000000000001</td>
+</tr>
+<tr>
+<td>5</td> <td>Crystal Palace</td> <td>0.07046070460704607</td>
+</tr>
+<tr>
+<td>6</td> <td>Newcastle</td> <td>0.06071428571428572</td>
+</tr>
+<tr>
+<td>7</td> <td>Stoke</td> <td>0.06062424969987995</td>
+</tr>
+<tr>
+<td>8</td> <td>Chelsea</td> <td>0.03205128205128205</td>
+</tr>
+<tr>
+<td>9</td> <td>Leicester</td> <td>0.009469696969696961</td>
+</tr>
+<tr>
+<td>10</td> <td>West Brom</td> <td>0.0034453057708871415</td>
+</tr>
+<tr>
+<td>11</td> <td>Man City</td> <td>-0.009009009009008973</td>
+</tr>
+<tr>
+<td>12</td> <td>Tottenham</td> <td>-0.022321428571428575</td>
+</tr>
+<tr>
+<td>13</td> <td>Watford</td> <td>-0.0231578947368421</td>
+</tr>
+<tr>
+<td>14</td> <td>Aston Villa</td> <td>-0.025641025641025605</td>
+</tr>
+<tr>
+<td>15</td> <td>Sunderland</td> <td>-0.04538461538461536</td>
+</tr>
+<tr>
+<td>16</td> <td>Swansea</td> <td>-0.04949314251639833</td>
+</tr>
+<tr>
+<td>17</td> <td>Norwich</td> <td>-0.10298102981029805</td>
+</tr>
+<tr>
+<td>18</td> <td>Liverpool</td> <td>-0.1515151515151515</td>
+</tr>
+<tr>
+<td>19</td> <td>Bournemouth</td> <td>-0.1523809523809524</td>
+</tr>
+<tr>
+<td>20</td> <td>Southampton</td> <td>-0.15598290598290598</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="watford-0-3-arsenal-manchester-city-5-1-bournemouth">Watford 0-3 Arsenal, Manchester City 5-1 Bournemouth</h2>
+<p>Two very dominate victories. These two feature at the top end of the tables above for this week. Team of the week here could easily go to Arsenal, although as we see above the Manchester City total shot ratio and shots on target ratio are both better than Arsenal's, let's not forget Arsenal were away from home.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="everton-0-3-manchester-united">Everton 0-3 Manchester United</h2>
+<p>Manchester United continue to make very good use of the shots that they have. Everton actually managed more shots than United, but United had 7 out of 10 shots on target, that is a very high target ratio beaten only by their Manchester rivals this week. A continuing theme is that United seem capable of scoring a high percentage of their shots on target, here scoring 3 of the 7, which is just higher than they have managed all season, which puts them 4th in the league:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">display_statistic_rankings</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'goals_sot_for_ratio'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>goals_sot_for_ratio</th>
+</tr>
+<tr>
+<td>1</td> <td>West Ham</td> <td>0.5128205128205128</td>
+</tr>
+<tr>
+<td>2</td> <td>Newcastle</td> <td>0.4</td>
+</tr>
+<tr>
+<td>3</td> <td>Leicester</td> <td>0.3958333333333333</td>
+</tr>
+<tr>
+<td>4</td> <td>Man United</td> <td>0.375</td>
+</tr>
+<tr>
+<td>5</td> <td>Chelsea</td> <td>0.358974358974359</td>
+</tr>
+<tr>
+<td>6</td> <td>Everton</td> <td>0.34285714285714286</td>
+</tr>
+<tr>
+<td>7</td> <td>Norwich</td> <td>0.34146341463414637</td>
+</tr>
+<tr>
+<td>8</td> <td>Bournemouth</td> <td>0.3333333333333333</td>
+</tr>
+<tr>
+<td>9</td> <td>Man City</td> <td>0.32432432432432434</td>
+</tr>
+<tr>
+<td>10</td> <td>Sunderland</td> <td>0.32</td>
+</tr>
+<tr>
+<td>11</td> <td>Aston Villa</td> <td>0.3076923076923077</td>
+</tr>
+<tr>
+<td>12</td> <td>Crystal Palace</td> <td>0.2926829268292683</td>
+</tr>
+<tr>
+<td>13</td> <td>Southampton</td> <td>0.28846153846153844</td>
+</tr>
+<tr>
+<td>14</td> <td>Stoke</td> <td>0.2647058823529412</td>
+</tr>
+<tr>
+<td>15</td> <td>West Brom</td> <td>0.25925925925925924</td>
+</tr>
+<tr>
+<td>16</td> <td>Arsenal</td> <td>0.25</td>
+</tr>
+<tr>
+<td>17</td> <td>Watford</td> <td>0.24</td>
+</tr>
+<tr>
+<td>18</td> <td>Swansea</td> <td>0.23255813953488372</td>
+</tr>
+<tr>
+<td>19</td> <td>Tottenham</td> <td>0.19642857142857142</td>
+</tr>
+<tr>
+<td>20</td> <td>Liverpool</td> <td>0.18181818181818182</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Coupled with this is a propensity for a high proportion of their shots to be on target, second only to Manchester City:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">display_statistic_rankings</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'sot_for_ratio'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>sot_for_ratio</th>
+</tr>
+<tr>
+<td>1</td> <td>Man City</td> <td>0.4134078212290503</td>
+</tr>
+<tr>
+<td>2</td> <td>Man United</td> <td>0.40404040404040403</td>
+</tr>
+<tr>
+<td>3</td> <td>Tottenham</td> <td>0.38620689655172413</td>
+</tr>
+<tr>
+<td>4</td> <td>Newcastle</td> <td>0.38461538461538464</td>
+</tr>
+<tr>
+<td>5</td> <td>Stoke</td> <td>0.37362637362637363</td>
+</tr>
+<tr>
+<td>6</td> <td>Southampton</td> <td>0.36363636363636365</td>
+</tr>
+<tr>
+<td>-</td> <td>Arsenal</td> <td>0.36363636363636365</td>
+</tr>
+<tr>
+<td>8</td> <td>Crystal Palace</td> <td>0.35344827586206895</td>
+</tr>
+<tr>
+<td>9</td> <td>Swansea</td> <td>0.3524590163934426</td>
+</tr>
+<tr>
+<td>10</td> <td>Bournemouth</td> <td>0.35106382978723405</td>
+</tr>
+<tr>
+<td>11</td> <td>Leicester</td> <td>0.34782608695652173</td>
+</tr>
+<tr>
+<td>12</td> <td>Liverpool</td> <td>0.33587786259541985</td>
+</tr>
+<tr>
+<td>13</td> <td>Everton</td> <td>0.32710280373831774</td>
+</tr>
+<tr>
+<td>14</td> <td>West Ham</td> <td>0.30952380952380953</td>
+</tr>
+<tr>
+<td>15</td> <td>Norwich</td> <td>0.3082706766917293</td>
+</tr>
+<tr>
+<td>16</td> <td>West Brom</td> <td>0.3068181818181818</td>
+</tr>
+<tr>
+<td>17</td> <td>Sunderland</td> <td>0.2976190476190476</td>
+</tr>
+<tr>
+<td>18</td> <td>Chelsea</td> <td>0.291044776119403</td>
+</tr>
+<tr>
+<td>19</td> <td>Aston Villa</td> <td>0.26262626262626265</td>
+</tr>
+<tr>
+<td>20</td> <td>Watford</td> <td>0.22522522522522523</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="southampton-2-2-leicester">Southampton 2-2 Leicester</h2>
+<p>Incredible match with Leicester managing 26 shots on target against a side that is generally managing to avoid shots against, Southampton are still only 16th with 103 which includes the 26 from Leicester:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">league_analysis</span><span class="o">.</span><span class="n">display_statistic_rankings</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'shots_against'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>shots_against</th>
+</tr>
+<tr>
+<td>1</td> <td>Newcastle</td> <td>163</td>
+</tr>
+<tr>
+<td>-</td> <td>Crystal Palace</td> <td>163</td>
+</tr>
+<tr>
+<td>3</td> <td>Sunderland</td> <td>149</td>
+</tr>
+<tr>
+<td>4</td> <td>Stoke</td> <td>136</td>
+</tr>
+<tr>
+<td>-</td> <td>West Ham</td> <td>136</td>
+</tr>
+<tr>
+<td>6</td> <td>West Brom</td> <td>132</td>
+</tr>
+<tr>
+<td>7</td> <td>Leicester</td> <td>123</td>
+</tr>
+<tr>
+<td>-</td> <td>Everton</td> <td>123</td>
+</tr>
+<tr>
+<td>9</td> <td>Norwich</td> <td>122</td>
+</tr>
+<tr>
+<td>10</td> <td>Chelsea</td> <td>119</td>
+</tr>
+<tr>
+<td>11</td> <td>Aston Villa</td> <td>117</td>
+</tr>
+<tr>
+<td>12</td> <td>Watford</td> <td>116</td>
+</tr>
+<tr>
+<td>-</td> <td>Swansea</td> <td>116</td>
+</tr>
+<tr>
+<td>14</td> <td>Tottenham</td> <td>115</td>
+</tr>
+<tr>
+<td>15</td> <td>Liverpool</td> <td>104</td>
+</tr>
+<tr>
+<td>16</td> <td>Southampton</td> <td>103</td>
+</tr>
+<tr>
+<td>17</td> <td>Arsenal</td> <td>99</td>
+</tr>
+<tr>
+<td>18</td> <td>Bournemouth</td> <td>94</td>
+</tr>
+<tr>
+<td>19</td> <td>Man United</td> <td>86</td>
+</tr>
+<tr>
+<td>20</td> <td>Man City</td> <td>78</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="newcastle-6-2-norwich">Newcastle 6-2 Norwich</h2>
+<p>As <a href="http://statsbomb.com/2015/10/fun-order-and-klopp-week-9-in-the-premier-league/">others have pointed out</a> it is not often a team concedes 6 and then scores 6 in the next match. More interesting here is that Newcastle had exactly 6 shots on target and scored with all six. How very Manchester United of them. I suspect this will be a statistical blip, so far still not very much for Newcastle fans to get excited about, other than:</p>
+<h2 id="west-brom-1-0-sunderland">West Brom 1-0 Sunderland</h2>
+<p>It seems like the north east teams will indeed both be involved in a scrap for relegation. It seems more likely that Sunderland will avoid a scrap only by being so far behind safety that their relegation is assured from Christmas onwards. This week, away from home, they actually managed to out-shoot their opponents, just a shame their opponents were West Brom. Tony Pulis does genuinely appear to have some ability to get more (points) from a team than their shot numbers suggest they should.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="tottenham-0-0-liverpool">Tottenham 0-0 Liverpool</h2>
+<p>Not a terribly exciting match for Liverpool's new manager. I think both of these teams are not getting the points they deserve. These two teams lie just above Southampton in the shots against column. Liverpool are 18th in the league for PDO, so they may have so far been a bit unlucky. As for Tottenham, they just aren't scoring very often. These two are the bottom teams in the league for shooting percentage, that is the percentage of their shots on target that are goals.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="swansea-0-1-stoke">Swansea 0-1 Stoke</h2>
+<p>I generally think Swansea are pretty decent mid-table side. No major worries. They were probably a touch unlucky to come away with nothing. Stoke fans have more cause for concern, but a good away 3 points was this.</p>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../epl-3-4-october-2015/" rel="prev" title="EPL 3-4 October 2015">Previous post</a>
+            </li>
+        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
+        
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="allanderek",
+            disqus_url="http://allanderek.github.io/football-analysis/posts/epl-17-19-october-2015/",
+        disqus_title="EPL 17-19 October 2015",
+        disqus_identifier="cache/posts/epl-17-19-october-2015.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        </section><script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script><script src="../../assets/js/mathjax.js"></script></article><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2015         <a href="mailto:allan.clark@gmail.com">allanderek</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>
