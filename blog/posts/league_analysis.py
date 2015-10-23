@@ -28,6 +28,44 @@ class Match(object):
         else:
             assert team == self.AwayTeam
             return self.HomeTeam
+
+    def get_quick_title(self):
+        return '{0} vs {1}'.format(self.HomeTeam, self.AwayTeam)
+
+    @property
+    def home_shots(self):
+        return self.HS
+
+    @property
+    def away_shots(self):
+        return self.AS
+
+    @property
+    def home_tsr(self):
+        return clean_ratio(self.HS, self.HS + self.AS)
+
+    @property
+    def away_tsr(self):
+        return clean_ratio(self.AS, self.HS + self.AS)
+
+    @property
+    def home_sotr(self):
+        return clean_ratio(self.HST, self.HST + self.AST)
+
+    @property
+    def away_sotr(self):
+        return clean_ratio(self.AST, self.HST + self.AST)
+
+
+    @property
+    def home_target_ratio(self):
+        return clean_ratio(self.HST, self.HS + self.HST)
+
+    @property
+    def away_target_ratio(self):
+        return clean_ratio(self.AST, self.AS + self.AST)
+
+
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
               'HBP', 'ABP', 'Bb1X2']
@@ -631,6 +669,39 @@ def get_stats_rankings(stats_dictionary, stat_name):
     sorted_pairs = sorted(pairs, key=key_fun, reverse=True)
     return sorted_pairs
 
+def rank_sorted_pairs(sorted_pairs):
+    def get_rows(sorted_pairs):
+        latest_value = None
+        latest_position = None
+        for position, (key, value) in enumerate(sorted_pairs, start=1):
+            if value ==  latest_value:
+                position = latest_position
+                position_string = '-'
+            else:
+                latest_position = position
+                position_string = str(position)
+            latest_value = value
+            yield [position_string, key, value]
+    return get_rows(sorted_pairs)
+
+# TODO: There is definitely some overlap between 'display_ranked_table'
+# and 'display_stats_table', but note that display_stats_tables allows
+# for more columns than the one that is sorted on.
+def display_ranked_table(headers, pairs):
+    sorted_pairs = sorted(pairs, key=lambda r: r[1], reverse=True)
+    rows = rank_sorted_pairs(sorted_pairs)
+    display_table(['Position'] + headers, rows)
+
+def rank_teams_single_matches(matches, stat_suffix, stat_header_name=None):
+    if stat_header_name is None:
+        stat_header_name = stat_suffix
+    def get_pairs():
+        for match in matches:
+            yield (match.HomeTeam, getattr(match, 'home_' + stat_suffix))
+            yield (match.AwayTeam, getattr(match, 'away_' + stat_suffix))
+    display_ranked_table(['Team', stat_header_name], get_pairs())
+
+
 def display_stats_table(after_game_no_dicts, stat_names):
     """To get the argument you can simply call the above
     'collect_after_game_dicts', this means that we will give the table
@@ -984,6 +1055,15 @@ def analyse_fixtures(league, end_date):
         shots_against = adjusted_sot_against_per_game[team]
         return shots_for - shots_against
 
+    def get_avg_adjusted_stat(stats, stat_name):
+        opponents = (match.opponent(stats.teamname) for match in stats.games)
+        opponents_stats = [getattr(league.team_stats[opp], stat_name) for opp in opponents]
+        avg_opp_stat = sum(opponents_stats) / len(opponents_stats)
+        team_stat = getattr(stats, stat_name)
+        adj_stat = team_stat + avg_opp_stat - 0.5
+        return adj_stat
+
+
     for home_team, away_team in fixtures:
         def print_statline(attribute):
             home = getattr(home_stats, attribute)
@@ -995,6 +1075,12 @@ def analyse_fixtures(league, end_date):
         away_stats = league.team_stats[away_team]
         away_stats.adjsr = get_adjusted_tsr(away_team)
         away_stats.adjsotr = get_adjusted_sotr(away_team)
+
+        home_stats.avgadjtsr = get_avg_adjusted_stat(home_stats, 'tsr')
+        home_stats.avgadjsotr = get_avg_adjusted_stat(home_stats, 'sotr')
+        away_stats.avgadjtsr = get_avg_adjusted_stat(away_stats, 'tsr')
+        away_stats.avgadjsotr = get_avg_adjusted_stat(away_stats, 'sotr')
+        
 
         suggested_bet = 'D'
         adjsr_diff = home_stats.adjsr - away_stats.adjsr
@@ -1015,8 +1101,10 @@ def analyse_fixtures(league, end_date):
         print_statline('points')
         print_statline('tsr')
         print_statline('adjsr')
+        print_statline('avgadjtsr')
         print_statline('sotr')
         print_statline('adjsotr')
+        print_statline('avgadjsotr')
         print_statline('pdo')
         print_statline('tsotr')
         print_statline('team_rating')
