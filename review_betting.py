@@ -2,9 +2,20 @@ import blog.posts.league_analysis as league_analysis
 import collections
 
 def display_table(headers, rows):
-    print(headers)
+    cell_size = 16
+    def pad_cell(s):
+        padded_s = s + (' ' * cell_size)
+        return(padded_s[:cell_size])
+    def print_row(cells):
+        cells = [pad_cell(str(c)) for c in cells]
+        print("|".join(cells))
+
+    border = '-' * ((cell_size + 1) * len(headers))
+    print(border)
+    print_row(headers)
     for row in rows:
-        print(row)
+        print_row(row)
+    print(border)
 
 def display_bet_analysis(bet_line, match, league, profit_loss=None):
     # So this is the number of goals we would have expected the team to have scored based on shots
@@ -151,7 +162,6 @@ def review_bets_file(bets_filename):
     with open(bets_filename) as bets_file:
         bets_text = bets_file.read()
 
-    print(bets_filename)
     for line in bets_text.split('\n'):
         if line == '' or line.startswith('#'):
             continue
@@ -171,6 +181,8 @@ def analyse_multiple_bet_files(bet_filenames):
         profit_losses = review_bets_file(filename)
         for league_name, profit_loss in profit_losses.items():
             leagues_profit_loss[league_name] += profit_loss
+    print()
+    print('-------------------------')
     print('Totals for all bet files analysed:')
     for league_name, profit_loss in leagues_profit_loss.items():
         print('{0}: {1}'.format(league_name, profit_loss))
@@ -188,7 +200,6 @@ if __name__ == '__main__':
         bets_filenames = [os.path.join(directory, f)
                           for f in os.listdir(directory)
                           if f.startswith('bets-')]
-        print(data_dir_ls)
     analyse_multiple_bet_files(bets_filenames)
 
 
