@@ -1,5 +1,5 @@
 import blog.posts.league_analysis as league_analysis
-
+import collections
 
 def display_table(headers, rows):
     print(headers)
@@ -98,18 +98,10 @@ class BetLine(object):
             return -1.0
 
 
-# In[47]:
-
-# league_two = league_analysis.year_201516.elt_league
-# league_one = league_analysis.year_201516.elo_league
-# championship = league_analysis.year_201516.ech_league
-# premiership = league_analysis.year_201516.epl_league
-# scottish_premiership = league_analysis.year_201516.spl_league
-
-
 def review_bet_lines(league_bet_lines, start_date, end_date):
     league_profit_loss = 0.0
     total_profit_loss = 0.0
+    leagues_profit_loss = dict()
     for league_name, (current_league, bet_lines) in league_bet_lines.items():
         league_profit_loss = 0.0
         if not bet_lines:
@@ -128,11 +120,15 @@ def review_bet_lines(league_bet_lines, start_date, end_date):
             league_profit_loss += profit_loss
             display_bet_analysis(bet_line, match, current_league, profit_loss=profit_loss)
         print('League profit/loss: {0}'.format(league_profit_loss))
+        leagues_profit_loss[league_name] = league_profit_loss
         print('------------------------')
         print()
         total_profit_loss += league_profit_loss
-    print('Total profit/loss: {0}'.format(total_profit_loss))
-    return total_profit_loss
+    total_message_format = 'profit/loss between {0} and {1}: {2}'
+    total_message = total_message_format.format(start_date, end_date,
+                                                total_profit_loss)
+    print(total_message)
+    return leagues_profit_loss
 
 
 def review_bets_file(bets_filename):
@@ -170,10 +166,16 @@ def review_bets_file(bets_filename):
     return review_bet_lines(league_bet_lines, start_date, end_date)
 
 def analyse_multiple_bet_files(bet_filenames):
-    profit_loss = 0.0
+    leagues_profit_loss = collections.defaultdict(float)
     for filename in bet_filenames:
-        profit_loss += review_bets_file(filename)
-    print('Total profit/loss: {0}'.format(profit_loss))
+        profit_losses = review_bets_file(filename)
+        for league_name, profit_loss in profit_losses.items():
+            leagues_profit_loss[league_name] += profit_loss
+    print('Totals for all bet files analysed:')
+    for league_name, profit_loss in leagues_profit_loss.items():
+        print('{0}: {1}'.format(league_name, profit_loss))
+    total_profit_loss = sum(leagues_profit_loss.values())
+    print('Overall total profit/loss: {0}'.format(total_profit_loss))
 
 if __name__ == '__main__':
     import sys
