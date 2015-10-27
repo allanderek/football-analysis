@@ -17,51 +17,24 @@ def display_table(headers, rows):
         print_row(row)
     print(border)
 
-def display_bet_analysis(bet_line, match, league, profit_loss=None):
-    # So this is the number of goals we would have expected the team to have scored based on shots
-    home_shots_goals = match.HS / league.shots_per_goal
-    away_shots_goals = match.AS / league.shots_per_goal
-    # Similarly for shots on target
-    home_sot_goals = match.HST / league.sot_per_goal
-    away_sot_goals = match.AST / league.sot_per_goal
 
-    # Who is closer to the shots scorelines, the bet or the real scoreline?
-    home_shots_score_diff = abs(match.FTHG - home_shots_goals)
-    away_shots_score_diff = abs(match.FTAG - away_shots_goals)
-    home_sots_score_diff = abs(match.FTHG - home_sot_goals)
-    away_sots_score_diff = abs(match.FTAG - away_sot_goals)
-
-    # home_bet = bet_line.home_score
-    # away_bet = bet_line.away_score
-    # home_shots_bet_diff = abs(home_bet - home_shots_goals)
-    # away_shots_bet_diff = abs(away_bet - away_shots_goals)
-    # home_sots_bet_diff = abs(home_bet - home_sot_goals)
-    # away_sots_bet_diff = abs(away_bet - away_sot_goals)
-    
-    headers = ['', match.HomeTeam, match.AwayTeam]
-    rows = [['Goals', match.FTHG, match.FTAG],
-            # ['Bet Goals', home_bet, away_bet],
-            ['Shots', match.HS, match.AS],
-            ['SOT', match.HST, match.AST],
-            ['Shots Scoreline', home_shots_goals, away_shots_goals],
-            ['SOT Scoreline', home_sot_goals, away_sot_goals],
-            ['Score-Shots Diff', home_shots_score_diff, away_shots_score_diff],
-            # ['Bet-Shots Diff', home_shots_bet_diff, away_shots_bet_diff],
-            ['Score-Sots Diff', home_sots_score_diff, away_sots_score_diff],
-            # ['Bet-Sots Diff', home_sots_bet_diff, away_sots_bet_diff]
-            ['Bet', bet_line.bet_result, bet_line.bet_result],
-            ['Profit/Loss', profit_loss, profit_loss]
-            ]
-
-    display_table(headers, rows)
-
-
+all_leagues = league_analysis.year_201516.all_leagues
 class BetLine(object):
     def __init__(self, bet_line):
         """Example Correct Score bet line: Bristol Rovers v Barnet: 1 - 1, 7.0
         Example of a Result bet line: Walsall v Doncaster: Walsall, 1.97
         """
         self.parse_result_line(bet_line)
+        for league in all_leagues:
+            home = league_analysis.alias_team(self.home)
+            away = league_analysis.alias_team(self.away)
+            if home in league.teams and away in league.teams:
+                self.league = league
+                break
+        else:
+            message = 'Match not found in any league, {0} vs {1}'
+            raise Exception(message.format(bet_line.home, bet_line.away))
+
 
     def parse_correct_score_line(self, bet_line):
         """Example Correct Score bet line: Bristol Rovers v Barnet: 1 - 1, 7.0
@@ -108,60 +81,50 @@ class BetLine(object):
         else:
             return -1.0
 
+    def display_bet_analysis(self):
+        match = self.match
+        # So this is the number of goals we would have expected the team to have scored based on shots
+        home_shots_goals = match.HS / self.league.shots_per_goal
+        away_shots_goals = match.AS / self.league.shots_per_goal
+        # Similarly for shots on target
+        home_sot_goals = match.HST / self.league.sot_per_goal
+        away_sot_goals = match.AST / self.league.sot_per_goal
 
-def review_bet_lines(league_bet_lines, start_date, end_date):
-    league_profit_loss = 0.0
-    total_profit_loss = 0.0
-    leagues_profit_loss = dict()
-    for league_name, (current_league, bet_lines) in league_bet_lines.items():
-        league_profit_loss = 0.0
-        if not bet_lines:
-            continue
-        print('{0}'.format(league_name))
-        print()
-        for bet_line in bet_lines:
-            try:
-                match = bet_line.get_relevant_match(current_league, start_date, end_date)
-            except IndexError:
-                message_template = 'Data not available for match: {0} vs {1}'
-                message = message_template.format(bet_line.home, bet_line.away)
-                print(message)
-                continue
-            profit_loss = bet_line.get_profit_loss(match=match, commission=0.05)
-            league_profit_loss += profit_loss
-            display_bet_analysis(bet_line, match, current_league, profit_loss=profit_loss)
-        print('League profit/loss: {0}'.format(league_profit_loss))
-        leagues_profit_loss[league_name] = league_profit_loss
-        print('------------------------')
-        print()
-        total_profit_loss += league_profit_loss
-    total_message_format = 'profit/loss between {0} and {1}: {2}'
-    total_message = total_message_format.format(start_date, end_date,
-                                                total_profit_loss)
-    print(total_message)
-    return leagues_profit_loss
+        # Who is closer to the shots scorelines, the bet or the real scoreline?
+        home_shots_score_diff = abs(match.FTHG - home_shots_goals)
+        away_shots_score_diff = abs(match.FTAG - away_shots_goals)
+        home_sots_score_diff = abs(match.FTHG - home_sot_goals)
+        away_sots_score_diff = abs(match.FTAG - away_sot_goals)
+
+        profit_loss = self.get_profit_loss()
+
+        headers = ['', match.HomeTeam, match.AwayTeam]
+        rows = [['Goals', match.FTHG, match.FTAG],
+                ['Shots', match.HS, match.AS],
+                ['SOT', match.HST, match.AST],
+                ['Shots Scoreline', home_shots_goals, away_shots_goals],
+                ['SOT Scoreline', home_sot_goals, away_sot_goals],
+                ['Score-Shots Diff', home_shots_score_diff, away_shots_score_diff],
+                ['Score-Sots Diff', home_sots_score_diff, away_sots_score_diff],
+                ['Bet', self.bet_result, self.bet_result],
+                ['Odds', self.bet_price, self.bet_price],
+                ['Profit/Loss', profit_loss, profit_loss]
+                ]
+        display_table(headers, rows)
 
 
-def review_bets_file(bets_filename):
-    all_leagues = league_analysis.year_201516.all_leagues
-    league_bet_lines = {league.title: (league, [])
-                        for league in all_leagues}
+def profit_loss_bet_lines(bet_lines):
+    return sum(bl.get_profit_loss() for bl in bet_lines)
 
-    def add_bet_line(bet_line):
-        for league in all_leagues:
-            home = league_analysis.alias_team(bet_line.home)
-            away = league_analysis.alias_team(bet_line.away)
-            if home in league.teams and away in league.teams:
-                _league, league_lines = league_bet_lines[league.title]
-                league_lines.append(bet_line)
-                break
-        else:
-            message = 'Match not found in any league, {0} vs {1}'
-            raise Exception(message.format(bet_line.home, bet_line.away))
+def display_bet_lines_analysis(bet_lines):
+    for bet_line in bet_lines:
+        bet_line.display_bet_analysis()
 
+def read_bets_file(bets_filename):
     with open(bets_filename) as bets_file:
         bets_text = bets_file.read()
 
+    bet_lines = []
     for line in bets_text.split('\n'):
         if line == '' or line.startswith('#'):
             continue
@@ -172,22 +135,55 @@ def review_bets_file(bets_filename):
             end_date = line.split(' ')[1]
             continue
         bet_line = BetLine(line)
-        add_bet_line(bet_line)
-    return review_bet_lines(league_bet_lines, start_date, end_date)
+        try:
+            bet_line.get_relevant_match(bet_line.league,
+                                        start_date, end_date)
+        except IndexError:
+            msg_template = 'Data not available for match: {0} vs {1}'
+            msg = msg_template.format(bet_line.home, bet_line.away)
+            print(msg)
+            continue
+        bet_lines.append(bet_line)
+    return bet_lines
+
+def display_analysis_bets_file(bets_filename):
+    bet_lines = read_bets_file(bets_filename)
+    display_bet_lines_analysis(bet_lines)
+
 
 def analyse_multiple_bet_files(bet_filenames):
+    bet_lines = []
+    for bet_filename in bet_filenames:
+        bet_lines.extend(read_bets_file(bet_filename))
+
     leagues_profit_loss = collections.defaultdict(float)
-    for filename in bet_filenames:
-        profit_losses = review_bets_file(filename)
-        for league_name, profit_loss in profit_losses.items():
-            leagues_profit_loss[league_name] += profit_loss
-    print()
+    for bet_line in bet_lines:
+        profit_loss = bet_line.get_profit_loss()
+        leagues_profit_loss[bet_line.league.title] += profit_loss
+
     print('-------------------------')
     print('Totals for all bet files analysed:')
     for league_name, profit_loss in leagues_profit_loss.items():
         print('{0}: {1}'.format(league_name, profit_loss))
     total_profit_loss = sum(leagues_profit_loss.values())
     print('Overall total profit/loss: {0}'.format(total_profit_loss))
+
+    print('----- Dividing by how you have betted ----------')
+    for result in ['H', 'A', 'D']:
+        relevant_bets = [bl for bl in bet_lines
+                         if bl.bet_result == result]
+        profit_loss = sum(bl.get_profit_loss() for bl in relevant_bets)
+        print('{0} bets total profit/loss: {1}'.format(result, profit_loss))
+        print('    based on {0} bets'.format(len(relevant_bets)))
+
+    print('----- Dividing by how the match ended ----------')
+    for result in ['H', 'A', 'D']:
+        relevant_bets = [bl for bl in bet_lines
+                         if bl.match.FTR == result]
+        profit_loss = sum(bl.get_profit_loss() for bl in relevant_bets)
+        print('{0} results total profit/loss: {1}'.format(result, profit_loss))
+        print('    based on {0} bets'.format(len(relevant_bets)))
+    
 
 if __name__ == '__main__':
     import sys
@@ -200,6 +196,9 @@ if __name__ == '__main__':
         bets_filenames = [os.path.join(directory, f)
                           for f in os.listdir(directory)
                           if f.startswith('bets-')]
+    key_fun = lambda f: league_analysis.last_modified_date(f)
+    last_bet_file = max(bets_filenames, key=key_fun)
+    display_analysis_bets_file(last_bet_file)
+    # Just so we get the totals just for the last bet file
+    analyse_multiple_bet_files([last_bet_file])
     analyse_multiple_bet_files(bets_filenames)
-
-
