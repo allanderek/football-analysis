@@ -429,13 +429,17 @@ class Year(object):
                             self.elo_league, self.elt_league,
                             self.spl_league]
 
-    def get_all_matches(self, leagues=None):
+    def get_all_matches(self, leagues=None, filter_fun=None):
         if leagues is None:
             leagues = self.all_leagues
         else:
             leagues = [getattr(self, league) for league in leagues]
         match_lists = (league.matches for league in leagues)
-        return itertools.chain.from_iterable(match_lists)
+        matches_iter = itertools.chain.from_iterable(match_lists)
+        if filter_fun is None:
+            return matches_iter
+        else:
+            return filter(filter_fun, matches_iter)
 
 
 year_201011 = Year('1011')
@@ -463,17 +467,27 @@ def get_match(league, home, away, date):
     return next(m for m in league.matches if filter_fun(m))
 
 
-def get_all_matches(years=None, leagues=None):
+def get_all_matches(years=None, leagues=None, filter_fun=None):
     if years is None:
         years = all_years
-    match_lists = (year.get_all_matches(leagues=leagues)
+    match_lists = (year.get_all_matches(leagues=leagues,
+                                        filter_fun=filter_fun)
                    for year in years)
     return itertools.chain.from_iterable(match_lists)
-
 
 def count_matches(filter_fun, matches):
     return len([m for m in matches if filter_fun(m)])
 
+def get_fraction_of_matches(filter_fun, matches=None):
+    if matches is None:
+        matches = get_all_matches()
+    num_matches = 0
+    num_filtered = 0
+    for m in matches:
+        num_matches += 1
+        if filter_fun(m):
+            num_filtered += 1
+    return (num_filtered, num_matches)
 
 def match_to_html(match):
     template = """
