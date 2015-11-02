@@ -51,7 +51,8 @@ class BetLine(object):
         """
         match_teams, bet_details = bet_line.split(': ')
         self.home, self.away = match_teams.split(' v ')
-        result, self.bet_price = bet_details.split(', ')
+        price_fields = bet_details.split(', ')
+        result = price_fields[0]
         if result == "The Draw":
             self.bet_result = 'D'
         elif result == self.home:
@@ -59,6 +60,16 @@ class BetLine(object):
         else:
             assert result == self.away
             self.bet_result = 'A'
+        self.bet_price = price_fields[1]
+        if len(price_fields) == 4:
+            modifier = price_fields[2]
+            modifier_name, asian_handicap = modifier.split(' ')
+            assert modifier_name == 'Asian'
+            self.asian_handicap = float(asian_handicap)
+            self.handicapped_team = price_fields[3]
+        else:
+            self.asian_handicap = 0
+            self.handicapped_team = None
     
     def get_relevant_match(self, league, start_date, end_date):
         home = league_analysis.alias_team(self.home)
@@ -75,7 +86,27 @@ class BetLine(object):
             match = self.match
         # The amount of money you get back is the odds multiplied by
         # the commission you pay. If you lose the bet you get no money back
-        if self.bet_result == match.FTR:
+        if self.handicapped_team is None:
+            match_result = match.FTR
+        else:
+            teams = [match.HomeTeam, match.AwayTeam]
+            assert self.handicapped_team in teams
+            if self.handicapped_team == match.HomeTeam:
+                home_goals = self.asian_handicap + match.FTHG
+                away_goals = match.FTAG
+            else:
+                away_goals = self.asian_handicap + match.FTAG
+                home_goals = match.FTHG
+            if home_goals > away_goals:
+                match_result = 'H'
+            elif home_goals == away_goals:
+                match_result = 'D'
+            else:
+                assert away_goals > home_goals
+                match_result = 'A'
+                
+            
+        if self.bet_result == match_result:
             odds = float(self.bet_price)
             return (odds - 1.0) * (1.0 - commission)
         else:
