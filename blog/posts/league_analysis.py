@@ -65,6 +65,13 @@ class Match(object):
     def away_target_ratio(self):
         return clean_ratio(self.AST, self.AS + self.AST)
 
+    @property
+    def home_booking_points(self):
+        return (self.HY * 10) + (self.HR * 25)
+
+    @property
+    def away_booking_points(self):
+        return (self.AY * 10) + (self.AR * 25)
 
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
@@ -147,6 +154,20 @@ def sot_for_in_game(team, game):
 def sot_against_in_game(team, game):
     return stats_against_in_game(team, game, game.HST, game.AST)
 
+def booking_points_for_in_game(team, game):
+    return stats_for_in_game(team, game, game.home_booking_points,
+                                         game.away_booking_points)
+
+def booking_points_against_in_game(team, game):
+    return stats_against_in_game(team, game, game.home_booking_points,
+                                             game.away_booking_points)
+
+def yellow_cards_in_game(team, game):
+    return stats_for_in_game(team, game, game.HY, game.AY)
+
+def red_cards_in_game(team, game):
+    return stats_for_in_game(team, game, game.HR, game.AR)
+
 
 def get_team_rating(pdo, tsotr, tsr):
     """Essentially tsr * tsott * pdo, but not weight equally, James Grayson
@@ -213,7 +234,26 @@ class TeamStats(object):
                                                    self.sot_against,
                                                    default=0.0)
         self.pdo = self.goals_sot_for_ratio - self.goals_sot_against_ratio
+        self.yellows = sum_stat(yellow_cards_in_game)
+        self.reds = sum_stat(red_cards_in_game)
+        self.booking_points_for = sum_stat(booking_points_for_in_game)
+        self.booking_points_against = sum_stat(booking_points_against_in_game)
         self.team_rating = get_team_rating(self.pdo, self.tsotr, self.tsr)
+
+        self.current_unbeaten_run = 0
+        self.current_winless_run = 0
+        for game in self.games:
+            points = points_in_game(self.teamname, game)
+            if points == 3:
+                self.current_unbeaten_run += 1
+                self.current_winless_run = 0
+            elif points == 1:
+                self.current_unbeaten_run += 1
+                self.current_winless_run += 1
+            else:
+                assert points == 0
+                self.current_unbeaten_run = 0
+                self.current_winless_run += 1
 
     def average_stat(self, stat_name):
         return getattr(self, stat_name) / float(self.num_games)
@@ -771,13 +811,14 @@ team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Aston Villa': ('MediumTurquoise', '-'),
                     'Newcastle': ('Black', ':'),
                     'Norwich': ('Gold', '--'),
-                    'Tottenham': ('DarkBlue', '--'),
+                    'Tottenham': ('DarkBlue', '-.'),
                     'Arsenal': ('Red', '-.'),
                     'Stoke': ('DarkRed', '-'),
                     'Bournemouth': ('DarkRed', ':')}
 
 def plot_changing_stats(league, after_game_no_dicts,
-                        stat_name, teams=None, rankings=False):
+                        stat_name, teams=None, rankings=False,
+                        y_axis_lims=None):
     if teams is None:
         teams = league.teams
     plot.xlabel('Game Number')
@@ -810,6 +851,8 @@ def plot_changing_stats(league, after_game_no_dicts,
                                        stat_name)
                                for x in xs]
 
+    if y_axis_lims is not None:
+        plot.gca().set_ylim(*y_axis_lims)
     xs = range(1, len(after_game_no_dicts) + 1)
     for team in teams:
         ys = get_ys(team)
@@ -1108,21 +1151,35 @@ def analyse_fixtures(league, end_date):
         home_bet_threshold = 2.4 - adjsotr_diff
         away_bet_threshold = 4.4 + adjsotr_diff
 
+        avgadjtsr_diff = home_stats.avgadjtsr - away_stats.avgadjtsr
+        avgadjsotr_diff = home_stats.avgadjsotr - away_stats.avgadjsotr
+        home_sotr_odds = 1.0 / (max(0.2, 0.45 + avgadjsotr_diff))
+        away_sotr_odds = 1.0 / (max(0.1, 0.25 - (0.8 * avgadjsotr_diff)))
+        if avgadjsotr_diff > -0.2 and avgadjsotr_diff < 0.1:
+            draw_probability = 0.27
+        else:
+            draw_probability = 0.2
+        draw_sotr_odds = 1.0 / draw_probability
+
         count_dict[suggested_bet] += 1
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
         last_x_matches(league, away_team, 3)
         print_statline('points')
         print_statline('tsr')
-        print_statline('adjsr')
+        # print_statline('adjsr')
         print_statline('avgadjtsr')
         print_statline('sotr')
-        print_statline('adjsotr')
+        # print_statline('adjsotr')
         print_statline('avgadjsotr')
         print_statline('pdo')
-        print_statline('tsotr')
-        print_statline('team_rating')
-        print("    Suggested bet: {0}".format(suggested_bet))
+        # print_statline('tsotr')
+        # print_statline('team_rating')
+        print("    Adj TSR diff = {0}".format(avgadjtsr_diff))
+        print("    Adj Sotr diff = {0}".format(avgadjsotr_diff))
+        print("    home_sotr_odds: {0}".format(home_sotr_odds))
+        print("    away_sotr_odds: {0}".format(away_sotr_odds))
+        print("    draw_sotr_odds: {0}".format(draw_sotr_odds))
         print("    home bet threshold: {0}".format(home_bet_threshold))
         print("    away bet threshold: {0}".format(away_bet_threshold))
 
