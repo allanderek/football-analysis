@@ -258,12 +258,32 @@ class TeamStats(object):
     def average_stat(self, stat_name):
         return getattr(self, stat_name) / float(self.num_games)
 
-interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'Goals For',
+    def get_stat_from_label(self, label):
+        stat_name = label.replace(' ', '_').lower()
+        return getattr(self, stat_name)
+
+
+interesting_stats = ['Shots For', 'Shots Against', 'TSR', 'SOTR', 'Goals For',
                      'Goals Against', 'SOT For', 'SOT Against', 'SOT For Ratio',
                      'SOT Against Ratio', 'TSOTR', 'Goals SOT For Ratio',
                      'Goals SOT Against Ratio', 'PDO', 'Team Rating'
                      ]
 
+
+def compare_home_away_form(league, team, stat_names=None):
+    home_stats = league.home_team_stats[team]
+    away_stats = league.away_team_stats[team]
+    if stat_names is None:
+        stat_names = interesting_stats
+    headings = ['Stat', 'Home', 'Away']
+    rows = [[s, home_stats.get_stat_from_label(s),
+                away_stats.get_stat_from_label(s)]
+            for s in stat_names]
+    per_game_stats = ['points', 'goals_for', 'goals_against']
+    per_game_rows = [[s + "-avg", home_stats.average_stat(s),
+                         away_stats.average_stat(s)]
+                      for s in per_game_stats]
+    display_table(headings, per_game_rows + rows)
 
 def last_modified_date(filepath):
     modification_timestamp = os.path.getmtime(filepath)
@@ -456,6 +476,7 @@ class League(object):
                          away_away_stats)]
         display_table(headers, rows)
 
+
 class Year(object):
     def __init__(self, year):
         self.year_name = year
@@ -638,6 +659,14 @@ def get_matches(league, starting_date, ending_date,
     matches = [m for m in league.matches if filter_fun(m)]
     return matches
 
+def display_match(league, home_team, away_team, date):
+    
+    match = get_match(league, home_team, away_team, date)
+    match_html = match_to_html(match)
+    title = '{0} {1} - {2} {3}'.format(match.HomeTeam, match.FTHG,
+                                       match.FTAG, match.AwayTeam)
+    html = '<h1>{0}</h1>{1}'.format(title, match_html)
+    display(HTML(html))
 
 def display_matches(league, starting_date, ending_date):
     """Display all matches within a league between the given dates."""
