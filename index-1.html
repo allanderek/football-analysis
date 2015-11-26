@@ -2,12 +2,14 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
 <head>
 <meta charset="utf-8">
+<base href="http://allanderek.github.io/football-analysis/index-1.html">
 <meta name="description" content="I basically just graph some of the data freely available for football leagues, I might even make the occasional comment.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Football Data Site (old posts, page 1) | Football Data Site</title>
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link href="assets/css/ipython.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/nikola_ipython.css" rel="stylesheet" type="text/css">
+<meta content="#5670d4" name="theme-color">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://allanderek.github.io/football-analysis/index-1.html">
 <link rel="prev" href="." type="text/html">
@@ -60,9 +62,71 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/shots-per-goal/" class="u-url">Shots Per Goal</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/results-histograms/" class="u-url">Results Histograms</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/results-histograms/" rel="bookmark"><time class="published dt-published" datetime="2015-08-26T14:02:12+01:00" title="2015-08-26 14:02">2015-08-26 14:02</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/results-histograms/#disqus_thread" data-disqus-identifier="cache/posts/results-histograms.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="result-histograms">Result Histograms</h2>
+<p>Suppose you wish to bet on the correct score for games in a particular league. Of course the odds for each result will depend heavily on the two teams involved but it would at least help to know what the <em>base</em> rates are. That is, how often each kind of result occurs in a particular league. There is no point in betting on a four-nil away victory if that result never happens. Here, we give a few histograms over the kinds of results that happen in our standard five leagues.</p>
+<p>We start off with a bunch of imports to get us started.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plot</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="n">league_names</span> <span class="o">=</span> <span class="p">[</span><span class="s">'epl'</span><span class="p">,</span> <span class="s">'ech'</span><span class="p">,</span> <span class="s">'elo'</span><span class="p">,</span> <span class="s">'elt'</span><span class="p">,</span> <span class="s">'spl'</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we require some code to actually draw the histogram of results from a particular set of matches. Our code here is generic enough to draw the histograms for both results (home, away, draw) and correct scores (0-0, 0-1, etc.).</p>
+<p class="more"><a href="posts/results-histograms/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/shots-per-goal/" class="u-url">Shots Per Goal</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/shots-per-goal/" rel="bookmark"><time class="published dt-published" datetime="2015-08-26T14:01:53+01:00" title="2015-08-26 14:01">2015-08-26 14:01</time></a></p>
                 <p class="commentline">
         
@@ -115,7 +179,9 @@
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-22-24-august/" class="u-url">EPL 22-24 August</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/epl-22-24-august/" rel="bookmark"><time class="published dt-published" datetime="2015-08-24T10:41:58+01:00" title="2015-08-24 10:41">2015-08-24 10:41</time></a></p>
                 <p class="commentline">
         
@@ -488,7 +554,9 @@
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-august-14-17/" class="u-url">EPL August 14-17</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/epl-august-14-17/" rel="bookmark"><time class="published dt-published" datetime="2015-08-17T11:07:38+01:00" title="2015-08-17 11:07">2015-08-17 11:07</time></a></p>
                 <p class="commentline">
         
@@ -861,7 +929,9 @@
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-first-weekend/" class="u-url">EPL First Weekend</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/epl-first-weekend/" rel="bookmark"><time class="published dt-published" datetime="2015-08-12T14:59:56+01:00" title="2015-08-12 14:59">2015-08-12 14:59</time></a></p>
                 <p class="commentline">
         
@@ -1253,7 +1323,9 @@
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/arsenal-west-ham-09-08-2015/" class="u-url">Arsenal vs West Ham</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/arsenal-west-ham-09-08-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-08-11T14:22:15+01:00" title="2015-08-11 14:22">2015-08-11 14:22</time></a></p>
                 <p class="commentline">
         
@@ -1350,7 +1422,9 @@
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/2014-2015-league-commentary/" class="u-url">2014/2015 League Commentary</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/2014-2015-league-commentary/" rel="bookmark"><time class="published dt-published" datetime="2015-08-11T07:38:18+01:00" title="2015-08-11 07:38">2015-08-11 07:38</time></a></p>
                 <p class="commentline">
         
@@ -1495,7 +1569,9 @@ line of best fit:
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/2014-2015-league-graphs/" class="u-url">2014/2015 League Graphs Data Dump</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/2014-2015-league-graphs/" rel="bookmark"><time class="published dt-published" datetime="2015-08-11T07:38:18+01:00" title="2015-08-11 07:38">2015-08-11 07:38</time></a></p>
                 <p class="commentline">
         
@@ -1606,7 +1682,9 @@ line of best fit:
     </div>
     </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/introduction/" class="u-url">Introduction</a></h1>
         <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">allanderek</span></p>
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
             <p class="dateline"><a href="posts/introduction/" rel="bookmark"><time class="published dt-published" datetime="2015-08-07T09:45:52+01:00" title="2015-08-07 09:45">2015-08-07 09:45</time></a></p>
                 <p class="commentline">
         
@@ -1628,8 +1706,9 @@ and the Scottish Premiership.</p>
 <li class="previous">
                 <a href="." rel="prev">Newer posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script><script src="assets/js/mathjax.js"></script>
+        </ul></nav><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
+            </script>
 </div>
         <!--End of body content-->
 
@@ -1642,7 +1721,7 @@ and the Scottish Premiership.</p>
 
 
             <script src="assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
-    moment.locale("");
+    moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
     </script><!-- end fancy dates -->
 </body>

@@ -1,2 +1,4 @@
 Sitemap: http://allanderek.github.io/football-analysis/sitemapindex.xml
 
+User-Agent: *
+Host: allanderek.github.io
