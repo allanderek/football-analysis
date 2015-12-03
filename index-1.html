@@ -62,7 +62,370 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/results-histograms/" class="u-url">Results Histograms</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-29-31-august-2015/" class="u-url">EPL 29-31 August 2015</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/epl-29-31-august-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-09-10T10:04:58+01:00" title="2015-09-10 10:04">2015-09-10 10:04</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-29-31-august-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-29-31-august-2015.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-29-31st-august-2015">EPL 29-31st August 2015</h2>
+<p>Having left for Tbilisi, Georgia to watch Scotland lose on Saturday August the 29th I'm only just getting back now to have a brief look over that weekend's results in the English Premier League.</p>
+<p>Here are the stats from all the matches:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'29/08/15'</span><span class="p">,</span> <span class="s">'31/08/15'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Aston Villa</td>
+<td>Sunderland</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>21</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Bournemouth</td>
+<td>Leicester</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Chelsea</td>
+<td>Crystal Palace</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>26</td>
+<td>13</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>9</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Liverpool</td>
+<td>West Ham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>12</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man City</td>
+<td>Watford</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>18</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Newcastle</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>1</td>
+<td>22</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>0</td>
+<td>9</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Stoke</td>
+<td>West Brom</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Tottenham</td>
+<td>Everton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>20</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Southampton</td>
+<td>Norwich</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>23</td>
+<td>6</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Swansea</td>
+<td>Man United</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="chelsea-1-2-crystal-palace">Chelsea 1 - 2 Crystal Palace</h2>
+<p class="more"><a href="posts/epl-29-31-august-2015/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/results-histograms/" class="u-url">Results Histograms</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 allanderek
