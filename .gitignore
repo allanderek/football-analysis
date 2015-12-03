@@ -3,7 +3,10 @@ venv/
 data/
 .ipynb_checkpoints/
 *~
+betting/
+betting.tar.gz
 blog/.conf.py.swp
+blog/.doit.db
 blog/.doit.db.bak
 blog/.doit.db.dat
 blog/.doit.db.dir
