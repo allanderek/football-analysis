@@ -527,6 +527,13 @@ def get_match(league, home, away, date):
                 match.AwayTeam == away and match.Date == date)
     return next(m for m in league.matches if filter_fun(m))
 
+def get_matches_between(leagues, home, away):
+    def filter_fun(match):
+        return (match.HomeTeam in [home, away] and
+                match.AwayTeam in [home, away])
+    match_lists = (league.matches for league in leagues)
+    matches_iter = itertools.chain.from_iterable(match_lists)
+    return filter(filter_fun, matches_iter)
 
 def get_all_matches(years=None, leagues=None, filter_fun=None):
     if years is None:
@@ -770,8 +777,10 @@ def rank_sorted_pairs(sorted_pairs):
 # TODO: There is definitely some overlap between 'display_ranked_table'
 # and 'display_stats_table', but note that display_stats_tables allows
 # for more columns than the one that is sorted on.
-def display_ranked_table(headers, pairs):
-    sorted_pairs = sorted(pairs, key=lambda r: r[1], reverse=True)
+def display_ranked_table(headers, pairs, reverse=None):
+    if reverse is None:
+        reverse = True
+    sorted_pairs = sorted(pairs, key=lambda r: r[1], reverse=reverse)
     rows = rank_sorted_pairs(sorted_pairs)
     display_table(['Position'] + headers, rows)
 
