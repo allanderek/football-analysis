@@ -486,9 +486,9 @@ REDIRECTIONS = []
 # Final command is: SASS_COMPILER SASS_OPTIONS file.s(a|c)ss
 # SASS_OPTIONS = []
 
-# #############################################################################
+#
 # Image Gallery Options
-# #############################################################################
+#
 
 # One or more folders containing galleries. The format is a dictionary of
 # {"source": "relative_destination"}, where galleries are looked for in
@@ -514,9 +514,9 @@ REDIRECTIONS = []
 IMAGE_FOLDERS = {'images': 'images'}
 # IMAGE_THUMBNAIL_SIZE = 400
 
-# #############################################################################
+#
 # HTML fragments and diverse things that are used by the templates
-# #############################################################################
+#
 
 # Data about post-per-page indexes.
 # INDEXES_PAGES defaults to ' old posts, page %d' or ' page %d' (translated),
@@ -629,7 +629,9 @@ INDEX_TEASERS = True
 # 'Read more...' for the index page, if INDEX_TEASERS is True (translatable)
 INDEX_READ_MORE_LINK = '<p class="more"><a href="{link}">{read_more}…</a></p>'
 # 'Read more...' for the RSS_FEED, if RSS_TEASERS is True (translatable)
-RSS_READ_MORE_LINK = '<p><a href="{link}">{read_more}…</a> ({min_remaining_read})</p>'
+# RSS_READ_MORE_LINK = '<p><a href="{link}">{read_more}…</a>
+# ({min_remaining_read})</p>' deprecated
+FEED_READ_MORE_LINK = '<p><a href="{link}">{read_more}…</a> ({min_remaining_read})</p>'
 
 # Append a URL query to the RSS_READ_MORE_LINK in Atom and RSS feeds. Advanced
 # option used for traffic source tracking.
@@ -639,7 +641,8 @@ RSS_READ_MORE_LINK = '<p><a href="{link}">{read_more}…</a> ({min_remaining_rea
 # {feedFormat}                  The name of the syndication format.
 # Example using replacement for use with Google Analytics:
 # "utm_source={feedRelUri}&utm_medium=nikola_feed&utm_campaign={feedFormat}_feed"
-RSS_LINKS_APPEND_QUERY = False
+# RSS_LINKS_APPEND_QUERY = False deprecated
+FEED_LINKS_APPEND_QUERY = False
 
 # A HTML fragment describing the license, for the sidebar.
 # (translatable)
@@ -844,7 +847,8 @@ MARKDOWN_EXTENSIONS = ['fenced_code', 'codehilite', 'extra']
 # RSS_LINK = None
 
 # Show only teasers in the RSS and Atom feeds? Default to True
-RSS_TEASERS = False
+# RSS_TEASERS = False # deprecated
+FEED_TEASERS = False
 
 # Strip HTML in the RSS feed? Default to False
 # RSS_PLAIN = False
@@ -951,11 +955,11 @@ UNSLUGIFY_TITLES = True
 # Images displayed come from the `previewimage` meta tag.
 # You can specify the card type by using the `card` parameter in TWITTER_CARD.
 # TWITTER_CARD = {
-#     # 'use_twitter_cards': True,  # enable Twitter Cards
-#     # 'card': 'summary',          # Card type, you can also use 'summary_large_image',
-#                                   # see https://dev.twitter.com/cards/types
-#     # 'site': '@website',         # twitter nick for the website
-#     # 'creator': '@username',     # Username for the content creator / author.
+# 'use_twitter_cards': True,  # enable Twitter Cards
+# 'card': 'summary',          # Card type, you can also use 'summary_large_image',
+# see https://dev.twitter.com/cards/types
+# 'site': '@website',         # twitter nick for the website
+# 'creator': '@username',     # Username for the content creator / author.
 # }
 
 # If webassets is installed, bundle JS and CSS into single files to make
