@@ -22,6 +22,7 @@ class Match(object):
     """Holds a parsed match object, each line of a data file is parsed
     into one Match object.
     """
+
     def opponent(self, team):
         if team == self.HomeTeam:
             return self.AwayTeam
@@ -56,7 +57,6 @@ class Match(object):
     def away_sotr(self):
         return clean_ratio(self.AST, self.HST + self.AST)
 
-
     @property
     def home_target_ratio(self):
         return clean_ratio(self.HST, self.HS + self.HST)
@@ -72,6 +72,10 @@ class Match(object):
     @property
     def away_booking_points(self):
         return (self.AY * 10) + (self.AR * 25)
+
+    @property
+    def winning_odds(self):
+        return {'H': self.BbAvH, 'A': self.BbAvA, 'D': self.BbAvD}[self.FTR]
 
 int_fields = ['FTHG', 'FTAG', 'HTHG', 'HTAG', 'HS', 'AS', 'HST', 'AST', 'HHW',
               'AHW', 'HC', 'AC', 'HF', 'AF', 'HO', 'AO', 'HY', 'AY', 'HR', 'AR',
@@ -154,16 +158,20 @@ def sot_for_in_game(team, game):
 def sot_against_in_game(team, game):
     return stats_against_in_game(team, game, game.HST, game.AST)
 
+
 def booking_points_for_in_game(team, game):
     return stats_for_in_game(team, game, game.home_booking_points,
-                                         game.away_booking_points)
+                             game.away_booking_points)
+
 
 def booking_points_against_in_game(team, game):
     return stats_against_in_game(team, game, game.home_booking_points,
-                                             game.away_booking_points)
+                                 game.away_booking_points)
+
 
 def yellow_cards_in_game(team, game):
     return stats_for_in_game(team, game, game.HY, game.AY)
+
 
 def red_cards_in_game(team, game):
     return stats_for_in_game(team, game, game.HR, game.AR)
@@ -204,6 +212,7 @@ class TeamStats(object):
     if you change the set of games, then you pretty much have to recalculate
     all of the stats.
     """
+
     def __init__(self, teamname, games):
         self.teamname = teamname
         self.games = games
@@ -277,13 +286,14 @@ def compare_home_away_form(league, team, stat_names=None):
         stat_names = interesting_stats
     headings = ['Stat', 'Home', 'Away']
     rows = [[s, home_stats.get_stat_from_label(s),
-                away_stats.get_stat_from_label(s)]
+             away_stats.get_stat_from_label(s)]
             for s in stat_names]
     per_game_stats = ['points', 'goals_for', 'goals_against']
     per_game_rows = [[s + "-avg", home_stats.average_stat(s),
-                         away_stats.average_stat(s)]
-                      for s in per_game_stats]
+                      away_stats.average_stat(s)]
+                     for s in per_game_stats]
     display_table(headings, per_game_rows + rows)
+
 
 def last_modified_date(filepath):
     modification_timestamp = os.path.getmtime(filepath)
@@ -322,6 +332,7 @@ data_dir_base = 'data/' if os.path.isdir('data/') else '../../data/'
 
 
 class League(object):
+
     def __init__(self, short_title, fixtures_directory, year, title=None):
         self.title = title if title is not None else fixtures_directory
         data_dir_url = 'http://www.football-data.co.uk/mmz4281/' + year
@@ -439,7 +450,7 @@ class League(object):
                         away_stats.average_stat('shots_for'),
                         shots_for_in_game(away, match),
                         home_stats.average_stat('shots_against')],
-                        
+
                        ['{0} SOT'.format(home),
                         home_stats.average_stat('sot_for'),
                         sot_for_in_game(home, match),
@@ -457,6 +468,7 @@ class League(object):
         away_away_stats = self.away_team_stats[match.AwayTeam]
         headers = ['Game Type', 'Shots For', 'Shots Against',
                                 'SOT For', 'SOT Against']
+
         def make_row(title, stats):
             return [title,
                     stats.average_stat('shots_for'),
@@ -478,6 +490,7 @@ class League(object):
 
 
 class Year(object):
+
     def __init__(self, year):
         self.year_name = year
         self.epl_league = League("E0", "premier-league", year)
@@ -511,6 +524,8 @@ year_201415 = Year('1415')
 year_201516 = Year('1516')
 all_years = [year_201011, year_201112, year_201213,
              year_201314, year_201415, year_201516]
+all_leagues = list(itertools.chain.from_iterable(
+    y.all_leagues for y in all_years))
 
 
 current_year = year_201516
@@ -527,6 +542,7 @@ def get_match(league, home, away, date):
                 match.AwayTeam == away and match.Date == date)
     return next(m for m in league.matches if filter_fun(m))
 
+
 def get_matches_between(leagues, home, away):
     def filter_fun(match):
         return (match.HomeTeam in [home, away] and
@@ -534,6 +550,7 @@ def get_matches_between(leagues, home, away):
     match_lists = (league.matches for league in leagues)
     matches_iter = itertools.chain.from_iterable(match_lists)
     return filter(filter_fun, matches_iter)
+
 
 def get_all_matches(years=None, leagues=None, filter_fun=None):
     if years is None:
@@ -543,8 +560,10 @@ def get_all_matches(years=None, leagues=None, filter_fun=None):
                    for year in years)
     return itertools.chain.from_iterable(match_lists)
 
+
 def count_matches(filter_fun, matches):
     return len([m for m in matches if filter_fun(m)])
+
 
 def get_fraction_of_matches(filter_fun, matches=None):
     if matches is None:
@@ -556,6 +575,7 @@ def get_fraction_of_matches(filter_fun, matches=None):
         if filter_fun(m):
             num_filtered += 1
     return (num_filtered, num_matches)
+
 
 def match_to_html(match):
     template = """
@@ -660,20 +680,22 @@ def get_matches(league, starting_date, ending_date,
         if away_team is not None and m.AwayTeam != away_team:
             return False
         if (team_involved is not None and
-            not involved_in_game(team_involved, m)):
+                not involved_in_game(team_involved, m)):
             return False
         return date_in_range(start_date, m.Date, end_date)
     matches = [m for m in league.matches if filter_fun(m)]
     return matches
 
+
 def display_match(league, home_team, away_team, date):
-    
+
     match = get_match(league, home_team, away_team, date)
     match_html = match_to_html(match)
     title = '{0} {1} - {2} {3}'.format(match.HomeTeam, match.FTHG,
                                        match.FTAG, match.AwayTeam)
     html = '<h1>{0}</h1>{1}'.format(title, match_html)
     display(HTML(html))
+
 
 def display_matches(league, starting_date, ending_date):
     """Display all matches within a league between the given dates."""
@@ -738,6 +760,7 @@ def collect_after_game_dicts(league, start_date, end_date):
     has changed over the course of a season.
     """
     after_game_no_dicts = collections.defaultdict(dict)
+
     def add_team_stats(team, after_game_no, stat):
         stat_dict = after_game_no_dicts[after_game_no]
         stat_dict[team] = stat
@@ -753,18 +776,20 @@ def collect_after_game_dicts(league, start_date, end_date):
             del after_game_no_dicts[x]
     return after_game_no_dicts
 
+
 def get_stats_rankings(stats_dictionary, stat_name):
     pairs = stats_dictionary.items()
     key_fun = lambda p: getattr(p[1], stat_name)
     sorted_pairs = sorted(pairs, key=key_fun, reverse=True)
     return sorted_pairs
 
+
 def rank_sorted_pairs(sorted_pairs):
     def get_rows(sorted_pairs):
         latest_value = None
         latest_position = None
         for position, (key, value) in enumerate(sorted_pairs, start=1):
-            if value ==  latest_value:
+            if value == latest_value:
                 position = latest_position
                 position_string = '-'
             else:
@@ -777,6 +802,8 @@ def rank_sorted_pairs(sorted_pairs):
 # TODO: There is definitely some overlap between 'display_ranked_table'
 # and 'display_stats_table', but note that display_stats_tables allows
 # for more columns than the one that is sorted on.
+
+
 def display_ranked_table(headers, pairs, reverse=None):
     if reverse is None:
         reverse = True
@@ -784,9 +811,11 @@ def display_ranked_table(headers, pairs, reverse=None):
     rows = rank_sorted_pairs(sorted_pairs)
     display_table(['Position'] + headers, rows)
 
+
 def rank_teams_single_matches(matches, stat_suffix, stat_header_name=None):
     if stat_header_name is None:
         stat_header_name = stat_suffix
+
     def get_pairs():
         for match in matches:
             yield (match.HomeTeam, getattr(match, 'home_' + stat_suffix))
@@ -804,12 +833,13 @@ def display_stats_table(after_game_no_dicts, stat_names):
     latest_dict = after_game_no_dicts[len(after_game_no_dicts)]
     first_stat_name = stat_names[0]
     sorted_pairs = get_stats_rankings(latest_dict, first_stat_name)
+
     def get_rows(sorted_pairs):
         latest_stat = None
         latest_position = None
         for position, (team, stats) in enumerate(sorted_pairs, start=1):
             this_stat = getattr(stats, first_stat_name)
-            if latest_stat ==  this_stat:
+            if latest_stat == this_stat:
                 position = latest_position
             else:
                 latest_position = position
@@ -818,6 +848,7 @@ def display_stats_table(after_game_no_dicts, stat_names):
             yield_row
     rows = get_rows(sorted_pairs)
     display_table(['Position', 'Team'] + stat_names, rows)
+
 
 def display_statistic_rankings(league, stat_name):
     def get_rows(stat_rankings, stat_name):
@@ -854,6 +885,7 @@ team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Stoke': ('DarkRed', '-'),
                     'Bournemouth': ('DarkRed', ':')}
 
+
 def plot_changing_stats(league, after_game_no_dicts,
                         stat_name, teams=None, rankings=False,
                         y_axis_lims=None):
@@ -864,6 +896,7 @@ def plot_changing_stats(league, after_game_no_dicts,
     if rankings:
         plot.title('Rank in {0} after game #'.format(stat_name))
         plot.ylabel('Rank in {0}'.format(stat_name))
+
         def get_team_rank(ranking_table, team_name):
             latest_position = 1
             latest_stat = None
@@ -929,7 +962,7 @@ def scatter_stats(league, title='', xlabel='', ylabel='', teams=None,
                           textcoords='offset points',
                           ha='right', va='bottom',
                           bbox=dict(boxstyle='round,pad=0.5',
-                          fc='yellow', alpha=0.5),
+                                    fc='yellow', alpha=0.5),
                           arrowprops=dict(arrowstyle='->',
                                           connectionstyle='arc3,rad=0'))
 
@@ -985,7 +1018,7 @@ def scatter_match_stats(matches, xlabel='', ylabel='', title='',
                           textcoords='offset points',
                           ha='right', va='bottom',
                           bbox=dict(boxstyle='round,pad=0.5',
-                          fc='yellow', alpha=0.5),
+                                    fc='yellow', alpha=0.5),
                           arrowprops=dict(arrowstyle='->',
                                           connectionstyle='arc3,rad=0'))
 
@@ -1028,6 +1061,207 @@ def get_adjusted_stat_dictionary(league, stat_home_name,
                       for t in league.teams}
     return adjusted_stats
 
+
+class BaseAnalyser(object):
+
+    def __init__(self, ignore_matches=None):
+        self.leagues = [year.epl_league for year in all_years]
+        self.reset_per_league_stats()
+        self.ignore_matches = ignore_matches
+
+    def valid_match(self, home_stats, away_stats):
+        """Determines whether a match should be evaluated"""
+        # If either of the statistics is None then you cannot evaluate the
+        # match
+        if home_stats is None or away_stats is None:
+            return False
+        # Otherwise if we have not specified a number of matches to ignore then
+        # this match can be evaluated.
+        if self.ignore_matches is None:
+            return True
+        # If we have specified a number of matches to ignore, check both teams
+        # have played at least that many:
+        if (len(home_stats.games) < self.ignore_matches or
+                len(away_stats.games) < self.ignore_matches):
+            return False
+        return True
+
+    def analyse_matches_with_contemporary_stats(self, league):
+        team_stats = dict()
+
+        def update_stats(match, team, stats):
+            stats = team_stats.get(team, None)
+            if stats is None:
+                games = [match]
+            else:
+                games = stats.games + [match]
+            team_stats[team] = TeamStats(team, games)
+        for match in league.matches:
+            home_stats = team_stats.get(match.HomeTeam, None)
+            away_stats = team_stats.get(match.AwayTeam, None)
+            if self.valid_match(home_stats, away_stats):
+                self.evaluate_match(match, home_stats, away_stats)
+
+            update_stats(match, match.HomeTeam, home_stats)
+            update_stats(match, match.AwayTeam, away_stats)
+
+    def reset_per_league_stats(self):
+        pass
+
+    def display_per_league_results(self):
+        pass
+
+    def analyse_leagues(self):
+        for league in self.leagues:
+            self.reset_per_league_stats()
+            self.analyse_matches_with_contemporary_stats(league)
+            self.display_per_league_results()
+
+
+class HistoricalBetAnalyser(BaseAnalyser):
+
+    def __init__(self, get_bet, commission=0.05, ignore_matches=None):
+        self.leagues = [year.epl_league for year in all_years]
+        self.get_bet = get_bet
+        self.commission = commission
+        self.total_profit_loss = 0.0
+        self.reset_per_league_stats()
+        self.ignore_matches = ignore_matches
+
+    def reset_per_league_stats(self):
+        self.counter = {'H': 0, 'A': 0, 'D': 0}
+        self.pl_counter = {'H': 0.0, 'A': 0.0, 'D': 0.0}
+        self.wins_counter = {'H': 0, 'A': 0, 'D': 0}
+        self.league_profit_loss = 0.0
+
+    def match_profit_loss(self, match, bet):
+        if bet == match.FTR:
+            return (match.winning_odds - 1.0) * (1.0 - self.commission)
+        else:
+            return -1.0
+
+    def evaluate_match(self, match, home_stats, away_stats):
+        bet = self.get_bet(match, home_stats, away_stats)
+        if bet is None:
+            return
+        self.counter[bet] += 1
+
+        profit_loss = self.match_profit_loss(match, bet)
+        self.pl_counter[bet] += profit_loss
+        if profit_loss > 0.0:
+            self.wins_counter[bet] += 1
+        self.league_profit_loss += profit_loss
+        self.total_profit_loss += profit_loss
+
+    def display_per_league_results(self):
+        print("League profit/loss: {0}".format(self.league_profit_loss))
+        for result in ['H', 'D', 'A']:
+            msg_format = "{0} bets wins {1} out of {2} for profit/loss: {3}"
+            print(msg_format.format(result, self.wins_counter[result],
+                                    self.counter[result],
+                                    self.pl_counter[result]))
+
+    def display_results(self):
+        print('Total profit loss for all leagues: {0}'.format(
+            self.total_profit_loss))
+
+    def historical_betting(self, get_bet):
+        self.analyse_leagues()
+        self.display_results()
+
+
+def result_count_factory():
+    return {'H': 0, 'D': 0, 'A': 0}
+
+
+class HistoricalStatAnalyser(BaseAnalyser):
+
+    def __init__(self, stat_name):
+        self.leagues = all_leagues
+        self.reset_per_league_stats()
+        self.buckets = collections.defaultdict(result_count_factory)
+        # [-1.0, -0.9 ... 0.0, 0.1, ... 1.0]
+        self.bucket_keys = [x / 10.0 for x in range(-10, 10)]
+        self.ignore_matches = 4
+        self.stat_name = stat_name
+
+    def reset_per_league_stats(self):
+        pass
+
+    def get_bucket(self, diff):
+        for bucket in self.bucket_keys:
+            if diff < bucket:
+                return bucket
+        else:
+            assert False
+
+    def get_stat_diff(self, home_stats, away_stats):
+        return (getattr(home_stats, self.stat_name) -
+                getattr(away_stats, self.stat_name))
+
+    def evaluate_match(self, match, home_stats, away_stats):
+        stat_diff = self.get_stat_diff(home_stats, away_stats)
+        bucket = self.get_bucket(stat_diff)
+        self.buckets[bucket][match.FTR] += 1
+
+    def display_per_league_results(self):
+        pass
+
+    def display_results(self):
+        for bucket in self.bucket_keys:
+            result_counts = self.buckets[bucket]
+            print('Bucket {0} to {1}'.format(bucket - 0.1, bucket))
+            total_matches = sum(r for r in result_counts.values())
+            if total_matches == 0:
+                (print('no such matches'))
+                continue
+            proportions = self.get_proportions(result_counts)
+            for result in ['H', 'D', 'A']:
+                number = result_counts[result]
+                proportion = proportions[result]
+                print("          '{0}': {1}, {2}".format(
+                    result, number, proportion))
+
+    def get_proportions(self, result_counts):
+        total_matches = sum(r for r in result_counts.values())
+
+        return {result: float(result_counts[result]) / float(total_matches)
+                for result in result_counts.keys()}
+
+    def get_reasonable_result_counts(self, stat_diff):
+        """ Just gets the bucket related to the stat_diff, however,
+        if the bucket has fewer than 100 results, we get the closest bucket
+        that has 100 or more results """
+        result_counts = self.buckets[self.get_bucket(stat_diff)]
+        num_results = sum(result_counts.values())
+        if num_results < 100:
+            if stat_diff < 0:
+                new_stat_diff = stat_diff + 0.1
+            else:
+                new_stat_diff = stat_diff - 0.1
+            return self.get_reasonable_result_counts(new_stat_diff)
+        return result_counts
+
+    def get_implied_odds(self, home_stats, away_stats):
+        stat_diff = self.get_stat_diff(home_stats, away_stats)
+        result_counts = self.get_reasonable_result_counts(stat_diff)
+        proportions = self.get_proportions(result_counts)
+        implied_odds = {r: 1.0 / p for r, p in proportions.items()}
+        return implied_odds
+
+    def historically_bet(self):
+        def get_bet(match, home_stats, away_stats):
+            implied_odds = self.get_implied_odds(home_stats, away_stats)
+            differences = [(r, getattr(match, 'BbAv' + r) - implied_odds[r])
+                           for r in ['H', 'A', 'D']]
+            sorted_differences = sorted(
+                differences, reverse=True, key=lambda p: p[1])
+            bet, gain = sorted_differences[1]
+            if gain > 0.0:
+                return bet
+            else:
+                return None
+        self.historical_betting(get_bet)
 
 from bs4 import BeautifulSoup
 # The teams on the left here, that is the keys of the dictionary are
@@ -1130,20 +1364,25 @@ count_dict['H'] = 0
 count_dict['A'] = 0
 count_dict['D'] = 0
 
-def analyse_fixtures(league, end_date):
+
+def analyse_fixtures(league, end_date, stat_analysers):
     fixtures = get_fixtures(league.fixtures_file, end_date)
     fixtures = [(alias_team(h), alias_team(a)) for h, a in fixtures]
 
-    adjusted_shots_for_per_game = get_adjusted_stat_dictionary(league, 'HS', 'AS', 'shots_against')
-    adjusted_shots_against_per_game = get_adjusted_stat_dictionary(league, 'AS', 'HS', 'shots_for')
+    adjusted_shots_for_per_game = get_adjusted_stat_dictionary(
+        league, 'HS', 'AS', 'shots_against')
+    adjusted_shots_against_per_game = get_adjusted_stat_dictionary(
+        league, 'AS', 'HS', 'shots_for')
 
     def get_adjusted_tsr(team):
         shots_for = adjusted_shots_for_per_game[team]
         shots_against = adjusted_shots_against_per_game[team]
         return shots_for - shots_against
 
-    adjusted_sot_for_per_game = get_adjusted_stat_dictionary(league, 'HST', 'AST', 'sot_against')
-    adjusted_sot_against_per_game = get_adjusted_stat_dictionary(league, 'AST', 'HST', 'sot_for')
+    adjusted_sot_for_per_game = get_adjusted_stat_dictionary(
+        league, 'HST', 'AST', 'sot_against')
+    adjusted_sot_against_per_game = get_adjusted_stat_dictionary(
+        league, 'AST', 'HST', 'sot_for')
 
     def get_adjusted_sotr(team):
         shots_for = adjusted_sot_for_per_game[team]
@@ -1152,12 +1391,12 @@ def analyse_fixtures(league, end_date):
 
     def get_avg_adjusted_stat(stats, stat_name):
         opponents = (match.opponent(stats.teamname) for match in stats.games)
-        opponents_stats = [getattr(league.team_stats[opp], stat_name) for opp in opponents]
+        opponents_stats = [
+            getattr(league.team_stats[opp], stat_name) for opp in opponents]
         avg_opp_stat = sum(opponents_stats) / len(opponents_stats)
         team_stat = getattr(stats, stat_name)
         adj_stat = team_stat + avg_opp_stat - 0.5
         return adj_stat
-
 
     for home_team, away_team in fixtures:
         def print_statline(attribute):
@@ -1175,12 +1414,11 @@ def analyse_fixtures(league, end_date):
         home_stats.avgadjsotr = get_avg_adjusted_stat(home_stats, 'sotr')
         away_stats.avgadjtsr = get_avg_adjusted_stat(away_stats, 'tsr')
         away_stats.avgadjsotr = get_avg_adjusted_stat(away_stats, 'sotr')
-        
 
         suggested_bet = 'D'
         adjsr_diff = home_stats.adjsr - away_stats.adjsr
-        adjsotr_diff = home_stats.adjsotr  - away_stats.adjsotr
-        
+        adjsotr_diff = home_stats.adjsotr - away_stats.adjsotr
+
         if adjsr_diff > 1.5 and adjsotr_diff > 0.68:
             suggested_bet = 'H'
         elif adjsr_diff < -2.5 and adjsotr_diff < -1.1:
@@ -1199,7 +1437,10 @@ def analyse_fixtures(league, end_date):
             draw_probability = 0.2
         draw_sotr_odds = 1.0 / draw_probability
 
-        count_dict[suggested_bet] += 1
+        # Team Rating stuff
+        tr_analyser = stat_analysers['team_rating']
+        tr_implied_odds = tr_analyser.get_implied_odds(home_stats, away_stats)
+
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
         last_x_matches(league, away_team, 3)
@@ -1211,15 +1452,16 @@ def analyse_fixtures(league, end_date):
         # print_statline('adjsotr')
         print_statline('avgadjsotr')
         print_statline('pdo')
-        # print_statline('tsotr')
-        # print_statline('team_rating')
-        print("    Adj TSR diff = {0}".format(avgadjtsr_diff))
-        print("    Adj Sotr diff = {0}".format(avgadjsotr_diff))
+        print_statline('tsotr')
+        print_statline('team_rating')
+        # print("    Adj TSR diff = {0}".format(avgadjtsr_diff))
+        # print("    Adj Sotr diff = {0}".format(avgadjsotr_diff))
         print("    home_sotr_odds: {0}".format(home_sotr_odds))
         print("    away_sotr_odds: {0}".format(away_sotr_odds))
         print("    draw_sotr_odds: {0}".format(draw_sotr_odds))
-        print("    home bet threshold: {0}".format(home_bet_threshold))
-        print("    away bet threshold: {0}".format(away_bet_threshold))
+        print("    home_tr_odds: {0}".format(tr_implied_odds['H']))
+        print("    away_tr_odds: {0}".format(tr_implied_odds['A']))
+        print("    draw_tr_odds: {0}".format(tr_implied_odds['D']))
 
 
 if __name__ == '__main__':
@@ -1229,7 +1471,11 @@ if __name__ == '__main__':
         date = date_from_string(date_string)
     except IndexError:
         date = datetime.date.today() + datetime.timedelta(days=3)
+
+    tr_analyser = HistoricalStatAnalyser('team_rating')
+    tr_analyser.analyse_leagues()
+
+    stat_analysers = {'team_rating': tr_analyser}
     for league in reversed(current_year.all_leagues):
         print(league.title)
-        analyse_fixtures(league, date)
-    print(count_dict)
+        analyse_fixtures(league, date, stat_analysers)
