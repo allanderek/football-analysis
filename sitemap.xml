@@ -7,7 +7,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://allanderek.github.io/football-analysis/</loc>
-  <lastmod>2015-11-25T10:16:00Z</lastmod>
+  <lastmod>2015-12-10T13:56:00Z</lastmod>
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/2015/</loc>
@@ -15,7 +15,7 @@
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/archive.html</loc>
-  <lastmod>2015-12-03T11:44:00Z</lastmod>
+  <lastmod>2015-12-10T13:55:00Z</lastmod>
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/categories/</loc>
@@ -23,7 +23,11 @@
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/index-1.html</loc>
-  <lastmod>2015-12-03T11:45:00Z</lastmod>
+  <lastmod>2015-12-10T13:56:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/index-2.html</loc>
+  <lastmod>2015-12-10T13:56:00Z</lastmod>
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/posts/2014-2015-league-commentary/</loc>
@@ -84,6 +88,10 @@
  <url>
   <loc>http://allanderek.github.io/football-analysis/posts/epl-31-02-octobernovember-2015/</loc>
   <lastmod>2015-11-25T10:16:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://allanderek.github.io/football-analysis/posts/epl-5-7th-december-2015/</loc>
+  <lastmod>2015-12-10T13:56:00Z</lastmod>
  </url>
  <url>
   <loc>http://allanderek.github.io/football-analysis/posts/epl-august-14-17/</loc>
