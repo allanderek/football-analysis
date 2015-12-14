@@ -1,9 +1,11 @@
 import blog.posts.league_analysis as league_analysis
 import collections
 
+
 def result_count_factory():
     return {'H': 0, 'D': 0, 'A': 0}
-    
+
+
 def post_match_odds(matches):
     sotr_buckets = collections.defaultdict(result_count_factory)
     tsr_buckets = collections.defaultdict(result_count_factory)
@@ -16,11 +18,14 @@ def post_match_odds(matches):
 
 sotr_buckets, tsr_buckets = post_match_odds(league_analysis.get_all_matches())
 
+
 def display_table(headers, rows):
     cell_size = 16
+
     def pad_cell(s):
         padded_s = s + (' ' * cell_size)
         return(padded_s[:cell_size])
+
     def print_row(cells):
         cells = [pad_cell(str(c)) for c in cells]
         print("|".join(cells))
@@ -34,7 +39,10 @@ def display_table(headers, rows):
 
 
 all_leagues = league_analysis.year_201516.all_leagues
+
+
 class BetLine(object):
+
     def __init__(self, bet_line):
         """Example Correct Score bet line: Bristol Rovers v Barnet: 1 - 1, 7.0
         Example of a Result bet line: Walsall v Doncaster: Walsall, 1.97
@@ -50,7 +58,6 @@ class BetLine(object):
             message = 'Match not found in any league, {0} vs {1}'
             raise Exception(message.format(bet_line.home, bet_line.away))
 
-
     def parse_correct_score_line(self, bet_line):
         """Example Correct Score bet line: Bristol Rovers v Barnet: 1 - 1, 7.0
         """
@@ -60,7 +67,7 @@ class BetLine(object):
         home_score, away_score = bet_score.split(' - ')
         self.home_score = int(home_score)
         self.away_score = int(away_score)
-    
+
     def parse_result_line(self, bet_line):
         """Example of a Result bet line: Walsall v Doncaster: Walsall, 1.97
         """
@@ -85,11 +92,11 @@ class BetLine(object):
         else:
             self.asian_handicap = 0
             self.handicapped_team = None
-    
+
     def get_relevant_match(self, league, start_date, end_date):
         home = league_analysis.alias_team(self.home)
         away = league_analysis.alias_team(self.away)
-    
+
         matches = league_analysis.get_matches(league, start_date, end_date,
                                               home_team=home, away_team=away)
         match = matches[0]
@@ -119,8 +126,7 @@ class BetLine(object):
             else:
                 assert away_goals > home_goals
                 match_result = 'A'
-                
-            
+
         if self.bet_result == match_result:
             odds = float(self.bet_price)
             return (odds - 1.0) * (1.0 - commission)
@@ -161,7 +167,8 @@ class BetLine(object):
 
     def display_bet_analysis(self):
         match = self.match
-        # So this is the number of goals we would have expected the team to have scored based on shots
+        # So this is the number of goals we would have expected the team to
+        # have scored based on shots
         home_shots_goals = match.HS / self.league.shots_per_goal
         away_shots_goals = match.AS / self.league.shots_per_goal
         # Similarly for shots on target
@@ -185,13 +192,17 @@ class BetLine(object):
                 ['SOT', match.HST, match.AST],
                 ['Shots Scoreline', home_shots_goals, away_shots_goals],
                 ['SOT Scoreline', home_sot_goals, away_sot_goals],
-                ['Score-Shots Diff', home_shots_score_diff, away_shots_score_diff],
-                ['Score-Sots Diff', home_sots_score_diff, away_sots_score_diff],
+                ['Score-Shots Diff', home_shots_score_diff,
+                    away_shots_score_diff],
+                ['Score-Sots Diff', home_sots_score_diff,
+                    away_sots_score_diff],
                 ['Bet', self.bet_result, self.bet_result],
                 ['Odds', self.bet_price, self.bet_price],
                 ['Profit/Loss', profit_loss, profit_loss],
-                ['Implied Sotr', sotr_post_match_implied_odds, sotr_post_match_implied_odds],
-                ['Implied TSR', tsr_post_match_implied_odds, tsr_post_match_implied_odds],
+                ['Implied Sotr', sotr_post_match_implied_odds,
+                    sotr_post_match_implied_odds],
+                ['Implied TSR', tsr_post_match_implied_odds,
+                    tsr_post_match_implied_odds],
                 ]
         display_table(headers, rows)
 
@@ -199,12 +210,15 @@ class BetLine(object):
 def profit_loss_bet_lines(bet_lines):
     return sum(bl.get_profit_loss() for bl in bet_lines)
 
+
 def post_match_expected_profit_loss_bet_lines(bet_lines):
-    return sum(bl.post_match_expected_profit_loss(bl) for bl in  bet_lines)
+    return sum(bl.post_match_expected_profit_loss(bl) for bl in bet_lines)
+
 
 def display_bet_lines_analysis(bet_lines):
     for bet_line in bet_lines:
         bet_line.display_bet_analysis()
+
 
 def read_bets_file(bets_filename):
     with open(bets_filename) as bets_file:
@@ -232,15 +246,19 @@ def read_bets_file(bets_filename):
         bet_lines.append(bet_line)
     return bet_lines
 
+
 def display_analysis_bets_file(bets_filename):
     bet_lines = read_bets_file(bets_filename)
     display_bet_lines_analysis(bet_lines)
 
+
 class SummaryTotals(object):
+
     def __init__(self):
         self.profit_loss = 0.0
         self.sotr_expected_profit_loss = 0.0
         self.tsr_expected_profit_loss = 0.0
+
 
 def analyse_multiple_bet_files(bet_filenames):
     bet_lines = []
@@ -264,19 +282,24 @@ def analyse_multiple_bet_files(bet_filenames):
                                           summary_totals.profit_loss,
                                           summary_totals.sotr_expected_profit_loss,
                                           summary_totals.tsr_expected_profit_loss))
-    total_profit_loss = sum(st.profit_loss for st in leagues_profit_loss.values())
-    total_exp_sotr = sum(st.sotr_expected_profit_loss for st in leagues_profit_loss.values())
-    total_exp_tsr = sum(st.tsr_expected_profit_loss for st in leagues_profit_loss.values())
+    total_profit_loss = sum(
+        st.profit_loss for st in leagues_profit_loss.values())
+    total_exp_sotr = sum(
+        st.sotr_expected_profit_loss for st in leagues_profit_loss.values())
+    total_exp_tsr = sum(
+        st.tsr_expected_profit_loss for st in leagues_profit_loss.values())
     print('Overall total profit/loss: {0}, {1}, {2}'.format(
-            total_profit_loss, total_exp_sotr, total_exp_tsr))
+        total_profit_loss, total_exp_sotr, total_exp_tsr))
 
     print('----- Dividing by how you have betted ----------')
     for result in ['H', 'A', 'D']:
         relevant_bets = [bl for bl in bet_lines
                          if bl.bet_result == result]
         profit_loss = sum(bl.get_profit_loss() for bl in relevant_bets)
-        sotr_exp = sum(bl.post_match_expected_profit_loss('SOTR') for bl in relevant_bets)
-        tsr_exp = sum(bl.post_match_expected_profit_loss('TSR') for bl in relevant_bets)
+        sotr_exp = sum(bl.post_match_expected_profit_loss('SOTR')
+                       for bl in relevant_bets)
+        tsr_exp = sum(bl.post_match_expected_profit_loss('TSR')
+                      for bl in relevant_bets)
         print('{0} bets total profit/loss: {1}'.format(result, profit_loss))
         print('    bets total sotr expected profit/loss: {0}'.format(sotr_exp))
         print('    bets total tsr expected profit/loss: {0}'.format(tsr_exp))
@@ -287,13 +310,15 @@ def analyse_multiple_bet_files(bet_filenames):
         relevant_bets = [bl for bl in bet_lines
                          if bl.match.FTR == result]
         profit_loss = sum(bl.get_profit_loss() for bl in relevant_bets)
-        sotr_exp = sum(bl.post_match_expected_profit_loss('SOTR') for bl in relevant_bets)
-        tsr_exp = sum(bl.post_match_expected_profit_loss('TSR') for bl in relevant_bets)
+        sotr_exp = sum(bl.post_match_expected_profit_loss('SOTR')
+                       for bl in relevant_bets)
+        tsr_exp = sum(bl.post_match_expected_profit_loss('TSR')
+                      for bl in relevant_bets)
         print('{0} results total profit/loss: {1}'.format(result, profit_loss))
         print('    bets total sotr expected profit/loss: {0}'.format(sotr_exp))
         print('    bets total tsr expected profit/loss: {0}'.format(tsr_exp))
         print('    based on {0} bets'.format(len(relevant_bets)))
-    
+
 
 if __name__ == '__main__':
     import sys
@@ -305,8 +330,9 @@ if __name__ == '__main__':
         data_dir_ls = os.listdir(directory)
         bets_filenames = [os.path.join(directory, f)
                           for f in os.listdir(directory)
-                          if f.startswith('bets-')]
-    key_fun = lambda f: league_analysis.last_modified_date(f)
+                          if f.startswith('bets-') and
+                          f.endswith('.text')]
+    key_fun = league_analysis.last_modified_date
     last_bet_file = max(bets_filenames, key=key_fun)
     display_analysis_bets_file(last_bet_file)
     # Just so we get the totals just for the last bet file
