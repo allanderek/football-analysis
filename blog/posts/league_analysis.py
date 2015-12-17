@@ -19,6 +19,7 @@ plot.rcParams['savefig.dpi'] = 2 * plot.rcParams['savefig.dpi']
 
 
 class Match(object):
+
     """Holds a parsed match object, each line of a data file is parsed
     into one Match object.
     """
@@ -208,6 +209,7 @@ def clean_ratio(sub, total, default=0.0):
 
 
 class TeamStats(object):
+
     """Note that this is intended to only be used with a set number of games,
     if you change the set of games, then you pretty much have to recalculate
     all of the stats.
@@ -251,16 +253,20 @@ class TeamStats(object):
 
         self.current_unbeaten_run = 0
         self.current_winless_run = 0
+        self.current_winning_run = 0
         for game in self.games:
             points = points_in_game(self.teamname, game)
             if points == 3:
+                self.current_winning_run += 1
                 self.current_unbeaten_run += 1
                 self.current_winless_run = 0
             elif points == 1:
+                self.current_winning_run = 0
                 self.current_unbeaten_run += 1
                 self.current_winless_run += 1
             else:
                 assert points == 0
+                self.current_winning_run = 0
                 self.current_unbeaten_run = 0
                 self.current_winless_run += 1
 
@@ -341,7 +347,8 @@ class League(object):
         self.data_dir = data_dir_base + year
         self.data_file = self.data_dir + '/' + data_file_basename
         fixtures_base_url = "http://www.bbc.co.uk/sport/football/"
-        self.fixtures_url = fixtures_base_url + fixtures_directory + "/fixtures"
+        self.fixtures_url = fixtures_base_url + \
+            fixtures_directory + "/fixtures"
         self.fixtures_file = "{0}/{1}-fixtures.html".format(self.data_dir,
                                                             short_title)
         self._retrieve_data()
