@@ -63,7 +63,370 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-19-20-september-2015/" class="u-url">EPL 19-20 September 2015</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-26-28-september-2015/" class="u-url">EPL 26-28 September 2015</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/epl-26-28-september-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-09-30T08:25:19+01:00" title="2015-09-30 08:25">2015-09-30 08:25</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-26-28-september-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-26-28-september-2015.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-27th-28th-september-2015">EPL 27th-28th September 2015</h2>
+<p>Another weekend in the EPL, let's look at the basic statistics for all the games:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'26/09/15'</span><span class="p">,</span> <span class="s">'28/09/15'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Leicester</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>16</td>
+<td>26</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>12</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Liverpool</td>
+<td>Aston Villa</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>21</td>
+<td>10</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>12</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man United</td>
+<td>Sunderland</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Newcastle</td>
+<td>Chelsea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>11</td>
+<td>16</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Southampton</td>
+<td>Swansea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>18</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Stoke</td>
+<td>Bournemouth</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>8</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Tottenham</td>
+<td>Man City</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>22</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>8</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Ham</td>
+<td>Norwich</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>19</td>
+<td>16</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Watford</td>
+<td>Crystal Palace</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>16</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Brom</td>
+<td>Everton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>12</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="leicester-2-5-arsenal">Leicester 2-5 Arsenal</h2>
+<p>Possibly the most entertaining game. Arsenal will be very happy with this of course, Arsenal have been posting pretty excellent numbers all season without really reaping the benefits of it. Here they did. Leicester on the other hand will obviously not be keen to lose too many games at home, but taking 16 shots, 7 of which were on target against an Arsenal side that have tended to dominate shots will be some consolation. Just how good/decent were Leicester against Arsenal? They took more shots against Arsenal than the average so far, but also let in more:</p>
+<p class="more"><a href="posts/epl-26-28-september-2015/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-19-20-september-2015/" class="u-url">EPL 19-20 September 2015</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 allanderek
@@ -802,7 +1165,7 @@
             <li class="next">
                 <a href="index-1.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
+        </ul></nav><script>var disqus_shortname="allanderek";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"> </script><script type="text/x-mathjax-config">
             MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});
             </script>
 </div>
