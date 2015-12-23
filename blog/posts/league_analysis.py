@@ -609,7 +609,7 @@ def match_to_html(match):
 
 
 def create_inline_block(html):
-    return '<div style="display:inline-block;">{0}</div>'.format(html)
+    return '<div style="display:inline-block; margin-right:2em;">{0}</div>'.format(html)
 
 
 def display_pairs(pairs, inline_block=True):
@@ -627,7 +627,7 @@ def display_dictionary(dictionary):
     display_pairs(pairs)
 
 
-def display_table(header_data, row_data):
+def html_table(header_data, row_data):
     """Display an ipython table given the headers and the row data."""
     def make_header_cell(s):
         return '<th>{0}</th>'.format(s)
@@ -643,6 +643,11 @@ def display_table(header_data, row_data):
             for row in row_data]
     rows = "\n".join(rows)
     html = '<table>' + header_row + rows + '</table>'
+    return html
+
+
+def display_table(header_data, row_data):
+    html = html_table(header_data, row_data)
     display(HTML(html))
 
 
@@ -662,13 +667,17 @@ def date_from_string(date_string):
     return datetime.date(year, month, day)
 
 
+def html_blocks(blocks):
+    inline_blocks = [create_inline_block(b) for b in blocks]
+    html = "\n".join(inline_blocks)
+    return (HTML(html))
+
+
 def display_given_matches(matches):
     """Display a given set of matches."""
-    def inline_div_match(match):
-        return create_inline_block(match_to_html(match))
-    match_blocks = [inline_div_match(match) for match in matches]
-    html = "\n".join(match_blocks)
-    display(HTML(html))
+    html_matches = [match_to_html(m) for m in matches]
+    html = html_blocks(html_matches)
+    display(html)
 
 
 def date_in_range(start_date, datestring, end_date):
@@ -811,12 +820,22 @@ def rank_sorted_pairs(sorted_pairs):
 # for more columns than the one that is sorted on.
 
 
-def display_ranked_table(headers, pairs, reverse=None):
+def create_ranked_table(headers, pairs, reverse=None):
     if reverse is None:
         reverse = True
     sorted_pairs = sorted(pairs, key=lambda r: r[1], reverse=reverse)
     rows = rank_sorted_pairs(sorted_pairs)
-    display_table(['Position'] + headers, rows)
+    return html_table(['Position'] + headers, rows)
+
+
+def display_ranked_table(headers, pairs, reverse=None):
+    display(HTML(create_ranked_table(headers, pairs, reverse=reverse)))
+
+
+def display_ranked_tables(tables_data):
+    ranked_tables = [create_ranked_table(h, p, r) for h, p, r in tables_data]
+    html = html_blocks(ranked_tables)
+    display(html)
 
 
 def rank_teams_single_matches(matches, stat_suffix, stat_header_name=None):
@@ -870,6 +889,29 @@ def display_statistic_rankings(league, stat_name):
     stat_rankings = get_stats_rankings(league.team_stats, stat_name)
     rows = get_rows(stat_rankings, stat_name)
     display_table(['Position', 'Team', stat_name], rows)
+
+
+def get_stat_pairs(stats_list, stat_name):
+    return [(stats.teamname, getattr(stats, stat_name))
+            for stats in stats_list]
+
+
+def blog_weekly_header(league, start_date, end_date):
+    weekend_matches = get_matches(league, start_date, end_date)
+    display_given_matches(weekend_matches)
+
+    points_pairs = get_stat_pairs(league.team_stats.values(), 'points')
+    points_table_data = (['Team', 'Points'], points_pairs, True)
+
+    team_rating_pairs = get_stat_pairs(
+        league.team_stats.values(), 'team_rating')
+    team_rating_table_data = (['Team', 'Team Rating'], team_rating_pairs, True)
+
+    pdo_pairs = get_stat_pairs(league.team_stats.values(), 'pdo')
+    pdo_table_data = (['Team', 'PDO'], pdo_pairs, True)
+
+    tables_data = [points_table_data, team_rating_table_data, pdo_table_data]
+    display_ranked_tables(tables_data)
 
 team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Crystal Palace': ('Crimson', '-'),
