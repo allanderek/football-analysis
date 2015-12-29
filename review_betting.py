@@ -5,18 +5,28 @@ import collections
 def result_count_factory():
     return {'H': 0, 'D': 0, 'A': 0}
 
+def get_team_ratio_bucket(team_ratio_diff):
+    for bucket in [x / 10.0 for x in range(-30, 30)]:
+        if team_ratio_diff < bucket:
+            return bucket
+    else:
+        print('TEAM RATIO DIFF: {0} ..... {1}'.format(team_ratio_diff, bucket))
+        assert False
 
 def post_match_odds(matches):
     sotr_buckets = collections.defaultdict(result_count_factory)
     tsr_buckets = collections.defaultdict(result_count_factory)
+    tr_buckets = collections.defaultdict(result_count_factory)
     for match in matches:
         sotr_diff = match.HST - match.AST
         sotr_buckets[sotr_diff][match.FTR] += 1
         tsr_diff = match.HS - match.AS
         tsr_buckets[tsr_diff][match.FTR] += 1
-    return sotr_buckets, tsr_buckets
+        tr_diff = match.home_team_rating - match.away_team_rating
+        tr_buckets[get_team_ratio_bucket(tr_diff)][match.FTR] += 1
+    return sotr_buckets, tsr_buckets, tr_buckets
 
-sotr_buckets, tsr_buckets = post_match_odds(league_analysis.get_all_matches())
+sotr_buckets, tsr_buckets, tr_buckets = post_match_odds(league_analysis.get_all_matches())
 
 
 def display_table(headers, rows):
@@ -138,10 +148,14 @@ class BetLine(object):
         if shots_ratio == "SOTR":
             buckets = sotr_buckets
             difference = match.HST - match.AST
-        else:
-            assert shots_ratio == "TSR"
+        elif shots_ratio == "TSR":
             buckets = tsr_buckets
             difference = match.HS - match.AS
+        else:
+            assert shots_ratio == "TR"
+            buckets = tr_buckets
+            tr_diff = match.home_team_rating - match.away_team_rating
+            difference = get_team_ratio_bucket(tr_diff)
         try:
             bucket = buckets[difference]
         except KeyError:
@@ -185,6 +199,9 @@ class BetLine(object):
 
         sotr_post_match_implied_odds = self.calculate_post_match_odds('SOTR')
         tsr_post_match_implied_odds = self.calculate_post_match_odds('TSR')
+        tsr_expected_profit_loss = self.post_match_expected_profit_loss('TSR')
+        tr_post_match_implied_odds = self.calculate_post_match_odds('TR')
+        tr_expected_profit_loss = self.post_match_expected_profit_loss('TR')
 
         headers = ['', match.HomeTeam, match.AwayTeam]
         rows = [['Goals', match.FTHG, match.FTAG],
@@ -203,6 +220,12 @@ class BetLine(object):
                     sotr_post_match_implied_odds],
                 ['Implied TSR', tsr_post_match_implied_odds,
                     tsr_post_match_implied_odds],
+                ['Exp P/L TSR', tsr_expected_profit_loss,
+                    tsr_expected_profit_loss],
+                ['Implied TR', tr_post_match_implied_odds,
+                                tr_post_match_implied_odds],
+                ['Exp P/L TR', tr_expected_profit_loss,
+                                tr_expected_profit_loss],
                 ]
         display_table(headers, rows)
 
@@ -258,6 +281,7 @@ class SummaryTotals(object):
         self.profit_loss = 0.0
         self.sotr_expected_profit_loss = 0.0
         self.tsr_expected_profit_loss = 0.0
+        self.tr_expected_profit_loss = 0.0
 
 
 def analyse_multiple_bet_files(bet_filenames):
@@ -274,14 +298,17 @@ def analyse_multiple_bet_files(bet_filenames):
         league_summary.sotr_expected_profit_loss += sotr_exp_pl
         tsr_exp_pl = bet_line.post_match_expected_profit_loss('TSR')
         league_summary.tsr_expected_profit_loss += tsr_exp_pl
+        tr_exp_pl = bet_line.post_match_expected_profit_loss('TR')
+        league_summary.tr_expected_profit_loss += tr_exp_pl
 
     print('-------------------------')
     print('Totals for all bet files analysed:')
     for league_name, summary_totals in leagues_profit_loss.items():
-        print('{0}: {1}, {2}, {3}'.format(league_name,
-                                          summary_totals.profit_loss,
-                                          summary_totals.sotr_expected_profit_loss,
-                                          summary_totals.tsr_expected_profit_loss))
+        print('{0}: {1}, {2}, {3}, {4}'.format(league_name,
+                              summary_totals.profit_loss,
+                              summary_totals.sotr_expected_profit_loss,
+                              summary_totals.tsr_expected_profit_loss,
+                              summary_totals.tr_expected_profit_loss))
     total_profit_loss = sum(
         st.profit_loss for st in leagues_profit_loss.values())
     total_exp_sotr = sum(

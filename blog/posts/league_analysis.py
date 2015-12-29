@@ -4,6 +4,7 @@ analyse upcoming fixtures using the past data of the current season.
 """
 
 from IPython.display import display, HTML
+import urllib.error
 import urllib.request
 import os
 import datetime
@@ -59,12 +60,57 @@ class Match(object):
         return clean_ratio(self.AST, self.HST + self.AST)
 
     @property
+    def home_tsotr(self):
+        return self.home_target_ratio - self.away_target_ratio
+
+    @property
+    def away_tsotr(self):
+        return self.away_target_ratio - self.home_target_ratio
+
+    @property
+    def home_shooting_ratio(self):
+        # The 'max' is here because occassionally teams score without
+        # getting a shot on target, this obviously does not entirely solve that
+        # problem but does allow a sensible result in the case that the number
+        # of goals is higher than the number of shots on target.
+        return clean_ratio(self.FTHG, max(self.FTHG, self.HST))
+
+    @property
+    def away_shooting_ratio(self):
+        # See home_shooting_percentage for explanation of max.
+        return clean_ratio(self.FTAG, max(self.FTAG, self.AST))
+
+    @property
+    def home_save_ratio(self):
+        return 1.0 - self.away_shooting_ratio
+
+    @property
+    def away_save_ratio(self):
+        return 1.0 - self.home_shooting_ratio
+
+    @property
+    def home_pdo(self):
+        return self.home_shooting_ratio + self.home_save_ratio
+
+    @property
+    def away_pdo(self):
+        return self.away_shooting_ratio + self.away_save_ratio
+
+    @property
     def home_target_ratio(self):
         return clean_ratio(self.HST, self.HS + self.HST)
 
     @property
     def away_target_ratio(self):
         return clean_ratio(self.AST, self.AS + self.AST)
+
+    @property
+    def home_team_rating(self):
+        return get_team_rating(self.home_pdo, self.home_tsotr, self.home_tsr)
+
+    @property
+    def away_team_rating(self):
+        return get_team_rating(self.away_pdo, self.away_tsotr, self.away_tsr)
 
     @property
     def home_booking_points(self):
@@ -179,7 +225,7 @@ def red_cards_in_game(team, game):
 
 
 def get_team_rating(pdo, tsotr, tsr):
-    """Essentially tsr * tsott * pdo, but not weight equally, James Grayson
+    """Essentially tsr * tsott * pdo, but not weighted equally, James Grayson
     gives it as: Rating = (0.5+(TSR-0.5)*0.732^0.5) *
                           (1.0+(%TSOTt-1.0)*0.166^2) *
                           (1000+(PDO-1000)*0.176^0.5)
@@ -330,7 +376,11 @@ def download_if_stale(filepath, fileurl):
     it again, otherwise we download it afresh.
     """
     if not os.path.exists(filepath) or needs_refreshing(filepath):
-        urllib.request.urlretrieve(fileurl, filepath)
+        try:
+            urllib.request.urlretrieve(fileurl, filepath)
+        except urllib.error.HTTPError:
+            print('The {0} is not reachable'.format(fileurl))
+
 
 # We sometimes call this from within the 'blog/posts' directory and
 # sometimes from the parent directory.
@@ -1527,4 +1577,7 @@ if __name__ == '__main__':
     stat_analysers = {'team_rating': tr_analyser}
     for league in reversed(current_year.all_leagues):
         print(league.title)
-        analyse_fixtures(league, date, stat_analysers)
+        try:
+            analyse_fixtures(league, date, stat_analysers)
+        except urllib.error.HTTPError:
+            print('Fixtures not reachable')
