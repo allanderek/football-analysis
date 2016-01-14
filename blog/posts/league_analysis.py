@@ -583,6 +583,7 @@ all_years = [year_201011, year_201112, year_201213,
              year_201314, year_201415, year_201516]
 all_leagues = list(itertools.chain.from_iterable(
     y.all_leagues for y in all_years))
+all_epl_leagues = [year.epl_league for year in all_years]
 
 
 current_year = year_201516
@@ -1275,8 +1276,8 @@ def result_count_factory():
 
 class HistoricalStatAnalyser(BaseAnalyser):
 
-    def __init__(self, stat_name):
-        self.leagues = all_leagues
+    def __init__(self, stat_name, leagues=None):
+        self.leagues = all_leagues if leagues is None else leagues
         self.reset_per_league_stats()
         self.buckets = collections.defaultdict(result_count_factory)
         # [-1.0, -0.9 ... 0.0, 0.1, ... 1.0]
@@ -1540,6 +1541,15 @@ def analyse_fixtures(league, end_date, stat_analysers):
         tr_analyser = stat_analysers['team_rating']
         tr_implied_odds = tr_analyser.get_implied_odds(home_stats, away_stats)
 
+        tr_diff = home_stats.team_rating - away_stats.team_rating
+        tr_home_win_proportion = (0.7799322440116623 * tr_diff) + 0.4433888763201811
+        tr_home_win_odds = 1.0 / tr_home_win_proportion
+        tr_away_win_proportion = (-0.6267394935044425 * tr_diff) + 0.3460323970831241
+        tr_away_win_odds = 1.0 / tr_away_win_proportion
+        tr_draw_proportion = 1 - (tr_home_win_proportion + tr_away_win_proportion)
+        tr_draw_odds = 1.0 / tr_draw_proportion
+
+
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
         last_x_matches(league, away_team, 3)
@@ -1558,10 +1568,12 @@ def analyse_fixtures(league, end_date, stat_analysers):
         print("    home_sotr_odds: {0}".format(home_sotr_odds))
         print("    away_sotr_odds: {0}".format(away_sotr_odds))
         print("    draw_sotr_odds: {0}".format(draw_sotr_odds))
-        print("    home_tr_odds: {0}".format(tr_implied_odds['H']))
-        print("    away_tr_odds: {0}".format(tr_implied_odds['A']))
-        print("    draw_tr_odds: {0}".format(tr_implied_odds['D']))
-
+        print("    old home_tr_odds: {0}".format(tr_implied_odds['H']))
+        print("    old away_tr_odds: {0}".format(tr_implied_odds['A']))
+        print("    old draw_tr_odds: {0}".format(tr_implied_odds['D']))
+        print("    home_tr_odds: {0}".format(tr_home_win_odds))
+        print("    away_tr_odds: {0}".format(tr_away_win_odds))
+        print("    draw_tr_odds: {0}".format(tr_draw_odds))
 
 if __name__ == '__main__':
     import sys
