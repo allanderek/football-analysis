@@ -13,7 +13,7 @@
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://allanderek.github.io/football-analysis/">
 <link rel="next" href="index-2.html" type="text/html">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-12-13th-january-2016/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/epl-16-18th-january-2016/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -62,7 +62,638 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-12-13th-january-2016/" class="u-url">EPL 12-13th January 2016</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-16-18th-january-2016/" class="u-url">EPL 16-18th January 2016</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/epl-16-18th-january-2016/" rel="bookmark"><time class="published dt-published" datetime="2016-01-18T10:45:03Z" title="2016-01-18 10:45">2016-01-18 10:45</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-16-18th-january-2016/#disqus_thread" data-disqus-identifier="cache/posts/epl-16-18th-january-2016.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-16-18th-january-2016">EPL 16-18th January 2016</h2>
+<p>Another look at some of the simple statistics underlying the matches in the English Premier league. A weekend that saw Manchester City claw back two points on Arsenal and Leicester who remain on top of the league separated only by goal difference and then only by a point to Manchester City.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">blog_weekly_header</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'16/01/2016'</span><span class="p">,</span> <span class="s">'18/01/2016'</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Aston Villa</td>
+<td>Leicester</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>12</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Bournemouth</td>
+<td>Norwich</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>10</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Chelsea</td>
+<td>Everton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>7</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man City</td>
+<td>Crystal Palace</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>4</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>17</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Newcastle</td>
+<td>West Ham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>23</td>
+<td>10</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>10</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Southampton</td>
+<td>West Brom</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>0</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Tottenham</td>
+<td>Sunderland</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>26</td>
+<td>5</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>11</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Liverpool</td>
+<td>Man United</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>19</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>4</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block; margin-right:2em;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Stoke</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>6</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block; margin-right:2em;"><table>
+<tr>
+<th>Position</th> <th>Team</th> <th>Points</th>
+</tr>
+<tr>
+<td>1</td> <td>Leicester</td> <td>44</td>
+</tr>
+<tr>
+<td>-</td> <td>Arsenal</td> <td>44</td>
+</tr>
+<tr>
+<td>3</td> <td>Man City</td> <td>43</td>
+</tr>
+<tr>
+<td>4</td> <td>Tottenham</td> <td>39</td>
+</tr>
+<tr>
+<td>5</td> <td>Man United</td> <td>37</td>
+</tr>
+<tr>
+<td>6</td> <td>West Ham</td> <td>35</td>
+</tr>
+<tr>
+<td>7</td> <td>Stoke</td> <td>33</td>
+</tr>
+<tr>
+<td>8</td> <td>Crystal Palace</td> <td>31</td>
+</tr>
+<tr>
+<td>-</td> <td>Liverpool</td> <td>31</td>
+</tr>
+<tr>
+<td>10</td> <td>Southampton</td> <td>30</td>
+</tr>
+<tr>
+<td>11</td> <td>Watford</td> <td>29</td>
+</tr>
+<tr>
+<td>-</td> <td>Everton</td> <td>29</td>
+</tr>
+<tr>
+<td>13</td> <td>West Brom</td> <td>27</td>
+</tr>
+<tr>
+<td>14</td> <td>Chelsea</td> <td>25</td>
+</tr>
+<tr>
+<td>15</td> <td>Bournemouth</td> <td>24</td>
+</tr>
+<tr>
+<td>16</td> <td>Norwich</td> <td>23</td>
+</tr>
+<tr>
+<td>17</td> <td>Newcastle</td> <td>21</td>
+</tr>
+<tr>
+<td>18</td> <td>Swansea</td> <td>19</td>
+</tr>
+<tr>
+<td>19</td> <td>Sunderland</td> <td>18</td>
+</tr>
+<tr>
+<td>20</td> <td>Aston Villa</td> <td>12</td>
+</tr>
+</table></div>
+<div style="display:inline-block; margin-right:2em;"><table>
+<tr>
+<th>Position</th> <th>Team</th> <th>Team Rating</th>
+</tr>
+<tr>
+<td>1</td> <td>Man City</td> <td>0.268646140939205</td>
+</tr>
+<tr>
+<td>2</td> <td>Tottenham</td> <td>0.2095837986514689</td>
+</tr>
+<tr>
+<td>3</td> <td>Arsenal</td> <td>0.12968815748790902</td>
+</tr>
+<tr>
+<td>4</td> <td>Liverpool</td> <td>0.12594760206332867</td>
+</tr>
+<tr>
+<td>5</td> <td>Southampton</td> <td>0.09705813917529782</td>
+</tr>
+<tr>
+<td>6</td> <td>Man United</td> <td>0.08331574714593583</td>
+</tr>
+<tr>
+<td>7</td> <td>Leicester</td> <td>0.04992989660149112</td>
+</tr>
+<tr>
+<td>8</td> <td>Chelsea</td> <td>0.027711637191637863</td>
+</tr>
+<tr>
+<td>9</td> <td>Everton</td> <td>-6.215174755661024e-05</td>
+</tr>
+<tr>
+<td>10</td> <td>West Ham</td> <td>-0.007394766925740114</td>
+</tr>
+<tr>
+<td>11</td> <td>Bournemouth</td> <td>-0.011344341125768903</td>
+</tr>
+<tr>
+<td>12</td> <td>Watford</td> <td>-0.016013565655321492</td>
+</tr>
+<tr>
+<td>13</td> <td>Stoke</td> <td>-0.06797834104243798</td>
+</tr>
+<tr>
+<td>14</td> <td>Crystal Palace</td> <td>-0.06864341529257256</td>
+</tr>
+<tr>
+<td>15</td> <td>Swansea</td> <td>-0.07359592731905512</td>
+</tr>
+<tr>
+<td>16</td> <td>Norwich</td> <td>-0.11707431145573177</td>
+</tr>
+<tr>
+<td>17</td> <td>West Brom</td> <td>-0.1353146231932329</td>
+</tr>
+<tr>
+<td>18</td> <td>Aston Villa</td> <td>-0.1538345508230108</td>
+</tr>
+<tr>
+<td>19</td> <td>Sunderland</td> <td>-0.18576134406507852</td>
+</tr>
+<tr>
+<td>20</td> <td>Newcastle</td> <td>-0.18866298263445705</td>
+</tr>
+</table></div>
+<div style="display:inline-block; margin-right:2em;"><table>
+<tr>
+<th>Position</th> <th>Team</th> <th>PDO</th>
+</tr>
+<tr>
+<td>1</td> <td>Everton</td> <td>0.10705009276437849</td>
+</tr>
+<tr>
+<td>2</td> <td>Leicester</td> <td>0.09603208104685523</td>
+</tr>
+<tr>
+<td>3</td> <td>Man United</td> <td>0.09358974358974359</td>
+</tr>
+<tr>
+<td>4</td> <td>Stoke</td> <td>0.09020523534472166</td>
+</tr>
+<tr>
+<td>5</td> <td>West Ham</td> <td>0.08571428571428569</td>
+</tr>
+<tr>
+<td>6</td> <td>Arsenal</td> <td>0.07997867235403891</td>
+</tr>
+<tr>
+<td>7</td> <td>Watford</td> <td>0.05212355212355213</td>
+</tr>
+<tr>
+<td>8</td> <td>Man City</td> <td>0.035278413424866484</td>
+</tr>
+<tr>
+<td>9</td> <td>Sunderland</td> <td>0.019766997708174194</td>
+</tr>
+<tr>
+<td>10</td> <td>Tottenham</td> <td>0.008633980881899483</td>
+</tr>
+<tr>
+<td>11</td> <td>West Brom</td> <td>0.00773993808049539</td>
+</tr>
+<tr>
+<td>12</td> <td>Chelsea</td> <td>0.0064102564102563875</td>
+</tr>
+<tr>
+<td>13</td> <td>Crystal Palace</td> <td>-0.0196629213483146</td>
+</tr>
+<tr>
+<td>14</td> <td>Newcastle</td> <td>-0.035048165607706516</td>
+</tr>
+<tr>
+<td>15</td> <td>Norwich</td> <td>-0.04611528822055139</td>
+</tr>
+<tr>
+<td>16</td> <td>Southampton</td> <td>-0.048308542845860225</td>
+</tr>
+<tr>
+<td>17</td> <td>Swansea</td> <td>-0.10833088018840153</td>
+</tr>
+<tr>
+<td>18</td> <td>Aston Villa</td> <td>-0.11191522357198241</td>
+</tr>
+<tr>
+<td>19</td> <td>Liverpool</td> <td>-0.14617044228694714</td>
+</tr>
+<tr>
+<td>20</td> <td>Bournemouth</td> <td>-0.15066266566641662</td>
+</tr>
+</table></div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="aston-villa-1-1-leicester">Aston Villa 1-1 Leicester</h2>
+<p>Aston Villa have not managed to out-shoot many teams this season, so to do so against (one of) the league leaders is possibly a sign of improvement. Which makes it a bit of shame that they are now further from safety than previously due to those closest to them having good weekends, notably Newcastle and Swansea.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="bournemouth-3-0-norwich">Bournemouth 3-0 Norwich</h2>
+<p>Bournemouth continue to improve and that result sees them leapfrog Norwich into 15th. Again because of the good weekends for Newcastle and Swansea they are still quite far from a comfortable position. Norwich beginning to slide rather worryingly.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="chelsea-3-3-everton">Chelsea 3-3 Everton</h2>
+<p>A very entertaining game with a bit of controversy at the end. However, it's hard to make the case that Chelsea didn't deserve a draw overall. On a non-stat related note, I don't have much love for John Terry, but I was surprised that no-one on MOTD mentioned that although his draw-saving goal was clearly off-side, it was a pretty good finish.</p>
+<p>It's hard to really see Chelsea as relegation candidates, but it's hard not to comment on the fact that they are just 4 points from safety. However, they are equally just 5 points from 10th placed Southampton. Chelsea are currently 8th for team rating, and it does not seem entirely unlikely that they could end the season there. Whilst Southampton and Liverpool stand between Chelsea in 8th there is a trio of teams above 8th who <strong>could</strong> slip back in Crystal Palace, Stoke City and West Ham United.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="manchester-city-4-0-crystal-palace">Manchester City 4-0 Crystal Palace</h2>
+<p>The two Manchester teams managed 5 shots on target between them and scored all five of them. In truth though the sky blue half of Manchester were entirely on top here and were always going to win. Crystal Palace are having a tough time of it at the moment.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="newcastle-2-1-west-ham">Newcastle 2-1 West Ham</h2>
+<p>A deserved victory for Newcastle, something I don't think we've said so far this season.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="southampton-3-0-west-brom">Southampton 3-0 West Brom</h2>
+<p>Interesting one, both teams had nine shots, but West Brom did not manage a single shot on target whilst Southampton managed 5. It is clear who deserved this one.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="tottenham-4-1-sunderland">Tottenham 4-1 Sunderland</h2>
+<p>About as one-sided as it gets. Worrying times for Sunderland, who might have thought the 4-2 victory over Swansea could have represented a rise in form. Not on this evidence. Having said that Tottenham are one of the best teams in the league, so perhaps away to Tottenham is just not the kind of game relegation scrappers have much hope for.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="liverpool-0-1-manchester-united">Liverpool 0-1 Manchester United</h2>
+<p>Not much less one-side than the Tottenham, but in this case Liverpool lose. The big difference here is the shots on target, 4-1 is not that large an advantage.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="stoke-0-0-arsenal">Stoke 0-0 Arsenal</h2>
+<p>Bit of a slip up this for Arsenal and Stoke, if anything, deservered a win.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre> 
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+    </div>
+  </div>
+
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-12-13th-january-2016/" class="u-url">EPL 12-13th January 2016</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 allanderek
@@ -5599,371 +6230,6 @@
 <h2 id="chelsea-1-3-liverpool">Chelsea 1-3 Liverpool</h2>
 <p>Probably the headline of the week as Chelsea's woes continue. However, those looking at underlying numbers were likely betting on this. Chelsea have been genuinely bad, here they are out-shot at home. Liverpool are a good side, but not so good the champions would expect to be deservedly beaten at home.</p>
 <p class="more"><a href="posts/epl-31-02-octobernovember-2015/">Read more…</a></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-    </div>
-    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-24-25-october-2015/" class="u-url">EPL 24-25 October 2015</a></h1>
-        <div class="metadata">
-            <p class="byline author vcard"><span class="byline-name fn">
-                allanderek
-            </span></p>
-            <p class="dateline"><a href="posts/epl-24-25-october-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-10-26T12:36:20Z" title="2015-10-26 12:36">2015-10-26 12:36</time></a></p>
-                <p class="commentline">
-        
-    <a href="posts/epl-24-25-october-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-24-25-october-2015.html">Comments</a>
-
-
-        </p>
-</div>
-    </header><div class="p-summary entry-summary">
-    <div tabindex="-1" id="notebook" class="border-box-sizing">
-    <div class="container" id="notebook-container">
-
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="epl-24-25th-october">EPL 24-25th October</h2>
-<p>Weekly look at the weekend games in the EPL:</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
-<span class="kn">import</span> <span class="nn">league_analysis</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
-<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
-<span class="n">weekend_matches</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'24/10/2015'</span><span class="p">,</span> <span class="s">'25/10/2015'</span><span class="p">)</span>
-<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-<div class="prompt"></div>
-
-<div class="output_html rendered_html output_subarea ">
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Arsenal</td>
-<td>Everton</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>20</td>
-<td>10</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>5</td>
-<td>5</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Aston Villa</td>
-<td>Swansea</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>1</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>9</td>
-<td>11</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>3</td>
-<td>4</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Leicester</td>
-<td>Crystal Palace</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>1</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>12</td>
-<td>9</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>3</td>
-<td>4</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Norwich</td>
-<td>West Brom</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>0</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>16</td>
-<td>7</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>3</td>
-<td>4</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Stoke</td>
-<td>Watford</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>0</td>
-<td>2</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>12</td>
-<td>13</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>1</td>
-<td>3</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>West Ham</td>
-<td>Chelsea</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>2</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>12</td>
-<td>8</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>5</td>
-<td>4</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Bournemouth</td>
-<td>Tottenham</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>1</td>
-<td>5</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>11</td>
-<td>14</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>3</td>
-<td>9</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Liverpool</td>
-<td>Southampton</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>1</td>
-<td>1</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>15</td>
-<td>8</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>2</td>
-<td>3</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Man United</td>
-<td>Man City</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>0</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>1</td>
-<td>1</td>
-</tr>
-</table>
-</div>
-<div style="display:inline-block;">
-    <table>
-<tr>
-<th></th>
-<th>Home</th>
-<th>Away</th>
-</tr>
-<tr>
-<td>Team</td>
-<td>Sunderland</td>
-<td>Newcastle</td>
-</tr>
-<tr>
-<td>Goals</td>
-<td>3</td>
-<td>0</td>
-</tr>
-<tr>
-<td>Shots</td>
-<td>9</td>
-<td>21</td>
-</tr>
-<tr>
-<td>SOT</td>
-<td>3</td>
-<td>8</td>
-</tr>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="manchester-united-0-0-manchester-city">Manchester United 0-0 Manchester City</h2>
-<p>A very even game, neither side giving up much. Manchester United typically have not shown much ambition to get a lot of shots, prefering to cultivate excellent chances whilst restricting their opponents. Manchester City on the other hand have tended to bombard their opponents. In this sense United will be pretty happy with how they restricted their Manchester neighbours.</p>
-<p>Having watched the game I felt City had the better of the first half and United the second. The best save of the match was Joe Hart to his left near the post and United also managed to hit the bar with a clever attempt at a lob. But overall, a game that could be easily forgotten.</p>
-<p class="more"><a href="posts/epl-24-25-october-2015/">Read more…</a></p>
 </div>
 </div>
 </div>

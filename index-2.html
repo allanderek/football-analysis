@@ -63,7 +63,372 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-17-19-october-2015/" class="u-url">EPL 17-19 October 2015</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-24-25-october-2015/" class="u-url">EPL 24-25 October 2015</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/epl-24-25-october-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-10-26T12:36:20Z" title="2015-10-26 12:36">2015-10-26 12:36</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-24-25-october-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-24-25-october-2015.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-24-25th-october">EPL 24-25th October</h2>
+<p>Weekly look at the weekend games in the EPL:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">weekend_matches</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'24/10/2015'</span><span class="p">,</span> <span class="s">'25/10/2015'</span><span class="p">)</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Arsenal</td>
+<td>Everton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>20</td>
+<td>10</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Aston Villa</td>
+<td>Swansea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Leicester</td>
+<td>Crystal Palace</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>9</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Norwich</td>
+<td>West Brom</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>16</td>
+<td>7</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Stoke</td>
+<td>Watford</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>13</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Ham</td>
+<td>Chelsea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Bournemouth</td>
+<td>Tottenham</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>11</td>
+<td>14</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>9</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Liverpool</td>
+<td>Southampton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>15</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man United</td>
+<td>Man City</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Sunderland</td>
+<td>Newcastle</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>21</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>3</td>
+<td>8</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="manchester-united-0-0-manchester-city">Manchester United 0-0 Manchester City</h2>
+<p>A very even game, neither side giving up much. Manchester United typically have not shown much ambition to get a lot of shots, prefering to cultivate excellent chances whilst restricting their opponents. Manchester City on the other hand have tended to bombard their opponents. In this sense United will be pretty happy with how they restricted their Manchester neighbours.</p>
+<p>Having watched the game I felt City had the better of the first half and United the second. The best save of the match was Joe Hart to his left near the post and United also managed to hit the bar with a clever attempt at a lob. But overall, a game that could be easily forgotten.</p>
+<p class="more"><a href="posts/epl-24-25-october-2015/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-17-19-october-2015/" class="u-url">EPL 17-19 October 2015</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 allanderek
