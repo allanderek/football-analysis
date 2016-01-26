@@ -297,24 +297,28 @@ class TeamStats(object):
         self.booking_points_against = sum_stat(booking_points_against_in_game)
         self.team_rating = get_team_rating(self.pdo, self.tsotr, self.tsr)
 
+        self.current_winning_run = 0
         self.current_unbeaten_run = 0
         self.current_winless_run = 0
-        self.current_winning_run = 0
+        self.current_losing_run = 0
         for game in self.games:
             points = points_in_game(self.teamname, game)
             if points == 3:
                 self.current_winning_run += 1
                 self.current_unbeaten_run += 1
                 self.current_winless_run = 0
+                self.current_losing_run = 0
             elif points == 1:
                 self.current_winning_run = 0
                 self.current_unbeaten_run += 1
                 self.current_winless_run += 1
+                self.current_losing_run = 0
             else:
                 assert points == 0
                 self.current_winning_run = 0
                 self.current_unbeaten_run = 0
                 self.current_winless_run += 1
+                self.current_losing_run += 1
 
     def average_stat(self, stat_name):
         return getattr(self, stat_name) / float(self.num_games)
@@ -947,22 +951,28 @@ def get_stat_pairs(stats_list, stat_name):
             for stats in stats_list]
 
 
+def get_stat_table_data(league, stat_header, stat_name, reverse):
+    pairs = get_stat_pairs(league.team_stats.values(), stat_name)
+    return (['Team', stat_header], pairs, reverse)
+
 def blog_weekly_header(league, start_date, end_date):
     weekend_matches = get_matches(league, start_date, end_date)
     display_given_matches(weekend_matches)
 
-    points_pairs = get_stat_pairs(league.team_stats.values(), 'points')
-    points_table_data = (['Team', 'Points'], points_pairs, True)
-
-    team_rating_pairs = get_stat_pairs(
-        league.team_stats.values(), 'team_rating')
-    team_rating_table_data = (['Team', 'Team Rating'], team_rating_pairs, True)
-
-    pdo_pairs = get_stat_pairs(league.team_stats.values(), 'pdo')
-    pdo_table_data = (['Team', 'PDO'], pdo_pairs, True)
-
-    tables_data = [points_table_data, team_rating_table_data, pdo_table_data]
+    tables_data = [get_stat_table_data(league, 'Points', 'points', True),
+                   get_stat_table_data(league, 'Team Rating', 'team_rating', True),
+                   get_stat_table_data(league, 'PDO', 'pdo', True),
+                   ]
     display_ranked_tables(tables_data)
+
+def display_current_runs(league):
+    tables_data = [get_stat_table_data(league, 'Winning Run', 'current_winning_run', True),
+                   get_stat_table_data(league, 'Unbeaten Run', 'current_unbeaten_run', True),
+                   get_stat_table_data(league, 'Winless', 'current_winless_run', True),
+                   get_stat_table_data(league, 'Losing', 'current_losing_run', True),
+                   ]
+    display_ranked_tables(tables_data)
+
 
 team_line_colors = {'Sunderland': ('DarkGreen', '--'),
                     'Crystal Palace': ('Crimson', '-'),
@@ -1430,13 +1440,13 @@ def fixtures_date_on_or_before(datestring, date):
     return datetime.date(year, month, day) <= date
 
 
-def get_fixtures(fixtures_page, end_date):
+def get_fixtures(fixtures_page, end_date, team=None):
     with open(fixtures_page, encoding='utf-8') as fixtures_file:
         soup = BeautifulSoup(fixtures_file)
     dates = soup.find_all('h2', class_='table-header')
     fixtures = []
     for date in dates:
-        if fixtures_date_on_or_before(date.string, end_date):
+        if end_date is None or fixtures_date_on_or_before(date.string, end_date):
             table = date.next_sibling.next_sibling
             match_details_list = table.find_all('td', class_='match-details')
             matches = [get_match_teams(md) for md in match_details_list]
@@ -1444,6 +1454,28 @@ def get_fixtures(fixtures_page, end_date):
         else:
             break
     return fixtures
+
+def get_team_fixtures(league, team):
+    fixtures = ((alias_team(h), alias_team(a))
+                for (h,a) in get_fixtures(league.fixtures_file, None))
+    fixtures = [(h, a) for (h,a) in fixtures if team in [h,a]]
+    return fixtures
+
+def get_fixture_string(fixture, team):
+    home, away = fixture
+    if team == home:
+        return "{} (H)".format(away)
+    else:
+        assert team == away
+        return "{} (A)".format(home)
+
+def compare_fixtures(league, teams):
+    def get_fixture_strings(team):
+        return [get_fixture_string(f, team) for f in get_team_fixtures(league, team)]
+    fixtures = [get_fixture_strings(team) for team in teams]
+    headers = teams
+    rows = zip(*fixtures)
+    display_table(headers, rows)
 
 
 def last_x_matches(league, team, x):
