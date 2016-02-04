@@ -227,7 +227,7 @@ def red_cards_in_game(team, game):
 def get_team_rating(pdo, tsotr, tsr):
     """Essentially tsr * tsott * pdo, but not weighted equally, James Grayson
     gives it as: Rating = (0.5+(TSR-0.5)*0.732^0.5) *
-                          (1.0+(%TSOTt-1.0)*0.166^2) *
+                          (1.0+(%TSOTt-1.0)*0.166^0.5) *
                           (1000+(PDO-1000)*0.176^0.5)
     But we have normalised the three values to average at 0. Note that by
     doing this we really shouldn't multipy. Instead we will add, but we will
@@ -1581,6 +1581,15 @@ def analyse_fixtures(league, end_date, stat_analysers):
         tr_draw_proportion = 1 - (tr_home_win_proportion + tr_away_win_proportion)
         tr_draw_odds = 1.0 / tr_draw_proportion
 
+        def get_2_degree_odds(x2, x1, x0):
+            proportion = ((tr_diff ** 2) * x2) + (tr_diff * x1) + x0
+            return 1.0 / proportion
+
+        tr_home_win_pf_odds = get_2_degree_odds(0.264179061438, 0.754584559712, 0.411753380201)
+        tr_away_win_pf_odds = get_2_degree_odds(0.263604481914, -0.650789277595, 0.314691118779)
+        tr_draw_pf_odds = get_2_degree_odds(0.527783543352, 0.103795282117, 0.273555501021)
+
+        pf_total = (1.0 / tr_home_win_pf_odds) + (1.0/tr_away_win_pf_odds) + (1.0/tr_draw_pf_odds)
 
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
@@ -1606,6 +1615,11 @@ def analyse_fixtures(league, end_date, stat_analysers):
         print("    home_tr_odds: {0}".format(tr_home_win_odds))
         print("    away_tr_odds: {0}".format(tr_away_win_odds))
         print("    draw_tr_odds: {0}".format(tr_draw_odds))
+        print("    home_tr_pf_odds: {0}".format(tr_home_win_pf_odds))
+        print("    away_tr_pf_odds: {0}".format(tr_away_win_pf_odds))
+        print("    draw_tr_pf_odds: {0}".format(tr_draw_pf_odds))
+        print("    pf total proportion: {}".format(pf_total))
+
 
 if __name__ == '__main__':
     import sys
