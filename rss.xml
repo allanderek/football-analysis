@@ -1,5 +1,678 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Football Data Site</title><link>http://allanderek.github.io/football-analysis/</link><description>I basically just graph some of the data freely available for football leagues, I might even make the occasional comment.</description><atom:link rel="self" href="http://allanderek.github.io/football-analysis/rss.xml" type="application/rss+xml"></atom:link><language>en</language><lastBuildDate>Thu, 04 Feb 2016 14:17:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>EPL 2nd-3rd February 2016</title><link>http://allanderek.github.io/football-analysis/posts/epl-2nd-3rd-february-2016/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Football Data Site</title><link>http://allanderek.github.io/football-analysis/</link><description>I basically just graph some of the data freely available for football leagues, I might even make the occasional comment.</description><atom:link href="http://allanderek.github.io/football-analysis/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 08 Feb 2016 11:07:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>EPL 6th-7th February 2016</title><link>http://allanderek.github.io/football-analysis/posts/epl-6th-7th-february-2016/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
+    &lt;div class="container" id="notebook-container"&gt;
+
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="epl-6-7th-february-2016"&gt;EPL 6-7th February 2016&lt;/h2&gt;
+&lt;p&gt;Leicester continue to win at the top of the table this time winning away from home with arguably their closest title rivals, who themselves have dropped to fourth place, albeit only a point behind 2nd.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;league_analysis&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
+&lt;span class="n"&gt;epl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;
+&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;blog_weekly_header&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'06/02/2016'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'07/02/2016'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Aston Villa&lt;/td&gt;&lt;td&gt;Norwich&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Liverpool&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Man City&lt;/td&gt;&lt;td&gt;Leicester&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;td&gt;West Brom&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Southampton&lt;/td&gt;&lt;td&gt;West Ham&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Stoke&lt;/td&gt;&lt;td&gt;Everton&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Swansea&lt;/td&gt;&lt;td&gt;Crystal Palace&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Tottenham&lt;/td&gt;&lt;td&gt;Watford&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;26&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;td&gt;Arsenal&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;
+    &lt;table&gt;
+      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Chelsea&lt;/td&gt;&lt;td&gt;Man United&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+      
+    &lt;/table&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Points&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;53&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;48&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;48&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;47&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;41&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;39&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;37&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;35&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;33&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;33&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;32&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;30&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;29&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;28&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;27&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Team Rating&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0.24439721722889646&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0.23934883186101397&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0.11892156954189927&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;0.11790372912864908&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0.09126485530226136&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0.08068393497172398&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0.0732797128665453&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0.03817934055163824&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0.029991428191271593&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0.015666371188515715&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;-0.008346162815690755&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;-0.035893132231974934&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;-0.060670405388337116&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;-0.08556647623187502&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;-0.1155426735898446&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;-0.13460521435422776&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;-0.14715674758120906&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;-0.14815862798573418&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;-0.1787900006841753&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;-0.17988417583715616&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;PDO&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0.12608791048050905&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0.11842975206611567&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0.08526249209361164&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0.07735461441213654&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0.07506152584085313&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0.05410183875530411&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0.02521008403361341&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0.024273345701917137&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;0.017756128221244505&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0.015757575757575748&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0.012704321087554649&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0.007120743034055743&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0.0012077294685990392&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;-0.0203738317757009&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;-0.05928211791456878&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;-0.07485513441626296&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;-0.07526881720430106&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;-0.10092514718250634&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;-0.1405565084810368&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;-0.15002513826043234&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="aston-villa-2-0-norwich"&gt;Aston Villa 2-0 Norwich&lt;/h2&gt;
+&lt;p&gt;The plunge continues for Norwich who now enter the relegation zone. An excellent three points for Aston Villa who have certainly deserved more results like this. They were actually out-shot by Norwich both in total shots and in shots on target, but marginally so. In such cases it usually means either that the match was pretty close and could have been won by either team, but the victory cannot be said to be entirely undeserved. Alternatively a team takes an early lead and hence has less ambition than the team behind. In such cases the victory is probably well deserved. The goals here came just before and after half-time, so probably this result was somewhere between the two. First goal was likely very important.&lt;/p&gt;
+&lt;p&gt;But enough speculation, what that means for Norwich is that they are in definite trouble now. For both teams there are a lack of suitable alternative candidates for relagation. Both of course will be hopeful that Newcastle's recent bounce is a statistical blip rather than a genuine improvement perhaps on the back of over £28m spent. Other than that, Swansea seem good enough to keep up pace with the bottom three and thus avoid relegation, but Swansea could of course be on the receiving end of some not so great luck. Aston Villa have the additional problem of still being 8 points behind 17th, so even if Newcastle revert to pre-Christmas form, Aston Villa are still struggling to make up the 8 points, or 11 on Swansea.&lt;/p&gt;
+&lt;!-- TEASER_END --&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="liverpool-2-2-sunderland"&gt;Liverpool 2-2 Sunderland&lt;/h2&gt;
+&lt;p&gt;This is another game that Liverpool could have won but did not. I briefly attempted to tease out a pattern here, Liverpool have been involved in 6 scoring draws, but there are a few teams with 6 and Everton lead the way on that measure with 8.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;scoring_draws&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;game&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;game&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;games&lt;/span&gt;
+                &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;game&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'D'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;game&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTHG&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;scoring_draws&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Scoring Draws'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Scoring Draws&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h3 id="dominate-but-draw"&gt;Dominate but Draw&lt;/h3&gt;
+&lt;p&gt;Okay, so how about the TSR for those games in which the team have drawn. I thought Liverpool might have a high TSR here, and indeed they are second only to Manchester City. However, Liverpool have the second highest TSR in the league for all matches played anyway. There does not really seem to be a pattern here. The most interesting thing is here is that Everton generally have a TSR of 0.49, 9th in the league, but in drawn matches they have a TSR of 0.44 which is 16th in the league. Given that Everton have the highest PDO in the league this might suggest that either some of those 8 scoring draws were somewhat fortunate, or perhaps they are holding on for draws when more endeavour might net them more points.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;tsr_draws&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;draws&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;game&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;game&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;games&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;game&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'D'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;draw_stats&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TeamStats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;draws&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;draw_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tsr&lt;/span&gt;
+
+&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tsr_draws&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
+&lt;span class="n"&gt;tsr_draw_table_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'TSR Draws'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tsr_table_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_stat_table_data&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'TSR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'tsr'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_tables&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;tsr_draw_table_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;tsr_table_data&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;TSR Draws&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0.6782608695652174&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;0.6260869565217392&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0.5793991416309013&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0.5722222222222222&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;0.5477707006369427&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;0.5232558139534884&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0.5214007782101168&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0.5136986301369864&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0.5024630541871922&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0.5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;0.5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0.4950980392156863&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0.49411764705882355&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;0.48214285714285715&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;0.4444444444444444&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0.4440789473684211&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;0.4383561643835616&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0.4276729559748428&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0.3482587064676617&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;0.3333333333333333&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;TSR&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0.6509863429438544&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;0.6251920122887865&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0.6137026239067055&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0.5467836257309941&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0.5420560747663551&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0.5390625&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;0.5368782161234992&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0.5342679127725857&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0.49850746268656715&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0.4977578475336323&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0.4845505617977528&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;0.4798061389337641&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0.47039473684210525&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;0.4475043029259897&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;0.44741235392320533&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;0.4375&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0.4287974683544304&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0.40604026845637586&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;0.40031152647975077&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;0.39634146341463417&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="manchester-city-1-3-leicester"&gt;Manchester City 1-3 Leicester&lt;/h2&gt;
+&lt;p&gt;Great game and an excellent result for the league leaders. Manchester City had 22 shots, often enough to win a game. However, Leicester managed 7 shots on target to City's 4, suggesting that Manchester City were getting somewhat desperate. It's hard to argue that this was anything other than a game between two pretty evenly matched teams. Leicester clearly finished better.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="newcastle-1-0-west-brom"&gt;Newcastle 1-0 West Brom&lt;/h2&gt;
+&lt;p&gt;In truth this could have been more. Pretty encouraging for Newcastle. West Brom failed to get a shot on target. There are probably just enough poorer teams below them for them not to have to worry. But on this performance it is hard to suggest that Newcastle are one of them. Of course that is just on &lt;em&gt;this&lt;/em&gt; performance, I wouldn't want to suggest Newcastle fans can rest easy. West Brom on a 5 game winnless streak.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="southampton-1-0-west-ham"&gt;Southampton 1-0 West Ham&lt;/h2&gt;
+&lt;p&gt;As usual a red card, especially relatively early on, kind of messes with the shot statistics somewhat. However, it is notable that although West Ham huffed and puffed somewhat, they only managed 2 shots on target. Southampton are well set-up defensively and are probably one of the better teams in the league at protecting a lead, even with reduced ranks.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="stoke-0-3-everton"&gt;Stoke 0-3 Everton&lt;/h2&gt;
+&lt;p&gt;Reminds me of the 3-0 defeat Everton handed out to Southampton earlier in the league. Not quite the same as they do have the better of the play, just nothing that would suggest such a large margin of victory. As mentioned above Everton have the highest PDO in the league, but it is not clear to me exactly how many &lt;em&gt;points&lt;/em&gt; they have gained from this. Here is a good example where their PDO has given them a large margin of victory but it was probably a game Everton deserved to win in any case.&lt;/p&gt;
+&lt;p&gt;Stoke have gone 4 games without a win now. Beginning to slip, not quite in the manner of Crystal Palace yet and both teams are likely far enough ahead not to be too worried about relegation. But both teams could do with a win.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="swansea-1-1-crystal-palace"&gt;Swansea 1-1 Crystal Palace&lt;/h2&gt;
+&lt;p&gt;That is now 8 games without a win for Crystal Palace, but they at least stopped their run of 5 losses. They are currently on 32 points, 30 points seemed a very rosy total 8 games ago, but it is not looking so hot now. Like Stoke they are probably too far ahead of the relegation zone to worry, but unless their form improves what looked like being a very successful season will turn into a very drab one. Unfortuantely for Stoke and Crystal Palace, their team rating rankings are still below their league table rankings. So whilst we would not really expect a further 8 games without a win, it would not be too surprising to see them roughly tread water from here to the end of the season.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_current_runs&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Winning Run&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Unbeaten Run&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;9&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Winless&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;div style="display:inline-block; margin-right:2em;"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Losing&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So why are things so bad at the moment for Palace? Let's compare some simple statistics for Palace over the whole season against Palace over this 8 game winless run:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [22]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;cp_stats&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'Crystal Palace'&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;cp_last_eight&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;TeamStats&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Crystal Palace'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;games&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;:])&lt;/span&gt;
+&lt;span class="n"&gt;rows&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[[&lt;/span&gt;&lt;span class="s"&gt;'Team Rating'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_rating&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_last_eight&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_rating&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'PDO'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdo&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_last_eight&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdo&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'TSR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tsr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_last_eight&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tsr&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'SOTR'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sotr&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cp_last_eight&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sotr&lt;/span&gt;&lt;span class="p"&gt;]]&lt;/span&gt;
+&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Stat'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Palace All Season'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Palace Last 8'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Stat&lt;/th&gt; &lt;th&gt;Palace All Season&lt;/th&gt; &lt;th&gt;Palace Last 8&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Team Rating&lt;/td&gt; &lt;td&gt;-0.08556647623187502&lt;/td&gt; &lt;td&gt;-0.25134474601733203&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;PDO&lt;/td&gt; &lt;td&gt;-0.0203738317757009&lt;/td&gt; &lt;td&gt;-0.22222222222222224&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;TSR&lt;/td&gt; &lt;td&gt;0.4375&lt;/td&gt; &lt;td&gt;0.43315508021390375&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;SOTR&lt;/td&gt; &lt;td&gt;0.4830917874396135&lt;/td&gt; &lt;td&gt;0.3333333333333333&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;So team rating and PDO have both dropped significantly. Interestingly TSR has not budged but their ratio of shots on target has. I'm not quite sure what to make of that.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="tottenham-1-0-watford"&gt;Tottenham 1-0 Watford&lt;/h2&gt;
+&lt;p&gt;There are only so many times that I can say that Tottenham look like very serious title contenders. They may be rueing some of their earlier draws and this is a game that they may have drawn earlier in the season. Watford can safely forget this game and move on, but three shots and none on target is pretty woeful.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="bournemouth-0-2-arsenal"&gt;Bournemouth 0-2 Arsenal&lt;/h2&gt;
+&lt;p&gt;Wow, Bournemouth competed pretty well here, although two early goals pretty much settled the game, it is probable that Bournemouth's stats here are inflated by a lack of ambition from Arsenal. Still, Bournemouth deserve to be easily mid-table. Arsenal are good enough to be in this title race for a lot longer yet. I think both Tottenham and Manchester City represent more likely title winners, but it probably is not far from a three-way tie. The question of course is where do Leicester fit in relation to that three-way tie?&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="chelsea-1-1-manchester-united"&gt;Chelsea 1-1 Manchester United&lt;/h2&gt;
+&lt;p&gt;Surprising many shots here. Manchester United actually out-shot their hosts depsite having the lead for the final 30 minutes and will be kicking themselves not to have taken all three points and Chelsea's unbeaten run back home with them. As it stands Chelsea continue their unbeaten run to 9 games. How much longer? Well:&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;
+&lt;div class="prompt input_prompt"&gt;In [14]:&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+    &lt;div class="input_area"&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compare_fixtures&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s"&gt;'Chelsea'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Leicester'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Southampton'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Tottenham'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Swansea'&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="output_wrapper"&gt;
+&lt;div class="output"&gt;
+
+
+&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
+
+&lt;div class="output_html rendered_html output_subarea "&gt;
+&lt;table&gt;&lt;tr&gt;&lt;th&gt;Chelsea&lt;/th&gt; &lt;th&gt;Leicester&lt;/th&gt; &lt;th&gt;Southampton&lt;/th&gt; &lt;th&gt;Tottenham&lt;/th&gt; &lt;th&gt;Swansea&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Newcastle (H)&lt;/td&gt; &lt;td&gt;Arsenal (A)&lt;/td&gt; &lt;td&gt;Swansea (A)&lt;/td&gt; &lt;td&gt;Man City (A)&lt;/td&gt; &lt;td&gt;Southampton (H)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Southampton (A)&lt;/td&gt; &lt;td&gt;Norwich (H)&lt;/td&gt; &lt;td&gt;Chelsea (H)&lt;/td&gt; &lt;td&gt;Swansea (H)&lt;/td&gt; &lt;td&gt;Tottenham (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Norwich (A)&lt;/td&gt; &lt;td&gt;West Brom (H)&lt;/td&gt; &lt;td&gt;Bournemouth (A)&lt;/td&gt; &lt;td&gt;West Ham (A)&lt;/td&gt; &lt;td&gt;Arsenal (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Stoke (H)&lt;/td&gt; &lt;td&gt;Watford (A)&lt;/td&gt; &lt;td&gt;Sunderland (H)&lt;/td&gt; &lt;td&gt;Arsenal (H)&lt;/td&gt; &lt;td&gt;Norwich (H)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Liverpool (A)&lt;/td&gt; &lt;td&gt;Newcastle (H)&lt;/td&gt; &lt;td&gt;Stoke (A)&lt;/td&gt; &lt;td&gt;Aston Villa (A)&lt;/td&gt; &lt;td&gt;Bournemouth (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;West Ham (H)&lt;/td&gt; &lt;td&gt;Crystal Palace (A)&lt;/td&gt; &lt;td&gt;Liverpool (H)&lt;/td&gt; &lt;td&gt;Bournemouth (H)&lt;/td&gt; &lt;td&gt;Aston Villa (H)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Aston Villa (A)&lt;/td&gt; &lt;td&gt;Southampton (H)&lt;/td&gt; &lt;td&gt;Leicester (A)&lt;/td&gt; &lt;td&gt;Liverpool (A)&lt;/td&gt; &lt;td&gt;Stoke (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Swansea (A)&lt;/td&gt; &lt;td&gt;Sunderland (A)&lt;/td&gt; &lt;td&gt;Newcastle (H)&lt;/td&gt; &lt;td&gt;Man United (H)&lt;/td&gt; &lt;td&gt;Chelsea (H)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Man City (H)&lt;/td&gt; &lt;td&gt;West Ham (H)&lt;/td&gt; &lt;td&gt;Everton (A)&lt;/td&gt; &lt;td&gt;Stoke (A)&lt;/td&gt; &lt;td&gt;Newcastle (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Bournemouth (A)&lt;/td&gt; &lt;td&gt;Swansea (H)&lt;/td&gt; &lt;td&gt;Aston Villa (A)&lt;/td&gt; &lt;td&gt;West Brom (H)&lt;/td&gt; &lt;td&gt;Leicester (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Tottenham (H)&lt;/td&gt; &lt;td&gt;Man United (A)&lt;/td&gt; &lt;td&gt;Man City (H)&lt;/td&gt; &lt;td&gt;Chelsea (A)&lt;/td&gt; &lt;td&gt;Liverpool (H)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Sunderland (A)&lt;/td&gt; &lt;td&gt;Everton (H)&lt;/td&gt; &lt;td&gt;Tottenham (A)&lt;/td&gt; &lt;td&gt;Southampton (H)&lt;/td&gt; &lt;td&gt;West Ham (A)&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Leicester (H)&lt;/td&gt; &lt;td&gt;Chelsea (A)&lt;/td&gt; &lt;td&gt;Crystal Palace (H)&lt;/td&gt; &lt;td&gt;Newcastle (A)&lt;/td&gt; &lt;td&gt;Man City (H)&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Looking good to avoid defeat against Newcastle at home, but may well have to keep a clean-sheet when they visit Southampton. Leicester must face Arsenal next, tough given that they lost 5-2 earlier in the season. Southampton have gone 5 games without losing a goal never mind a game, and that run includes Arsenal and Mancester United. Nothing in their up-coming games suggests they cannot continue that, other than the aforementioned game against Chelsea. Tottenham have Manchester City next. Swansea to keep up their run of draws? Perhaps.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;
+&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;
+&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Thanks for reading.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</description><guid>http://allanderek.github.io/football-analysis/posts/epl-6th-7th-february-2016/</guid><pubDate>Mon, 08 Feb 2016 09:31:39 GMT</pubDate></item><item><title>EPL 2nd-3rd February 2016</title><link>http://allanderek.github.io/football-analysis/posts/epl-2nd-3rd-february-2016/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
     &lt;div class="container" id="notebook-container"&gt;
 
 &lt;div class="cell border-box-sizing text_cell rendered"&gt;
@@ -4800,1073 +5473,4 @@ I'm quite interested in Bournemouth, in the last two weeks they have shot themse
 &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-</description><guid>http://allanderek.github.io/football-analysis/posts/epl-28-29-november-2015/</guid><pubDate>Thu, 03 Dec 2015 11:40:14 GMT</pubDate></item><item><title>EPL 21-23 November 2015</title><link>http://allanderek.github.io/football-analysis/posts/epl-21-23-november-2015/</link><dc:creator>allanderek</dc:creator><description>&lt;div tabindex="-1" id="notebook" class="border-box-sizing"&gt;
-    &lt;div class="container" id="notebook-container"&gt;
-
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="epl-november-21st-23rd-2015"&gt;EPL November 21st - 23rd 2015&lt;/h2&gt;
-&lt;p&gt;Another brief look at some of the simple statistics underlying the weekend games in the English Premier League.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [1]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="k"&gt;matplotlib&lt;/span&gt; &lt;span class="n"&gt;inline&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;league_analysis&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;IPython.display&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;display&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;HTML&lt;/span&gt;
-&lt;span class="n"&gt;epl&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;
-&lt;span class="n"&gt;weekend_matches&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/2015'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'23/11/2015'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_given_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;weekend_matches&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Chelsea&lt;/td&gt;&lt;td&gt;Norwich&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Everton&lt;/td&gt;&lt;td&gt;Aston Villa&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Man City&lt;/td&gt;&lt;td&gt;Liverpool&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;td&gt;Leicester&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Southampton&lt;/td&gt;&lt;td&gt;Stoke&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Swansea&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Watford&lt;/td&gt;&lt;td&gt;Man United&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;West Brom&lt;/td&gt;&lt;td&gt;Arsenal&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Tottenham&lt;/td&gt;&lt;td&gt;West Ham&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Crystal Palace&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [2]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Chelsea'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Norwich'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Chelsea 1 - 0 Norwich&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Chelsea&lt;/td&gt;&lt;td&gt;Norwich&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Similar to their win against Aston Villa before a poor run of results, Chelsea really needed a win here. It looks as though their 1-0 victory was if anything a little unflattering. Such a performance will be encouraging, though it is still beating teams around the relegation battle rather than those they might hope to surpass into one of the four champions' league spots.&lt;/p&gt;
-&lt;!-- TEASER_END --&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [3]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compare_game_against_opponents&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Chelsea'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Norwich'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Measure&lt;/th&gt; &lt;th&gt;Average Per Game for&lt;/th&gt; &lt;th&gt;This game for&lt;/th&gt; &lt;th&gt;Average Per Game against opponents&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chelsea Shots&lt;/td&gt; &lt;td&gt;14.615384615384615&lt;/td&gt; &lt;td&gt;21&lt;/td&gt; &lt;td&gt;13.76923076923077&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Norwich Shots&lt;/td&gt; &lt;td&gt;12.846153846153847&lt;/td&gt; &lt;td&gt;4&lt;/td&gt; &lt;td&gt;12.23076923076923&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Chelsea SOT&lt;/td&gt; &lt;td&gt;4.3076923076923075&lt;/td&gt; &lt;td&gt;7&lt;/td&gt; &lt;td&gt;4.6923076923076925&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Norwich SOT&lt;/td&gt; &lt;td&gt;4.153846153846154&lt;/td&gt; &lt;td&gt;2&lt;/td&gt; &lt;td&gt;5.230769230769231&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;So, Chelsea with 21 shots took 6 and a half shots more than usual and 7 more than the average team does against Norwich. They also only allowed 4 shots, whereas Norwich normally take nearly 13 and Chelsea normally allow over 12. Similar statistics for the shots on target. Overall then a pretty good display from the champions, even if the narrow scoreline probably had a few Chelsea fans worried about a late equaliser.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [4]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Everton'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Aston Villa'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Everton 4 - 0 Aston Villa&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Everton&lt;/td&gt;&lt;td&gt;Aston Villa&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Probably the most predictable of the results this weekend (with Tottenham's win over West Ham a good second). The scoreline looks a little harsh on Aston Villa. Worrying signs for Aston Villa, now bottom in the league for goals scored and goal difference, and not doing great on the goals conceded front either.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [20]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goals_for&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goals_against&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Goal Difference'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goals_for&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Goals For'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;goals_against&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Goals Against'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;reverse&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Goal Difference&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;5&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;-4&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;-8&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;-12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;-12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;-13&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;-14&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Goals For&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;28&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;27&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;19&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;19&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;11&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;Goals Against&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;9&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;11&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;11&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;15&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;17&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;20&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;23&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;-&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;24&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;25&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;26&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;27&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [6]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Man City'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Liverpool'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Man City 1 - 4 Liverpool&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Man City&lt;/td&gt;&lt;td&gt;Liverpool&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;14&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Concerning the last table this game is the reason that Manchester City were not joint top with Manchester United for goals conceded. It's hard to argue with the score line as well, with 9 shots on target Liverpool were significantly better than most teams have managed against Manchester City:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [7]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compare_game_against_opponents&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;'Man City'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Liverpool'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Measure&lt;/th&gt; &lt;th&gt;Average Per Game for&lt;/th&gt; &lt;th&gt;This game for&lt;/th&gt; &lt;th&gt;Average Per Game against opponents&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Man City Shots&lt;/td&gt; &lt;td&gt;17.692307692307693&lt;/td&gt; &lt;td&gt;11&lt;/td&gt; &lt;td&gt;10.76923076923077&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Liverpool Shots&lt;/td&gt; &lt;td&gt;15.23076923076923&lt;/td&gt; &lt;td&gt;14&lt;/td&gt; &lt;td&gt;8.153846153846153&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Man City SOT&lt;/td&gt; &lt;td&gt;6.615384615384615&lt;/td&gt; &lt;td&gt;3&lt;/td&gt; &lt;td&gt;3.230769230769231&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;Liverpool SOT&lt;/td&gt; &lt;td&gt;5.076923076923077&lt;/td&gt; &lt;td&gt;9&lt;/td&gt; &lt;td&gt;2.8461538461538463&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Restricting the home side to just 11 shots from an average of more than 17 is impressive, and done when taking 14 shots themselves. Basically Liverpool have managed to restrict Manchester City to looking like an average team that plays Liverpool (that average team usually manage 10.8 shots and 3.2 shots on target), but have done so whilst looking anything like an average team that takes on Manchester City. Even Tottenham, the other team to have beaten Man City 4-1, did not manage to out-shoot them, and were pretty fortunate to win 4-1:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [8]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_given_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_matches_between&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s"&gt;'Man City'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Tottenham'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Tottenham&lt;/td&gt;&lt;td&gt;Man City&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;15&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [9]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Newcastle'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Leicester'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Newcastle 0 - 3 Leicester&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;td&gt;Leicester&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;And so to the new league leaders. Say what you want you about Leicester and how they might not sustain this run, but they certainly deserved their victory here. In fact the interest around Leicester's rise to the top of the table should not distract us from the danger that Newcastle find themselves. This is pretty terrible stuff, losing at home so comprehsively.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [10]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Southampton'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Stoke'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Southampton 0 - 1 Stoke&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Southampton&lt;/td&gt;&lt;td&gt;Stoke&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This was pretty surprising, Stoke have not had great numbers so far this season. Although with the influx of some talent it was a bit of a surprise that Stoke's numbers were quite as bad as they were and perhaps many expected an up-tick. Still, an excellent away victory at Southampton, all the more for having competed so well on the shot counts. This was not like the defeat of Chelsea in which they suffered something of a battering. This was a solid display (at least in terms of shot numbers).&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [11]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Swansea'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Bournemouth'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Swansea 2 - 2 Bournemouth&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Swansea&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;16&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Bournemouth just cannot catch a break. Though to be fair Bournemouth had a two goal lead here and probably should have held on, but an away draw is not a disaster. Still, their PDO has not been their friend, I fully expect Bournemouth to remain in the division:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [12]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;pairs&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;teamname&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdo&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-         &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;stats&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;team_stats&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;values&lt;/span&gt;&lt;span class="p"&gt;()]&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_ranked_table&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s"&gt;'Team'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'PDO'&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;pairs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;table&gt;&lt;tr&gt;&lt;th&gt;Position&lt;/th&gt; &lt;th&gt;Team&lt;/th&gt; &lt;th&gt;PDO&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;1&lt;/td&gt; &lt;td&gt;Man United&lt;/td&gt; &lt;td&gt;0.1680035650623886&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;2&lt;/td&gt; &lt;td&gt;Everton&lt;/td&gt; &lt;td&gt;0.15101838052657723&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;3&lt;/td&gt; &lt;td&gt;West Ham&lt;/td&gt; &lt;td&gt;0.134453781512605&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;4&lt;/td&gt; &lt;td&gt;Arsenal&lt;/td&gt; &lt;td&gt;0.07640344747262984&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;5&lt;/td&gt; &lt;td&gt;Leicester&lt;/td&gt; &lt;td&gt;0.06681405060181778&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;6&lt;/td&gt; &lt;td&gt;Stoke&lt;/td&gt; &lt;td&gt;0.06533776301218164&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;7&lt;/td&gt; &lt;td&gt;Tottenham&lt;/td&gt; &lt;td&gt;0.0314176245210728&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;8&lt;/td&gt; &lt;td&gt;Watford&lt;/td&gt; &lt;td&gt;0.026455026455026454&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;9&lt;/td&gt; &lt;td&gt;West Brom&lt;/td&gt; &lt;td&gt;0.017543859649122806&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;10&lt;/td&gt; &lt;td&gt;Crystal Palace&lt;/td&gt; &lt;td&gt;0.0014380212827150018&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;11&lt;/td&gt; &lt;td&gt;Sunderland&lt;/td&gt; &lt;td&gt;-0.010932105868814712&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;12&lt;/td&gt; &lt;td&gt;Chelsea&lt;/td&gt; &lt;td&gt;-0.03466386554621853&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;13&lt;/td&gt; &lt;td&gt;Man City&lt;/td&gt; &lt;td&gt;-0.037397862979258345&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;14&lt;/td&gt; &lt;td&gt;Newcastle&lt;/td&gt; &lt;td&gt;-0.059857057772483624&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;15&lt;/td&gt; &lt;td&gt;Southampton&lt;/td&gt; &lt;td&gt;-0.061969439728353115&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;16&lt;/td&gt; &lt;td&gt;Swansea&lt;/td&gt; &lt;td&gt;-0.06216931216931221&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;17&lt;/td&gt; &lt;td&gt;Aston Villa&lt;/td&gt; &lt;td&gt;-0.06409130816505704&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;18&lt;/td&gt; &lt;td&gt;Norwich&lt;/td&gt; &lt;td&gt;-0.09714632665452339&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;19&lt;/td&gt; &lt;td&gt;Liverpool&lt;/td&gt; &lt;td&gt;-0.09956709956709958&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;20&lt;/td&gt; &lt;td&gt;Bournemouth&lt;/td&gt; &lt;td&gt;-0.23153942428035046&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Just look at that number. They are minus 0.23 more than double the negative of the next worse off team Liverpool. Also worth noting here is that Leicester aren't getting an &lt;strong&gt;incredible&lt;/strong&gt; amount of luck.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [13]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Watford'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Man United'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Watford 1 - 2 Man United&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Watford&lt;/td&gt;&lt;td&gt;Man United&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The above table showed the league leaders in PDO are Manchester United. However, we know that PDO is an imperfect measure of luck, and that Mancester United do seem to have some qualities that allow them to defy measure. A good &lt;a href="http://statsbomb.com/2014/10/how-low-can-you-go-assorted-thoughts-about-crosses/"&gt;article at statsbomb&lt;/a&gt; (by Marek Kwiatkowski otherwise known as statlurker), is a nice discussion of one way in which shot statistics might miss "near chances". So perhaps Manchester United create a lot of plays that do not result in shots but &lt;em&gt;nearly&lt;/em&gt; a shot from a highly dangerous position. In other words a cross/pass which missed its target but had it done so would have resulted in a goal with high probability. Having watched Manchester United play this season I'm a little sceptical of that explanation (for this season).&lt;/p&gt;
-&lt;p&gt;Still, this was a game that Mancester United probably deserved to win, but it highlights a problem with playing in such a closed manner. You're susceptible to the vagries of chance. In other words, you're more likely to lose if you out-shoot your opponents 5-3 than you are if you out-shoot them 20-12. Since Man United should probably consider themselves favourites for most games against league opponents this season, their tactics are at least a bit questionable. But that is a topic that deserves much more than a brief look.&lt;/p&gt;
-&lt;p&gt;Of course I say all this despite the fact that actually Watford have managed quite a decent number of shots and shots on target against the generally miserly Man United. Watford are in danger of coming off as plucky-losers a lot, but the general signs points to a pretty decent team that &lt;strong&gt;should&lt;/strong&gt; manage to remain in the league, they certainly seem better than Newcastle, Sunderland and Aston Villa.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [14]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'West Brom'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Arsenal'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'21/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;West Brom 2 - 1 Arsenal&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;West Brom&lt;/td&gt;&lt;td&gt;Arsenal&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Great win for West Brom. Another defeat for Arsenal despite dominating the game for large portions. Still, Arsenal are clearly title contenders this season.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [15]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Tottenham'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'West Ham'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'22/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Tottenham 4 - 1 West Ham&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Tottenham&lt;/td&gt;&lt;td&gt;West Ham&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;22&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This was pretty predictable. Tottenham are beginning to look better and better this season. With the very lacklustre start to the campaign for the champions, a top 4 spot has looked well within Tottenham's grasp. Having seen Arsenal and City lose this weekend I suspect Spurs fans are starting to dream of a title-bid if not exactly a title. Probably a little premature for that, but still, it's been a long time since Spurs lost a league match.&lt;/p&gt;
-&lt;p&gt;I don't wish to harp on at West Ham, but they are still over-performing. I still think they will not manage to remain in the top half of the table.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [16]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_match&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;epl&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Crystal Palace'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'Sunderland'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;'23/11/15'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;h2&gt;Crystal Palace 0 - 1 Sunderland&lt;/h2&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Crystal Palace&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;File this one under, "Did not see that coming". However, once again the shots statistics show that Sunderland probably did not deserve this win. I say once again, because Sunderland have only won two games this season, and both have been seemingly undeserved:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [17]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HomeTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Sunderland'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'H'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt;
-            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AwayTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Sunderland'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="n"&gt;relevant_matches&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_all_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;years&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year_201516&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_given_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;relevant_matches&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;21&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;td&gt;8&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Crystal Palace&lt;/td&gt;&lt;td&gt;Sunderland&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;19&lt;/td&gt;&lt;td&gt;12&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;td&gt;4&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Worrying times, unless you're a Newcastle fan, except that:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [18]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HomeTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Newcastle'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'H'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt;
-            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AwayTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Newcastle'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="n"&gt;relevant_matches&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_all_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;years&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year_201516&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_given_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;relevant_matches&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;td&gt;Norwich&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;18&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;td&gt;6&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;td&gt;Newcastle&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;20&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Still it could be worse, you could have only won &lt;strong&gt;one&lt;/strong&gt; game, which you probably didn't deserve:&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing code_cell rendered"&gt;
-&lt;div class="input"&gt;
-&lt;div class="prompt input_prompt"&gt;In [19]:&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-    &lt;div class="input_area"&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;HomeTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Aston Villa'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'H'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt;
-            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AwayTeam&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'Aston Villa'&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;match&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;FTR&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s"&gt;'A'&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
-
-&lt;span class="n"&gt;relevant_matches&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_all_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;years&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year_201516&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;filter_fun&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="n"&gt;league_analysis&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;display_given_matches&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;relevant_matches&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="output_wrapper"&gt;
-&lt;div class="output"&gt;
-
-
-&lt;div class="output_area"&gt;&lt;div class="prompt"&gt;&lt;/div&gt;
-
-&lt;div class="output_html rendered_html output_subarea "&gt;
-&lt;div style="display:inline-block;"&gt;
-    &lt;table&gt;
-      &lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th&gt;Home&lt;/th&gt;&lt;th&gt;Away&lt;/th&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;Bournemouth&lt;/td&gt;&lt;td&gt;Aston Villa&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Goals&lt;/td&gt;&lt;td&gt;0&lt;/td&gt;&lt;td&gt;1&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Shots&lt;/td&gt;&lt;td&gt;11&lt;/td&gt;&lt;td&gt;7&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;SOT&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;&lt;/tr&gt;
-      
-    &lt;/table&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
-&lt;/div&gt;
-&lt;div class="inner_cell"&gt;
-&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;As I said, poor old Bournemouth.&lt;/p&gt;
-&lt;p&gt;Thanks for reading.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-</description><guid>http://allanderek.github.io/football-analysis/posts/epl-21-23-november-2015/</guid><pubDate>Wed, 25 Nov 2015 10:15:36 GMT</pubDate></item></channel></rss>
+</description><guid>http://allanderek.github.io/football-analysis/posts/epl-28-29-november-2015/</guid><pubDate>Thu, 03 Dec 2015 11:40:14 GMT</pubDate></item></channel></rss>
