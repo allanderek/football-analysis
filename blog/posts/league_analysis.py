@@ -951,25 +951,34 @@ def get_stat_pairs(stats_list, stat_name):
             for stats in stats_list]
 
 
-def get_stat_table_data(league, stat_header, stat_name, reverse):
-    pairs = get_stat_pairs(league.team_stats.values(), stat_name)
+def get_stat_table_data(team_stats, stat_header, stat_name, reverse):
+    pairs = get_stat_pairs(team_stats, stat_name)
     return (['Team', stat_header], pairs, reverse)
+
+def header_stat_tables(league, stats=None):
+    if stats is None:
+        stats = league.team_stats.values()
+    tables_data = [get_stat_table_data(stats, 'Points', 'points', True),
+                   get_stat_table_data(stats, 'Team Rating', 'team_rating', True),
+                   get_stat_table_data(stats, 'PDO', 'pdo', True),
+                   ]
+    display_ranked_tables(tables_data)
+
+def last_x_game_stats(league, x):
+    return [TeamStats(ts.teamname, ts.games[-x:])
+            for ts in league.team_stats.values()]
 
 def blog_weekly_header(league, start_date, end_date):
     weekend_matches = get_matches(league, start_date, end_date)
     display_given_matches(weekend_matches)
-
-    tables_data = [get_stat_table_data(league, 'Points', 'points', True),
-                   get_stat_table_data(league, 'Team Rating', 'team_rating', True),
-                   get_stat_table_data(league, 'PDO', 'pdo', True),
-                   ]
-    display_ranked_tables(tables_data)
+    header_stat_tables(league)
 
 def display_current_runs(league):
-    tables_data = [get_stat_table_data(league, 'Winning Run', 'current_winning_run', True),
-                   get_stat_table_data(league, 'Unbeaten Run', 'current_unbeaten_run', True),
-                   get_stat_table_data(league, 'Winless', 'current_winless_run', True),
-                   get_stat_table_data(league, 'Losing', 'current_losing_run', True),
+    stats = league.team_stats.values()
+    tables_data = [get_stat_table_data(stats, 'Winning Run', 'current_winning_run', True),
+                   get_stat_table_data(stats, 'Unbeaten Run', 'current_unbeaten_run', True),
+                   get_stat_table_data(stats, 'Winless', 'current_winless_run', True),
+                   get_stat_table_data(stats, 'Losing', 'current_losing_run', True),
                    ]
     display_ranked_tables(tables_data)
 
@@ -1581,15 +1590,27 @@ def analyse_fixtures(league, end_date, stat_analysers):
         tr_draw_proportion = 1 - (tr_home_win_proportion + tr_away_win_proportion)
         tr_draw_odds = 1.0 / tr_draw_proportion
 
-        def get_2_degree_odds(x2, x1, x0):
+        def get_2_degree_odds(tr_diff, x2, x1, x0):
             proportion = ((tr_diff ** 2) * x2) + (tr_diff * x1) + x0
             return 1.0 / proportion
 
-        tr_home_win_pf_odds = get_2_degree_odds(0.264179061438, 0.754584559712, 0.411753380201)
-        tr_away_win_pf_odds = get_2_degree_odds(0.263604481914, -0.650789277595, 0.314691118779)
-        tr_draw_pf_odds = get_2_degree_odds(0.527783543352, 0.103795282117, 0.273555501021)
+        tr_home_win_pf_odds = get_2_degree_odds(tr_diff, 0.264179061438, 0.754584559712, 0.411753380201)
+        tr_away_win_pf_odds = get_2_degree_odds(tr_diff, 0.263604481914, -0.650789277595, 0.314691118779)
+        tr_draw_pf_odds = get_2_degree_odds(tr_diff, 0.527783543352, 0.103795282117, 0.273555501021)
 
         pf_total = (1.0 / tr_home_win_pf_odds) + (1.0/tr_away_win_pf_odds) + (1.0/tr_draw_pf_odds)
+
+        # Do the same again, but for the last ten games:
+        home_last_ten_stats = TeamStats(home_stats.teamname, home_stats.games[-10:])
+        away_last_ten_stats = TeamStats(away_stats.teamname, away_stats.games[-10:])
+        lt_tr_diff = home_last_ten_stats.team_rating - away_last_ten_stats.team_rating
+        # Of course we should calculate these co-efficients for last ten game stats
+        # rather than just use the coefficients above.
+        lt_tr_home_win_pf_odds = get_2_degree_odds(lt_tr_diff, 0.264179061438, 0.754584559712, 0.411753380201)
+        lt_tr_away_win_pf_odds = get_2_degree_odds(lt_tr_diff, 0.263604481914, -0.650789277595, 0.314691118779)
+        lt_tr_draw_pf_odds = get_2_degree_odds(lt_tr_diff, 0.527783543352, 0.103795282117, 0.273555501021)
+        lt_pf_total = (1.0 / lt_tr_home_win_pf_odds) + (1.0/lt_tr_away_win_pf_odds) + (1.0/lt_tr_draw_pf_odds)
+
 
         print('{0} vs {1}'.format(home_team, away_team))
         last_x_matches(league, home_team, 3)
@@ -1619,6 +1640,10 @@ def analyse_fixtures(league, end_date, stat_analysers):
         print("    away_tr_pf_odds: {0}".format(tr_away_win_pf_odds))
         print("    draw_tr_pf_odds: {0}".format(tr_draw_pf_odds))
         print("    pf total proportion: {}".format(pf_total))
+        print("    lt_home_tr_pf_odds: {0}".format(lt_tr_home_win_pf_odds))
+        print("    lt_away_tr_pf_odds: {0}".format(lt_tr_away_win_pf_odds))
+        print("    lt_draw_tr_pf_odds: {0}".format(lt_tr_draw_pf_odds))
+        print("    lt_pf total proportion: {}".format(lt_pf_total))
 
 
 if __name__ == '__main__':
