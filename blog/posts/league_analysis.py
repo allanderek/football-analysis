@@ -683,15 +683,15 @@ def display_dictionary(dictionary):
 
 
 def html_table(header_data, row_data):
-    """Display an ipython table given the headers and the row data."""
+    """Create an html table given the headers and the row data."""
     def make_header_cell(s):
-        return '<th>{0}</th>'.format(s)
+        return '<th>{}</th>'.format(s)
 
     def make_cell(s):
-        return '<td>{0}</td>'.format(s)
+        return '<td>{}</td>'.format(s)
 
     def make_row(s):
-        return '<tr>{0}</tr>'.format(s)
+        return '<tr>{}</tr>'.format(s)
     headers = " ".join([make_header_cell(h) for h in header_data])
     header_row = make_row(headers)
     rows = [make_row(" ".join([make_cell(c) for c in row]))
@@ -725,14 +725,14 @@ def date_from_string(date_string):
 def html_blocks(blocks):
     inline_blocks = [create_inline_block(b) for b in blocks]
     html = "\n".join(inline_blocks)
-    return (HTML(html))
+    return html
 
 
 def display_given_matches(matches):
     """Display a given set of matches."""
     html_matches = [match_to_html(m) for m in matches]
     html = html_blocks(html_matches)
-    display(html)
+    display(HTML(html))
 
 
 def date_in_range(start_date, datestring, end_date):
@@ -890,7 +890,7 @@ def display_ranked_table(headers, pairs, reverse=None):
 def display_ranked_tables(tables_data):
     ranked_tables = [create_ranked_table(h, p, r) for h, p, r in tables_data]
     html = html_blocks(ranked_tables)
-    display(html)
+    display(HTML(html))
 
 
 def rank_teams_single_matches(matches, stat_suffix, stat_header_name=None):
@@ -962,7 +962,8 @@ def header_stat_tables(league, stats=None):
                    get_stat_table_data(stats, 'Team Rating', 'team_rating', True),
                    get_stat_table_data(stats, 'PDO', 'pdo', True),
                    ]
-    display_ranked_tables(tables_data)
+    ranked_tables = [create_ranked_table(h, p, r) for h, p, r in tables_data]
+    return html_blocks(ranked_tables)
 
 def last_x_game_stats(league, x):
     return [TeamStats(ts.teamname, ts.games[-x:])
@@ -970,8 +971,10 @@ def last_x_game_stats(league, x):
 
 def blog_weekly_header(league, start_date, end_date):
     weekend_matches = get_matches(league, start_date, end_date)
-    display_given_matches(weekend_matches)
-    header_stat_tables(league)
+    html_matches = html_blocks([match_to_html(m) for m in weekend_matches])
+    html_tables = header_stat_tables(league)
+    return html_matches + html_tables
+
 
 def display_current_runs(league):
     stats = league.team_stats.values()
