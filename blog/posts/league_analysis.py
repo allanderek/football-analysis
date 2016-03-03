@@ -973,7 +973,7 @@ def blog_weekly_header(league, start_date, end_date):
     weekend_matches = get_matches(league, start_date, end_date)
     html_matches = html_blocks([match_to_html(m) for m in weekend_matches])
     html_tables = header_stat_tables(league)
-    return html_matches + html_tables
+    return "<div>{}</div><div>{}</div>".format(html_matches, html_tables)
 
 
 def display_current_runs(league):
@@ -1662,6 +1662,8 @@ if __name__ == '__main__':
 
     stat_analysers = {'team_rating': tr_analyser}
     for league in reversed(current_year.all_leagues):
+        if league.title != 'premier-league':
+            continue
         print(league.title)
         try:
             analyse_fixtures(league, date, stat_analysers)
