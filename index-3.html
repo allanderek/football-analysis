@@ -63,7 +63,451 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-5-7th-december-2015/" class="u-url">EPL 5-7th December 2015</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-12-14th-december-2015/" class="u-url">EPL 12-14th December 2015</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">
+                allanderek
+            </span></p>
+            <p class="dateline"><a href="posts/epl-12-14th-december-2015/" rel="bookmark"><time class="published dt-published" datetime="2015-12-17T14:25:50Z" title="2015-12-17 14:25">2015-12-17 14:25</time></a></p>
+                <p class="commentline">
+        
+    <a href="posts/epl-12-14th-december-2015/#disqus_thread" data-disqus-identifier="cache/posts/epl-12-14th-december-2015.html">Comments</a>
+
+
+        </p>
+</div>
+    </header><div class="p-summary entry-summary">
+    <div tabindex="-1" id="notebook" class="border-box-sizing">
+    <div class="container" id="notebook-container">
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="epl-12-14th-december">EPL 12-14th December</h2>
+<p>A great weekend in the premier league, which saw the meeting between the two sides that the public continues to believe will eventually revert back to last season's form. Leicester flying high at the top of the table are expected to wane at least some of they way down the league table whilst the champions Chelsea are expected to start pulling together a string of victories to propel them up the league towards some semblance of at least competing for a champions' league spot.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="o">%</span><span class="k">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">league_analysis</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">epl</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">epl</span>
+<span class="n">weekend_matches</span> <span class="o">=</span> <span class="n">league_analysis</span><span class="o">.</span><span class="n">get_matches</span><span class="p">(</span><span class="n">epl</span><span class="p">,</span> <span class="s">'12/12/2015'</span><span class="p">,</span> <span class="s">'14/12/2015'</span><span class="p">)</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_given_matches</span><span class="p">(</span><span class="n">weekend_matches</span><span class="p">)</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[(</span><span class="n">stats</span><span class="o">.</span><span class="n">teamname</span><span class="p">,</span> <span class="n">stats</span><span class="o">.</span><span class="n">points</span><span class="p">)</span> <span class="k">for</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">epl</span><span class="o">.</span><span class="n">team_stats</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+<span class="n">league_analysis</span><span class="o">.</span><span class="n">display_ranked_table</span><span class="p">([</span><span class="s">'Team'</span><span class="p">,</span> <span class="s">'Points'</span><span class="p">],</span> <span class="n">pairs</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Bournemouth</td>
+<td>Man United</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>11</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Crystal Palace</td>
+<td>Southampton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>12</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Man City</td>
+<td>Swansea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>13</td>
+<td>13</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>7</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Norwich</td>
+<td>Everton</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>15</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Sunderland</td>
+<td>Watford</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>14</td>
+<td>13</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>6</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>West Ham</td>
+<td>Stoke</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>22</td>
+<td>12</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>9</td>
+<td>3</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Aston Villa</td>
+<td>Arsenal</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>18</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>2</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Liverpool</td>
+<td>West Brom</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>28</td>
+<td>4</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>2</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Tottenham</td>
+<td>Newcastle</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>20</td>
+<td>8</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>8</td>
+<td>4</td>
+</tr>
+</table>
+</div>
+<div style="display:inline-block;">
+    <table>
+<tr>
+<th></th>
+<th>Home</th>
+<th>Away</th>
+</tr>
+<tr>
+<td>Team</td>
+<td>Leicester</td>
+<td>Chelsea</td>
+</tr>
+<tr>
+<td>Goals</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Shots</td>
+<td>9</td>
+<td>11</td>
+</tr>
+<tr>
+<td>SOT</td>
+<td>5</td>
+<td>5</td>
+</tr>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+<div class="prompt"></div>
+
+<div class="output_html rendered_html output_subarea ">
+<table>
+<tr>
+<th>Position</th> <th>Team</th> <th>Points</th>
+</tr>
+<tr>
+<td>1</td> <td>Leicester</td> <td>35</td>
+</tr>
+<tr>
+<td>2</td> <td>Arsenal</td> <td>33</td>
+</tr>
+<tr>
+<td>3</td> <td>Man City</td> <td>32</td>
+</tr>
+<tr>
+<td>4</td> <td>Man United</td> <td>29</td>
+</tr>
+<tr>
+<td>5</td> <td>Tottenham</td> <td>26</td>
+</tr>
+<tr>
+<td>-</td> <td>Crystal Palace</td> <td>26</td>
+</tr>
+<tr>
+<td>7</td> <td>Watford</td> <td>25</td>
+</tr>
+<tr>
+<td>8</td> <td>West Ham</td> <td>24</td>
+</tr>
+<tr>
+<td>-</td> <td>Liverpool</td> <td>24</td>
+</tr>
+<tr>
+<td>10</td> <td>Everton</td> <td>23</td>
+</tr>
+<tr>
+<td>-</td> <td>Stoke</td> <td>23</td>
+</tr>
+<tr>
+<td>12</td> <td>Southampton</td> <td>21</td>
+</tr>
+<tr>
+<td>13</td> <td>West Brom</td> <td>20</td>
+</tr>
+<tr>
+<td>14</td> <td>Bournemouth</td> <td>16</td>
+</tr>
+<tr>
+<td>-</td> <td>Newcastle</td> <td>16</td>
+</tr>
+<tr>
+<td>16</td> <td>Chelsea</td> <td>15</td>
+</tr>
+<tr>
+<td>17</td> <td>Swansea</td> <td>14</td>
+</tr>
+<tr>
+<td>-</td> <td>Norwich</td> <td>14</td>
+</tr>
+<tr>
+<td>19</td> <td>Sunderland</td> <td>12</td>
+</tr>
+<tr>
+<td>20</td> <td>Aston Villa</td> <td>6</td>
+</tr>
+</table>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="bournemouth-2-1-manchester-united">Bournemouth 2-1 Manchester United</h2>
+<p>Two of the more statistically interesting teams in the league. For a while stat watchers have been expecting Bournemouth to improve results since their underlying performances looked quite decent whilst their results were awful. Manchester United continued to have pretty lukewarm shots and are generally playing "low-event" football. I'd really like to spend a full post talking about why I think low-event football for a generally superior team is a poor strategy but for the time being Manchester United have appeared to some to be riding their luck. Whether they are really riding their luck or simply providing an excellent case study is a topic to be explored. For the interested a good couple of statsbomb articles:</p>
+<ul>
+<li><a href="http://statsbomb.com/2015/12/why-are-manchester-united-and-arsenal-about-to-slow-down/">Are Manchester United and Arsenal getting lucky</a></li>
+<li><a href="http://statsbomb.com/2015/12/manchester-united-sleeping-in-the-theatre-of-dreams/">Manchester United sleeping in the theatre of dreams</a></li>
+</ul>
+<p></p>
+<p class="more"><a href="posts/epl-12-14th-december-2015/">Read more…</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/epl-5-7th-december-2015/" class="u-url">EPL 5-7th December 2015</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">
                 allanderek
