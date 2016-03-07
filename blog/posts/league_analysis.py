@@ -969,6 +969,10 @@ def last_x_game_stats(league, x):
     return [TeamStats(ts.teamname, ts.games[-x:])
             for ts in league.team_stats.values()]
 
+def html_games(games):
+    return html_blocks(match_to_html(m) for m in games)
+
+
 def blog_weekly_header(league, start_date, end_date):
     weekend_matches = get_matches(league, start_date, end_date)
     html_matches = html_blocks([match_to_html(m) for m in weekend_matches])
