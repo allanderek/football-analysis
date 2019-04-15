@@ -1,7 +1,7 @@
 beautifulsoup4==4.3.2
 certifi==14.5.14
 ipython==2.4.1
-Jinja2==2.7.3
+Jinja2==2.10.1
 MarkupSafe==0.23
 numpy==1.9.1
 pandas==0.15.2
